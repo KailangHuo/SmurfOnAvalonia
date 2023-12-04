@@ -2,11 +2,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="350"
-        Height="350" Width="400" 
+        xmlns:views="clr-namespace:AvaloniaApplication1.Views"
+        mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="500"
+        Height="500" Width="1000" 
         x:Class="AvaloniaApplication1.Views.MusicStoreWindow"
         Title="MusicStoreWindow"
-        RequestedThemeVariant="Light"
+        WindowStartupLocation="CenterOwner"
+        RequestedThemeVariant="Dark"
         TransparencyLevelHint="AcrylicBlur"
         ExtendClientAreaToDecorationsHint="True"
         >
@@ -15,14 +17,16 @@
                         <ExperimentalAcrylicBorder.Material>
                                 <ExperimentalAcrylicMaterial 
                                         BackgroundSource="Digger"
-                                        TintColor="White"
+                                        TintColor="Black"
                                         TintOpacity="1"
                                         MaterialOpacity="0.65"
                                         />
                         </ExperimentalAcrylicBorder.Material>
                 </ExperimentalAcrylicBorder>
                 
-                <Panel Margin="40"></Panel>
+                <Panel Margin="40">
+                        <views:MusicStoreView/>
+                </Panel>
                 
         </Panel>
 </Window>

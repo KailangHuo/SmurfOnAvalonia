@@ -1,27 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {}
+    "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {}
   },
   "projects": {
-    "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {
+    "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
+        "projectUniqueName": "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
         "projectName": "AvaloniaApplication1",
-        "projectPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
-        "packagesPath": "C:\\Users\\kailang.huo\\.nuget\\packages\\",
-        "outputPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\obj\\",
+        "projectPath": "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
+        "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
+        "outputPath": "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {

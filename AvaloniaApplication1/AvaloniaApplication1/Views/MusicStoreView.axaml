@@ -2,9 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:AvaloniaApplication1.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="AvaloniaApplication1.Views.MusicStoreView"
              >
+    
     <DockPanel>
         <StackPanel DockPanel.Dock="Top">
             <TextBox Watermark="Search for Albums...." Text="{Binding SearchText}"/>
@@ -15,8 +17,17 @@
                 DockPanel.Dock="Bottom"
                 HorizontalAlignment="Center"
         />
-        <ListBox ItemsSource="{Binding SearchResults}"
+        <ListBox ItemsSource="{Binding SearchResult}"
                  SelectedItem="{Binding SelectedAlbum}"
-        />
+                 Background="Transparent"
+                 Margin="0 20"
+        >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+        </ListBox>
     </DockPanel>
+    
 </UserControl>

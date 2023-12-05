@@ -17,14 +17,10 @@ public class MainWindowViewModel : ViewModelBase {
     public ICommand BuyMusicCommand { get; private set; }
 
     private void SetupCommand() {
-        this.BuyMusicCommand = ReactiveCommand.CreateFromTask(async ()=> BuyMusic());
-    }
-
-    private async void BuyMusic() {
-        Window window = new MusicStoreWindow();
-        MusicStoreViewModel store = new MusicStoreViewModel();
-        window.DataContext = store;
-        var result = await ShowDialog.Handle(store);
+        this.BuyMusicCommand = ReactiveCommand.CreateFromTask(async () => {
+            var store = new MusicStoreViewModel();
+            var result = await ShowDialog.Handle(store);
+        });
     }
 
     public Interaction<MusicStoreViewModel, AlbumViewModel> ShowDialog { get; }

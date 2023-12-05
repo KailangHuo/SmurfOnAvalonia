@@ -5,6 +5,8 @@
       <map>
         <entry key="AvaloniaApplication1/App.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
         <entry key="AvaloniaApplication1/Icons.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
+        <entry key="AvaloniaApplication1/ViewModels/AlbumView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
+        <entry key="AvaloniaApplication1/Views/AlbumView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
         <entry key="AvaloniaApplication1/Views/MainWindow.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
         <entry key="AvaloniaApplication1/Views/MusicStoreView.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />
         <entry key="AvaloniaApplication1/Views/MusicStoreWindow.axaml" value="AvaloniaApplication1/AvaloniaApplication1.csproj" />

@@ -21,6 +21,9 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Icons.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/AlbumView.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
 [D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 

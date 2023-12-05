@@ -134,3 +134,4 @@ D:\System\Documents\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplicat
 D:\System\Documents\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplication1\obj\Debug\net6.0\AvaloniaApplication1.csproj.CopyComplete
 D:\System\Documents\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplication1\obj\Debug\net6.0\AvaloniaApplication1.genruntimeconfig.cache
 D:\System\Documents\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplication1\obj\Debug\net6.0\ref\AvaloniaApplication1.dll
+D:\System\Documents\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplication1\bin\Debug\net6.0\iTunesSearch.Library.dll

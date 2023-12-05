@@ -13,7 +13,8 @@
           "Avalonia.Diagnostics": "11.0.2",
           "Avalonia.Fonts.Inter": "11.0.2",
           "Avalonia.ReactiveUI": "11.0.2",
-          "Avalonia.Themes.Fluent": "11.0.2"
+          "Avalonia.Themes.Fluent": "11.0.2",
+          "iTunesSearch": "1.0.44"
         },
         "runtime": {
           "AvaloniaApplication1.dll": {}
@@ -348,6 +349,14 @@
             "rid": "win-x86",
             "assetType": "native",
             "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "iTunesSearch/1.0.44": {
+        "runtime": {
+          "lib/net40/iTunesSearch.Library.dll": {
+            "assemblyVersion": "1.0.44.0",
+            "fileVersion": "1.0.44.0"
           }
         }
       },
@@ -1136,6 +1145,13 @@
       "sha512": "sha512-Wo6QpE4+a+PFVdfIBoLkLr4wq2uC0m9TZC8FAfy4ZnLsUc10WL0Egk9EBHHhDCeokNOXDse5YtvuTYtS/rbHfg==",
       "path": "harfbuzzsharp.nativeassets.win32/2.8.2.3",
       "hashPath": "harfbuzzsharp.nativeassets.win32.2.8.2.3.nupkg.sha512"
+    },
+    "iTunesSearch/1.0.44": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nrOQz1VaJwnjUtBpg6AgJ83Iso9bjonovoFLgLJ7ryNX4YuRtCp8+BtGNaileWF1AIBkFN+HlGhsM1HWoUHtDA==",
+      "path": "itunessearch/1.0.44",
+      "hashPath": "itunessearch.1.0.44.nupkg.sha512"
     },
     "MicroCom.Runtime/0.11.0": {
       "type": "package",

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading;
 using AvaloniaApplication1.Models;
@@ -12,6 +13,10 @@ namespace AvaloniaApplication1.ViewModels;
 public class MusicStoreViewModel : ViewModelBase {
 
     public MusicStoreViewModel() {
+        this.BuyMusicCommand = ReactiveCommand.Create(() => {
+            return SelectedAlbum;
+        });
+        
         this.SearchResult = new ObservableCollection<AlbumViewModel>();
         this.WhenAnyValue(x => x.SearchText)
             .Throttle(TimeSpan.FromMilliseconds(400))
@@ -90,5 +95,7 @@ public class MusicStoreViewModel : ViewModelBase {
             if(cancellationToken.IsCancellationRequested) return;
         }
     }
+
+    public ReactiveCommand<Unit, AlbumViewModel?> BuyMusicCommand { get; private set; }
 
 }

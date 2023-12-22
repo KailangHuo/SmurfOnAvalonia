@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="using:AvaloniaApplication1.Views"
         mc:Ignorable="d" d:DesignWidth="1000" d:DesignHeight="500"
-        Height="500" Width="1000" 
+        Height="700" Width="1000" 
         x:Class="AvaloniaApplication1.Views.MusicStoreWindow"
         Title="MusicStoreWindow"
         WindowStartupLocation="CenterOwner"

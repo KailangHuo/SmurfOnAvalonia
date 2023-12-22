@@ -13,22 +13,22 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AvaloniaApplication1
-build_property.ProjectDir = E:\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplication1\
+build_property.ProjectDir = D:\System\Documents\GitHub\SmurfOnAvalonia\AvaloniaApplication1\AvaloniaApplication1\
 
-[E:/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/App.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Icons.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Icons.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/AlbumView.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/AlbumView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MainWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MusicStoreView.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MusicStoreView.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MusicStoreWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/AvaloniaApplication1/AvaloniaApplication1/Views/MusicStoreWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

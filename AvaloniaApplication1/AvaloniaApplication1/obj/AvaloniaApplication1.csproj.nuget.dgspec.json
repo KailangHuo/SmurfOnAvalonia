@@ -1,26 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {}
+    "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {}
   },
   "projects": {
-    "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {
+    "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
+        "projectUniqueName": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
         "projectName": "AvaloniaApplication1",
-        "projectPath": "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
-        "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
-        "outputPath": "E:\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\obj\\",
+        "projectPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\AvaloniaApplication1.csproj",
+        "packagesPath": "E:\\NUGET\\packages",
+        "outputPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\AvaloniaApplication1\\AvaloniaApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
         },
         "frameworks": {
           "net6.0": {

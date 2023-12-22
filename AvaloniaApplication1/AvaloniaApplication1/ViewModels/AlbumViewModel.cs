@@ -22,20 +22,34 @@ public class AlbumViewModel : ViewModelBase {
 
     public Bitmap? Cover
     {
-        get => _cover;
-        private set => this.RaiseAndSetIfChanged(ref _cover, value);
-        /*get {
+        get {
             return _cover;
         }
-        set {
+        private set {
+            if(_cover == value)return;
             _cover = value;
-            this.RaiseAndSetIfChanged(ref _cover, value);
-        }*/
+            this.RaisePropertyChanged(nameof(Cover));
+        }
+
+
     }
 
     public async Task LoadCover() {
         await using (var imageStream = await _album.LoadCoverBitmapAsync()) {
             Cover = await Task.Run(() => Bitmap.DecodeToWidth(imageStream, 400));
+        }
+    }
+
+    public async Task SaveToDiskAsync() {
+        await _album.SaveAsync();
+
+        if (Cover != null) {
+            var bitmap = Cover;
+            await Task.Run(() => {
+                using (var fs = _album.SaveCoverBitmapStream()) {
+                    bitmap.Save(fs);
+                }
+            });
         }
     }
 

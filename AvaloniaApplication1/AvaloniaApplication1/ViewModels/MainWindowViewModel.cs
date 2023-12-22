@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
@@ -11,6 +12,7 @@ public class MainWindowViewModel : ViewModelBase {
 
     public MainWindowViewModel() {
         this.ShowDialog = new Interaction<MusicStoreViewModel, AlbumViewModel?>();
+        this.Albums = new ObservableCollection<AlbumViewModel>();
         SetupCommand();
     }
 
@@ -20,8 +22,14 @@ public class MainWindowViewModel : ViewModelBase {
         this.BuyMusicCommand = ReactiveCommand.CreateFromTask(async () => {
             var store = new MusicStoreViewModel();
             var result = await ShowDialog.Handle(store);
+            if (result != null) {
+                Albums.Add(result);
+                await result.SaveToDiskAsync();
+            }
         });
     }
 
     public Interaction<MusicStoreViewModel, AlbumViewModel> ShowDialog { get; }
+
+    public ObservableCollection<AlbumViewModel> Albums { get; }
 }

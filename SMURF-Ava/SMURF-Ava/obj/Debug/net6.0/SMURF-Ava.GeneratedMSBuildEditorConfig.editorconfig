@@ -20,3 +20,6 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/PopupWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

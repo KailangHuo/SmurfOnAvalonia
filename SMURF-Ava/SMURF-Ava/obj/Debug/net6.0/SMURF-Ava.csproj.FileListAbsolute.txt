@@ -135,3 +135,4 @@ D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\SMURF-Ava.genruntimeconfig.cache
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\ref\SMURF-Ava.dll
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\bin\Debug\net6.0\EventDrivenElements.dll
+D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\bin\Debug\net6.0\AvaloniaProgressRing.dll

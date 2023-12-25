@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
+using Avalonia;
+using Avalonia.Controls;
 using EventDrivenElements;
 using SMURF_Ava.configuration;
+using SMURF_Ava.Views;
 
 namespace SMURF_Ava.ViewModels;
 
@@ -20,7 +25,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.SelectedAppName = ApplicationList[0];
     }
-
+    
     #endregion
 
     #region PROPERTIES
@@ -119,6 +124,32 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     public void LogSystemInfo(string s) {
         string timeStamp = DateTime.Now.ToString();
         SystemLog += "[" + timeStamp + "] " + s + "\n";
+    }
+
+    #endregion
+
+    #region COMMANDS
+
+    public void CallUpCommand(object o = null) {
+        LogSystemInfo("=== Call up ===");
+        Window window = (Window)o;
+        PopupManager.GetInstance().PopupProcessingWaiting_Block("processing CALLUP", window);
+    }
+
+    public void VerticalLoginCommand(object o = null) {
+        
+    }
+
+    public void SaveCommand(object o = null) {
+        
+    }
+
+    public void CloseClientCommand(object o = null) {
+        
+    }
+
+    public void ClearLog() {
+        this.SystemLog = "";
     }
 
     #endregion

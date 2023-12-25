@@ -35,7 +35,7 @@ public class SystemConfiguration {
 
     private void Init() {
         applicationList = new List<string>();
-        ConfigurationFilePath = System.Environment.CurrentDirectory + @"\Configuration\Configuration.xml";
+        ConfigurationFilePath = System.Environment.CurrentDirectory + @"/Configuration/Configuration.xml";
         _document = new XmlDocument();
         _document.Load(ConfigurationFilePath);
         XmlNode constantAppListNode = _document.SelectSingleNode(@"/Root/Applications");

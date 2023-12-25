@@ -15,7 +15,7 @@
           "Avalonia.ReactiveUI": "11.0.6",
           "Avalonia.Themes.Fluent": "11.0.6",
           "Deadpikle.AvaloniaProgressRing": "0.10.3",
-          "EventDrivenElements": "1.0.0"
+          "EventDrivenElements": "1.1.1"
         },
         "runtime": {
           "SMURF-Ava.dll": {}
@@ -296,11 +296,11 @@
           }
         }
       },
-      "EventDrivenElements/1.0.0": {
+      "EventDrivenElements/1.1.1": {
         "runtime": {
           "lib/net6.0/EventDrivenElements.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
+            "assemblyVersion": "1.1.1.0",
+            "fileVersion": "1.1.1.0"
           }
         }
       },
@@ -1130,12 +1130,12 @@
       "path": "dynamicdata/7.9.5",
       "hashPath": "dynamicdata.7.9.5.nupkg.sha512"
     },
-    "EventDrivenElements/1.0.0": {
+    "EventDrivenElements/1.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-WghfVyjxp1DNXAQg9tW+BdXcxN+MI3K11Aoe/Uz3edNgPjzUisD1nNC7scMj6UQToTdcE+UpGeAoYVnrw5jSlw==",
-      "path": "eventdrivenelements/1.0.0",
-      "hashPath": "eventdrivenelements.1.0.0.nupkg.sha512"
+      "sha512": "sha512-OAZSxpk3Tr4WsF1pFb8XqrLol4YXydSS6QIb2va9vNBNkCQom2u30BmiEV28HG4LxSSHj+2Sw7myyh9quhFdMw==",
+      "path": "eventdrivenelements/1.1.1",
+      "hashPath": "eventdrivenelements.1.1.1.nupkg.sha512"
     },
     "HarfBuzzSharp/7.3.0": {
       "type": "package",

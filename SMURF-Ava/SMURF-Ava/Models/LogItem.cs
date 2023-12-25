@@ -6,7 +6,7 @@ public class LogItem {
 
     public LogItem(LogTypeEnum logTypeEnum, DateTime timeStamp, string content) {
         this.LogType = logTypeEnum;
-        this.TimeStamp = TimeStamp;
+        this.TimeStamp = timeStamp;
         this.Content = content;
     }
 

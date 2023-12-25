@@ -16,11 +16,14 @@ public class SystemFacade : AbstractEventDrivenObject{
     }
 
     private void InitSystem() {
-        
         this.SystemLogger = new SystemLogger();
-        
+        PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
-        PublishEvent(nameof(SystemFacade), this.CommandLineCommunicator);
+        PublishCmdCommunicator();
+        
+        this.CommandLineCommunicator.RegisterObserver(this.SystemLogger);
+        
+        
 
     }
 
@@ -53,8 +56,16 @@ public class SystemFacade : AbstractEventDrivenObject{
         this.RegisterObserver(viewModel);
     }
 
+    public void PublishCmdCommunicator() {
+        PublishEvent(nameof(PublishCmdCommunicator), this.CommandLineCommunicator);
+    }
+
+    public void PublishSystemLogger() {
+        PublishEvent(nameof(PublishSystemLogger), this.SystemLogger);
+    }
+
     public void Log(string content, LogTypeEnum logType = LogTypeEnum.SYSTEM_NOTIFICATION) {
-        this.SystemLogger.Log(content, logType);
+        this.SystemLogger.UpdateLog(content, logType);
     }
 
     public void InvokeCommand(string cmdName, MetaDataObject metaDataObject) {

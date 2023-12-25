@@ -382,7 +382,7 @@
           }
         }
       },
-      "EventDrivenElements/1.0.0": {
+      "EventDrivenElements/1.1.1": {
         "type": "package",
         "compile": {
           "lib/net6.0/EventDrivenElements.dll": {}
@@ -1961,15 +1961,15 @@
         "logo.png"
       ]
     },
-    "EventDrivenElements/1.0.0": {
-      "sha512": "WghfVyjxp1DNXAQg9tW+BdXcxN+MI3K11Aoe/Uz3edNgPjzUisD1nNC7scMj6UQToTdcE+UpGeAoYVnrw5jSlw==",
+    "EventDrivenElements/1.1.1": {
+      "sha512": "OAZSxpk3Tr4WsF1pFb8XqrLol4YXydSS6QIb2va9vNBNkCQom2u30BmiEV28HG4LxSSHj+2Sw7myyh9quhFdMw==",
       "type": "package",
-      "path": "eventdrivenelements/1.0.0",
+      "path": "eventdrivenelements/1.1.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
-        "eventdrivenelements.1.0.0.nupkg.sha512",
+        "eventdrivenelements.1.1.1.nupkg.sha512",
         "eventdrivenelements.nuspec",
         "lib/net6.0/EventDrivenElements.dll"
       ]
@@ -4749,30 +4749,29 @@
       "Avalonia.ReactiveUI >= 11.0.6",
       "Avalonia.Themes.Fluent >= 11.0.6",
       "Deadpikle.AvaloniaProgressRing >= 0.10.3",
-      "EventDrivenElements >= 1.0.0"
+      "EventDrivenElements >= 1.1.1"
     ]
   },
   "packageFolders": {
-    "E:\\NUGET\\packages": {}
+    "C:\\Users\\huoka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
+      "projectUniqueName": "E:\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
       "projectName": "SMURF-Ava",
-      "projectPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
-      "packagesPath": "E:\\NUGET\\packages",
-      "outputPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\obj\\",
+      "projectPath": "E:\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
+      "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
+      "outputPath": "E:\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
@@ -4820,7 +4819,7 @@
           },
           "EventDrivenElements": {
             "target": "Package",
-            "version": "[1.0.0, )"
+            "version": "[1.1.1, )"
           }
         },
         "imports": [

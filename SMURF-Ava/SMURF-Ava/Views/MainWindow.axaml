@@ -7,6 +7,7 @@
         x:Class="SMURF_Ava.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         MinHeight="800" MinWidth="1250"
+        Height="800" Width="1250"
         ExtendClientAreaToDecorationsHint="True"
         WindowStartupLocation="CenterScreen"
         TransparencyLevelHint="AcrylicBlur"
@@ -27,10 +28,27 @@
         <DataTemplate x:Key="CommandTabTemplate">
             <Grid>
                 <StackPanel Orientation="Horizontal">
-                    <ProgressBar MinHeight="40" />
+                    <ProgressBar MinHeight="40" Orientation="Vertical"/>
                     <TextBlock Text="CommandName" VerticalAlignment="Center"/>
-                    <Button Content="send" />
+                    <Button Content="send" Command="{Binding SendCommand}"/>
                 </StackPanel>
+            </Grid>
+        </DataTemplate>
+        
+        <DataTemplate x:Key="SystemLogItemTemplate">
+            <Grid ColumnDefinitions="2* 8*" >
+                <Border Grid.ColumnSpan="2" BorderBrush="DarkGray" BorderThickness="1" />
+                
+                <TextBlock Grid.Column="0" Text="{Binding TimeStamp}" 
+                           TextWrapping="Wrap"
+                           Margin="7" Foreground="{Binding ForeGroundColorStr}"/>  
+                
+                <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="DarkGray" />
+                
+                <TextBlock Grid.Column="1" Text="{Binding Content}"
+                           TextWrapping="Wrap"
+                           Margin="7" Foreground="{Binding ForeGroundColorStr}"/>
+                
             </Grid>
         </DataTemplate>
         
@@ -94,19 +112,14 @@
                         </Grid>
                         
                             
-                        <ScrollViewer Grid.Row="1" Name="SystemInfoScrollViewer"
-                                      Margin="0 5 0 0"
-                                      HorizontalScrollBarVisibility="Disabled"
-                                      VerticalScrollBarVisibility="Visible"
-                                      DataContextChanged="SystemInfo_ScrollViewer_OnDataContextChanged"
-                        >
-                            <TextBox IsReadOnly="True" 
-                                     BorderThickness="1"
-                                     FontSize="12" FontWeight="Light"
-                                     TextWrapping="Wrap" Text="{Binding SystemLogManagerViewModel.LogInfo}"
-                                     TextChanged="SystemInfo_OnTextChanged"
-                            />
-                        </ScrollViewer>
+                        <ListBox Grid.Row="1" BorderThickness="1" Margin="0 5 0 0"
+                                 Name="SystemLogListBox"
+                                 CornerRadius="5"
+                                 ItemsSource="{Binding SystemLogManagerViewModel.LogItemViewModels}"
+                                 ItemTemplate="{StaticResource SystemLogItemTemplate}"
+                                 AutoScrollToSelectedItem="True"
+                                 PropertyChanged="SystemLogListBox_OnPropertyChanged"
+                        />
                         
                     </Grid>
                     

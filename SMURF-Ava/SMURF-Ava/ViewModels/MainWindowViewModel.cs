@@ -157,9 +157,16 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(SystemFacade))) {
+        if (propertyName.Equals(nameof(SystemFacade.PublishCmdCommunicator))) {
             CommandLineCommunicator commandLineCommunicator = (CommandLineCommunicator)o;
             commandLineCommunicator.RegisterObserver(this.PopupManagerViewModel);
+            return;
+        }
+
+        if (propertyName.Equals(nameof(SystemFacade.PublishSystemLogger))) {
+            SystemLogger systemLogger = (SystemLogger)o;
+            systemLogger.RegisterObserver(this.SystemLogManagerViewModel);
+            return;
         }
     }
 }

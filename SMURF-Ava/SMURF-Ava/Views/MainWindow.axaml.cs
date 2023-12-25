@@ -1,4 +1,5 @@
 using System;
+using Avalonia;
 using Avalonia.Controls;
 
 namespace SMURF_Ava.Views;
@@ -10,15 +11,16 @@ public partial class MainWindow : Window {
         
 
     private void SystemInfo_OnTextChanged(object sender, TextChangedEventArgs e) {
-        SystemInfoScrollViewer.ScrollToEnd();
+        //SystemInfoScrollViewer.ScrollToEnd();
     }
 
     private void SystemInfo_ScrollViewer_OnDataContextChanged(object? sender, EventArgs e) {
         ScrollViewer sc = (ScrollViewer)sender;
         sc.ScrollToEnd();
     }
+    
 
-    /*private void StyledElement_OnDataContextChanged(object? sender, EventArgs e) {
-        SystemInfoScrollViewer.ScrollToEnd();
-    }*/
+    private void SystemLogListBox_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
+        
+    }
 }

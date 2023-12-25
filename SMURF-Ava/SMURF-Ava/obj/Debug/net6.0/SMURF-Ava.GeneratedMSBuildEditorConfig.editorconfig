@@ -18,8 +18,11 @@ build_property.ProjectDir = D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava
 [D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/ExceptionWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/PopupWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/InProgressWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

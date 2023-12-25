@@ -2,11 +2,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="SMURF_Ava.App"
              xmlns:local="using:SMURF_Ava"
-             RequestedThemeVariant="Dark">
+             RequestedThemeVariant="Light">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
   
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme/>
         <StyleInclude Source="avares://AvaloniaProgressRing/Styles/ProgressRing.xaml"/>
     </Application.Styles>
 </Application>

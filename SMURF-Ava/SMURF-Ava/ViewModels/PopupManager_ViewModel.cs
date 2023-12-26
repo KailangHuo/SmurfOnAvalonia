@@ -16,11 +16,17 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     public PopupManager_ViewModel() {
         this.DefaultMainWindow = SystemFacade.GetInstance().MainWindow;
         this.commandPopupMap = new Dictionary<UIH_Command, InProgressWindow>();
+        ExceptionManager.GetInstance().RegisterObserver(this);
     }
 
     private Window DefaultMainWindow;
 
     private Dictionary<UIH_Command, InProgressWindow> commandPopupMap;
+
+    private void PopupExceptionWindow(string content) {
+        ExceptionWindow window = new ExceptionWindow(content);
+        window.ShowDialog(this.DefaultMainWindow);
+    }
 
     private void PopupCommandProcessing_BlockWindow(UIH_Command uihCommand) {
         if(commandPopupMap.ContainsKey(uihCommand)) return;
@@ -32,23 +38,31 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     private void CloseCommandProcessing_BlockWindow(UIH_Command uihCommand) {
         if (commandPopupMap.ContainsKey(uihCommand)) {
             InProgressWindow progressWindow = commandPopupMap[uihCommand];
-            Dispatcher.UIThread.Invoke(() => { progressWindow.Close();} );
+            //Dispatcher.UIThread.Invoke(() => { } );
+            progressWindow.Close();
             commandPopupMap.Remove(uihCommand);
         }
 
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {
-            UIH_Command command = (UIH_Command)o;
-            PopupCommandProcessing_BlockWindow(command);
-            return;
-        }
+        Dispatcher.UIThread.Invoke(() => {
+            if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {
+                UIH_Command command = (UIH_Command)o;
+                PopupCommandProcessing_BlockWindow(command);
+                return;
+            }
 
-        if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandFinished))) {
-            UIH_Command command = (UIH_Command)o;
-            CloseCommandProcessing_BlockWindow(command);
-            return;
-        }
+            if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandFinished))) {
+                UIH_Command command = (UIH_Command)o;
+                CloseCommandProcessing_BlockWindow(command);
+                return;
+            }
+
+            if (propertyName.Equals(nameof(ExceptionManager.ThrowException))) {
+                this.PopupExceptionWindow((string)o);
+                return;
+            }
+        });
     }
 }

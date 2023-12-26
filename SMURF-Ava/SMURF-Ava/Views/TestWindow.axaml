@@ -5,14 +5,20 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SMURF_Ava.Views.TestWindow"
         Title="TestWindow">
-    <Grid ColumnDefinitions="1* 6*" >
-        <Border Grid.ColumnSpan="2" BorderBrush="DarkGray" BorderThickness="1" />
+    <Grid ColumnDefinitions="Auto *" Name="templateGrid">
                 
-        <TextBlock Grid.Column="0" Text="[TimeStamp]" Margin="7" Foreground="{Binding }"/>
+        <TextBlock Grid.Column="0" Text="BIndingTimeStamp" 
+                   IsVisible="{Binding ShowTimeStamp, RelativeSource={RelativeSource AncestorType=Window}}"
+                   TextWrapping="Wrap" 
+                   FontSize="14"
+                   FontWeight="Normal"
+                   Margin="7 0 0 0" Foreground="{Binding ForeGroundColorStr}"/>  
                 
-        <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="DarkGray" />
-                
-        <TextBlock Grid.Column="1" Text="[Log Details]" Margin="7" Foreground="{Binding }"/>
+        <TextBlock Grid.Column="1" Text=" || Binding Content}"
+                   TextWrapping="Wrap"
+                   Margin="7 0 0 0" Foreground="{Binding ForeGroundColorStr}"/>
+        
+        <Button Grid.Column="1" Content="Copy" HorizontalAlignment="Right" IsVisible="{Binding #templateGrid.is}"/>
                 
     </Grid>
 </Window>

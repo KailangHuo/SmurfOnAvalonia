@@ -22,12 +22,12 @@ public class UIH_Command {
 
     public string GetIntegrationArgs() {
         string args = "";
-        args += this.CommandName + "\n";
-        args += "--user=" + this.UserName + "\n";
-        args += "--password=" + this.Password + "\n";
-        args += "--selectedStudy=" + this.StudyUid + "\n";
-        args += "--application=" + this.ApplicationName + "\n";
-        args += "--serverDomain=" + this.DomainUrl + "\n";
+        args += this.CommandName + " ";
+        args += "--user=" + this.UserName + " ";
+        args += "--password=" + this.Password + " ";
+        args += "--selectedStudy=" + this.StudyUid + " ";
+        args += "--application=" + this.ApplicationName + " ";
+        args += "--serverDomain=" + this.DomainUrl + " ";
         return args;
     }
 

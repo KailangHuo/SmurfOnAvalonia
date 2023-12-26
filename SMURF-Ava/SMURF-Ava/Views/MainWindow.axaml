@@ -35,19 +35,24 @@
             </Grid>
         </DataTemplate>
         
-        <DataTemplate x:Key="SystemLogItemTemplate">
-            <Grid ColumnDefinitions="2* 8*" >
-                <Border Grid.ColumnSpan="2" BorderBrush="DarkGray" BorderThickness="1" />
+        <DataTemplate x:Key="SystemLogItemTemplate" >
+            <Grid ColumnDefinitions="Auto *" >
                 
                 <TextBlock Grid.Column="0" Text="{Binding TimeStamp}" 
-                           TextWrapping="Wrap"
-                           Margin="7" Foreground="{Binding ForeGroundColorStr}"/>  
-                
-                <Border Grid.Column="0" BorderThickness="0 0 1 0" BorderBrush="DarkGray" />
+                           IsVisible="{Binding ShowTimeStamp, RelativeSource={RelativeSource AncestorType=Window}}"
+                           TextWrapping="Wrap" 
+                           FontSize="14"
+                           FontWeight="Normal"
+                           Margin="7 0 0 0" Foreground="DarkGray"/>  
                 
                 <TextBlock Grid.Column="1" Text="{Binding Content}"
                            TextWrapping="Wrap"
-                           Margin="7" Foreground="{Binding ForeGroundColorStr}"/>
+                           Margin="7 0 0 0" Foreground="{Binding ForeGroundColorStr}"/>
+                <Grid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy" Command="{Binding CopyCommand}"/>
+                    </ContextMenu>
+                </Grid.ContextMenu>
                 
             </Grid>
         </DataTemplate>
@@ -83,7 +88,7 @@
                 
                 <!-- CmdBox & basic params -->
                 <Grid Grid.Column="0" RowDefinitions="Auto * *">
-                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="WhiteSmoke" Margin="-1 0 0 0"/>
+                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkGray" Margin="-1 0 0 0"/>
                     
                     <!-- Title Area -->
                     <TextBlock Grid.Row="0" Text="1.Callup the Client" FontSize="23"  Margin="5 10 0 0"/>
@@ -94,15 +99,29 @@
                         <!-- Grid Title -->
                         <Grid Grid.ColumnDefinitions="* *">
                             
-                            <TextBlock Text=" system log" FontSize="20" 
-                                       HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                            <StackPanel Grid.Column="0" Orientation="Horizontal"
+                                        HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                
+                                <TextBlock Text=" system log" FontSize="20" 
+                                           HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                                
+                                <ToggleButton Content="{Binding TimestampButtonContent
+                                              , RelativeSource={RelativeSource AncestorType=Window}}" 
+                                              Padding="3"
+                                              Margin="10 0 0 0"
+                                              Click="Button_OnClick"/>
+                                
+                            </StackPanel>
+                           
                             
                             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                                 
                                 <Button Command="{Binding GenerateLogCommand}"
+                                        Padding="3"
                                         Content="generate log"  Margin="0 0 3 0"/>
                                 
                                 <Button Command="{Binding ClearLogCommand}"
+                                        Padding="3"
                                         Content="clear"/>
                                 
                             </StackPanel>
@@ -111,15 +130,22 @@
                             
                         </Grid>
                         
+                        <!-- ScrollView -->
+                        <ScrollViewer Grid.Row="1" Name="SystemInfo_ScrollViewer"
+                                      Margin="0 5 0 0"
+                                      HorizontalScrollBarVisibility="Disabled"
+                        >
+                            <ItemsControl BorderThickness="1" 
+                                          Name="SystemLogListBox"
+                                          Background="Black"
+                                          BorderBrush="DarkGray"
+                                          CornerRadius="8"
+                                          ItemsSource="{Binding SystemLogManagerViewModel.LogItemViewModels}"
+                                          ItemTemplate="{StaticResource SystemLogItemTemplate}"
+                                          PropertyChanged="SystemLogListBox_OnPropertyChanged"
+                            />
                             
-                        <ListBox Grid.Row="1" BorderThickness="1" Margin="0 5 0 0"
-                                 Name="SystemLogListBox"
-                                 CornerRadius="5"
-                                 ItemsSource="{Binding SystemLogManagerViewModel.LogItemViewModels}"
-                                 ItemTemplate="{StaticResource SystemLogItemTemplate}"
-                                 AutoScrollToSelectedItem="True"
-                                 PropertyChanged="SystemLogListBox_OnPropertyChanged"
-                        />
+                        </ScrollViewer>
                         
                     </Grid>
                     
@@ -141,14 +167,17 @@
                             
                                 <Grid Grid.ColumnDefinitions="* Auto">
                                     <TextBox Text="{Binding ClientPath, Mode=TwoWay}" Height="14" Margin="0,0,0,5" 
+                                             Watermark="输入客户端的bin目录路径"
                                              MinHeight="22"
+                                             FontWeight="Normal"
                                              VerticalAlignment="Bottom"
                                              ScrollViewer.VerticalScrollBarVisibility="Disabled"                                        
                                              TextWrapping="NoWrap"
                                              Padding="1 1 1 1"/>
                                     
                                     <Button Grid.Column="1" Command="{Binding OpenInCmdCommand}"
-                                            Content="Open in Cmd" Margin="5 0 0 0"/>
+                                            Padding="3"
+                                            Content="Open in Cmd" Margin="5 0 0 3"/>
                                 </Grid>
                                 
                                 
@@ -167,6 +196,7 @@
                             
                                         <TextBox Text="{Binding UserAccountObject.UserName, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
                                                  MinHeight="22"
+                                                 FontWeight="Normal"
                                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"                                         
                                                  TextWrapping="NoWrap"
                                                  Padding="1 1 1 1"/>
@@ -175,6 +205,7 @@
                             
                                         <TextBox Text="{Binding UserAccountObject.Password, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
                                                  MinHeight="22"
+                                                 FontWeight="Normal"
                                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"                                         
                                                  TextWrapping="NoWrap"
                                                  Padding="1 1 1 1"/>
@@ -183,6 +214,7 @@
                             
                                         <TextBox Text="{Binding UserAccountObject.DomainUrl, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
                                                  MinHeight="22"
+                                                 FontWeight="Normal"
                                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                                  TextWrapping="NoWrap"
                                                  Padding="1 1 1 1"/>
@@ -192,7 +224,9 @@
                                         
                                         <TextBlock Text="Study Uid: " Margin="0,0,0,3" /> 
                                         <TextBox Text="{Binding StudyUid, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                 Watermark="确保Study来自对应的服务器"
                                                  MinHeight="22"
+                                                 FontWeight="Normal"
                                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                                  TextWrapping="NoWrap"
                                                  Padding="1 1 1 1"/>
@@ -222,12 +256,16 @@
                         <Grid Grid.Row="2" VerticalAlignment="Top" Margin="0,10,0,0">
                             <StackPanel 
                                 Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="call-up" Margin="0 0 10 0 "
-                                        Command="{Binding CallUpCommand}" 
+                                <Button Content="login launch" Margin="0 0 10 0 "
+                                        Padding="3"
+                                        Command="{Binding LoginLaunchCommand}" 
                                         CommandParameter="{Binding $parent[Window]}"/>
-                                <Button Content="vertical call-up" Command="{Binding VerticalLoginCommand}" Margin="0 0 10 0 "/>
-                                <Button Content="save" Command="{Binding SaveCommand}" Margin="0 0 10 0 "/>
-                                <Button Content="close client" Command="{Binding CloseClientCommand}" Margin="0 0 10 0 "/>
+                                <Button Content="vertical login" Command="{Binding VerticalLoginCommand}" 
+                                        Padding="3" Margin="0 0 10 0 "/>
+                                <Button Content="save" Command="{Binding SaveCommand}" 
+                                        Padding="3" Margin="0 0 10 0 "/>
+                                <Button Content="close client" Command="{Binding CloseClientCommand}"
+                                        Padding="3" Margin="0 0 10 0 "/>
                             </StackPanel>
                         </Grid>
                         
@@ -237,20 +275,20 @@
                 
                 <!-- Commands Panel -->
                 <Grid Grid.Column="1" RowDefinitions="Auto * Auto">
-                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="WhiteSmoke" Margin="-1 0 -1 0"/>
+                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkGray" Margin="-1 0 -1 0"/>
                     
                     <!-- Title Area -->
                     <TextBlock Grid.Row="0" Text="2. Send Command" FontSize="23"  Margin="5 10 0 0"/>
                     
                     <!-- Command ListView -->
-                    <Border Grid.Row="1" CornerRadius="5"
-                            BorderThickness="1" BorderBrush="Gray" Margin="6 57 6 6"/>
                     <ListBox Grid.Row="1" Margin="7 58 7 7"
-                             BorderBrush="WhiteSmoke"
+                             BorderBrush="DarkGray"
                              Background="Transparent"
                              ItemsSource=""
                              ItemTemplate=""
                              />
+                    <Border Grid.Row="1" CornerRadius="5"
+                            BorderThickness="1" BorderBrush="Black" Margin="6 57 6 6"/>
                     
                     
                     <!-- Temp PlaceHolder -->
@@ -262,7 +300,7 @@
                 
                 <!-- Respond Panel -->
                 <Grid Grid.Column="2" RowDefinitions="Auto * *">
-                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="WhiteSmoke" Margin="0 0 -1 0"/>
+                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkGray" Margin="0 0 -1 0"/>
                     
                     <!-- Title Area -->
                     <TextBlock Grid.Row="0" Text="3. Receive your response" FontSize="23"  Margin="5 10 0 0"/>

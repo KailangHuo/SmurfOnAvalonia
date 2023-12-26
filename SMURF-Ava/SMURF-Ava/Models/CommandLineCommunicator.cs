@@ -8,32 +8,33 @@ namespace SMURF_Ava.Models;
 public class CommandLineCommunicator : AbstractEventDrivenObject {
 
     public CommandLineCommunicator() {
-        //this.INTEGRATION_EXECUTEABLE = @"\integration.exe";
-        this.INTEGRATION_EXECUTEABLE = @"\IntegrationSImulator.exe";
+        this.INTEGRATION_EXECUTEABLE = @"\integration.exe";
+        //this.INTEGRATION_EXECUTEABLE = @"\IntegrationSImulator.exe";
     }
 
     private readonly string INTEGRATION_EXECUTEABLE;
 
     public void SendCommand(UIH_Command uihCommand) {
         PublishCommandStart(uihCommand);
-        int exitCode = 0;
+        string respond = "";
         Thread thread = new Thread(() => {
             try { 
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.FileName = uihCommand.ClientPath + this.INTEGRATION_EXECUTEABLE;
                 processStartInfo.Arguments = uihCommand.GetIntegrationArgs();
-                processStartInfo.WindowStyle = ProcessWindowStyle.Normal;
+                processStartInfo.CreateNoWindow = true;
                 Process process = Process.Start(processStartInfo);
                 process.WaitForExit();
-                exitCode = process.ExitCode;
+                int exitCode = process.ExitCode;
+                respond = uihCommand.CommandName + " respond! ==> " + exitCode;
                 
             }
             catch (Exception e) {
-                Console.WriteLine(e);
-                throw;
+                ExceptionManager.GetInstance().ThrowException(e.ToString());
+                respond = uihCommand.CommandName + " Failed!";
             }
             
-            PublishRespondReceived(uihCommand, exitCode);
+            PublishRespondReceived(uihCommand, respond);
             PublishCommandFinished(uihCommand);
         });
         thread.Start();
@@ -47,9 +48,7 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
         PublishEvent(nameof(PublishCommandFinished), uihCommand);
     }
 
-    public void PublishRespondReceived(UIH_Command uihCommand, int respondNumber) {
-        string respond = "";
-        respond += uihCommand.CommandName + " => result:" + respondNumber;
-        PublishEvent(nameof(PublishRespondReceived), respond);
+    public void PublishRespondReceived(UIH_Command uihCommand, string responds) {
+        PublishEvent(nameof(PublishRespondReceived), responds);
     }
 }

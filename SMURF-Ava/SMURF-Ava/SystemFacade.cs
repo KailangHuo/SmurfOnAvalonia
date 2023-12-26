@@ -16,6 +16,7 @@ public class SystemFacade : AbstractEventDrivenObject{
     }
 
     private void InitSystem() {
+        this.ExceptionManager = Models.ExceptionManager.GetInstance();
         this.SystemLogger = new SystemLogger();
         PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
@@ -42,6 +43,8 @@ public class SystemFacade : AbstractEventDrivenObject{
     public Window MainWindow { get; private set; }
 
     public AbstractEventDrivenViewModel MainWindowViewModel{ get; private set; }
+
+    private ExceptionManager ExceptionManager;
 
     private SystemLogger SystemLogger;
 

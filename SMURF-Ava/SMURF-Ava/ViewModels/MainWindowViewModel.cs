@@ -128,25 +128,25 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     #region COMMANDS
 
-    public void CallUpCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeCommand("CALL-UP", _metaDataObject);
+    public void LoginLaunchCommand(object o = null) {
+        SystemFacade.GetInstance().InvokeCommand("loginLaunch", _metaDataObject);
     }
 
     public void VerticalLoginCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeCommand("Vertical CALL-UP", _metaDataObject);
+        SystemFacade.GetInstance().InvokeCommand("verticalLogin", _metaDataObject);
     }
 
     public void SaveCommand(object o = null) {
         this.Saved = true;
-        SystemFacade.GetInstance().InvokeCommand("Save", _metaDataObject);
+        SystemFacade.GetInstance().InvokeCommand("save", _metaDataObject);
     }
 
     public void CloseClientCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeCommand("CLOSE CLIENT", _metaDataObject);
+        SystemFacade.GetInstance().InvokeCommand("closeClient", _metaDataObject);
     }
 
     public void ClearLogCommand() {
-        SystemFacade.GetInstance().InvokeCommand("CLEAR LOG", _metaDataObject);
+        SystemFacade.GetInstance().InvokeCommand("clearLog", _metaDataObject);
     }
 
     public void OpenInCmdCommand() {

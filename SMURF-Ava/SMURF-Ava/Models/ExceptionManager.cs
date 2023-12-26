@@ -22,8 +22,8 @@ public class ExceptionManager : AbstractEventDrivenObject {
         return _instance;
     }
 
-    public void ThrowExceptionWithShutDown(string exceptionStr) {
-        
+    public void ThrowException(string exceptionStr) {
+        PublishEvent(nameof(ThrowException), exceptionStr);
     }
 
 }

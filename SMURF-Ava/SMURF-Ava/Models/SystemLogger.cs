@@ -24,6 +24,13 @@ public class SystemLogger : AbstractEventDrivenObject {
             UIH_Command uihCommand = (UIH_Command)o;
             string logContent = uihCommand.GetIntegrationArgs();
             UpdateLog(logContent, LogTypeEnum.SYSTEM_OPERATION);
+            return;
+        }
+
+        if (propertyName.Equals(nameof(CommandLineCommunicator.PublishRespondReceived))) {
+            string resultStr = (string)o;
+            UpdateLog(resultStr, LogTypeEnum.RESPOND);
+            return;
         }
     }
 }

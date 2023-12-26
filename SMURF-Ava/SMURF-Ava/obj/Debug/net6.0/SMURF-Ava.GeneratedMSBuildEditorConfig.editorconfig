@@ -13,19 +13,19 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SMURF-Ava
-build_property.ProjectDir = E:\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\
+build_property.ProjectDir = D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\
 
-[E:/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/App.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/ExceptionWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/ExceptionWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/InProgressWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/InProgressWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[E:/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/TestWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/TestWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

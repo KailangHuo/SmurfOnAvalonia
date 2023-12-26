@@ -5,6 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="250"
         x:Class="SMURF_Ava.Views.ExceptionWindow"
         MinWidth="300" MinHeight="180"
+        Width="300"
         CanResize="False"
         WindowStartupLocation="CenterOwner"
         SystemDecorations="None"
@@ -23,6 +24,7 @@
         </ExperimentalAcrylicBorder>
         
         <Grid RowDefinitions="Auto * Auto">
+            <Border Grid.RowSpan="3" BorderBrush="DarkGray" BorderThickness="1" />
             
             <TextBlock Grid.Row="0" Text="Exception" TextAlignment="Center" Margin="0 10 0 7"/>
             
@@ -30,7 +32,11 @@
             
             <!-- Content Grid -->
             <Grid Grid.Row="1">
-                <TextBlock Text="Exception Content" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Name="ExceptionTextBlock" 
+                           TextWrapping="Wrap"
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           Margin="30"/>
                 
             </Grid>
             
@@ -38,7 +44,10 @@
             <Grid Grid.Row="2">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
                             Margin="30 0 30 20">
-                    <Button Content="OK" Width="100" HorizontalContentAlignment="Center"/>
+                    <Button Content="OK" 
+                            Click="Button_OnClick"
+                            Width="100" 
+                            HorizontalContentAlignment="Center"/>
                 </StackPanel>
             </Grid>
             

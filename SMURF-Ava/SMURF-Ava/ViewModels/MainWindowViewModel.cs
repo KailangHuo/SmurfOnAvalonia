@@ -146,7 +146,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     }
 
     public void ClearLogCommand() {
-        SystemFacade.GetInstance().InvokeCommand("clearLog", _metaDataObject);
+        SystemFacade.GetInstance().ClearLogCommand();
     }
 
     public void OpenInCmdCommand() {

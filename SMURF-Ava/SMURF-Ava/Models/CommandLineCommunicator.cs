@@ -27,15 +27,15 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
                 process.WaitForExit();
                 int exitCode = process.ExitCode;
                 respond = uihCommand.CommandName + " respond! ==> " + exitCode;
-                
+                PublishRespondReceived(respond);
+                PublishCommandFinished(uihCommand);
             }
             catch (Exception e) {
-                ExceptionManager.GetInstance().ThrowException(e.ToString());
                 respond = uihCommand.CommandName + " Failed!";
+                PublishRespondReceived(respond);
+                ExceptionManager.GetInstance().ThrowException(e.ToString());
+                PublishCommandFinished(uihCommand);
             }
-            
-            PublishRespondReceived(uihCommand, respond);
-            PublishCommandFinished(uihCommand);
         });
         thread.Start();
     }
@@ -48,7 +48,7 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
         PublishEvent(nameof(PublishCommandFinished), uihCommand);
     }
 
-    public void PublishRespondReceived(UIH_Command uihCommand, string responds) {
+    public void PublishRespondReceived(string responds) {
         PublishEvent(nameof(PublishRespondReceived), responds);
     }
 }

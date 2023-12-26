@@ -23,13 +23,13 @@ public class UihCommandFactory {
         return _instance;
     }
 
-    public UIH_Command CreateUihCommand(string commandName, MetaDataObject metaDataObject, UihCommandType commandType) {
+    public UIH_Command CreateUihCommand(string commandName, MetaDataObject metaDataObject, UihCommandEnum commandEnum) {
         UIH_Command uihCommand = null;
-        if (commandType == UihCommandType.COMMAND_LINE) {
+        if (commandEnum == UihCommandEnum.COMMAND_LINE) {
             uihCommand = new UIH_Command();
             uihCommand.ClientPath = metaDataObject.ClientPath;
             uihCommand.CommandName = commandName;
-            uihCommand.UihCommandType = commandType;
+            uihCommand.UihCommandEnum = commandEnum;
             uihCommand.UserName = metaDataObject.UserAccountViewModel.UserName;
             uihCommand.Password = metaDataObject.UserAccountViewModel.Password;
             uihCommand.DomainUrl = metaDataObject.UserAccountViewModel.DomainUrl;

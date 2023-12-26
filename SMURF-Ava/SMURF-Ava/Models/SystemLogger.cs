@@ -12,6 +12,12 @@ public class SystemLogger : AbstractEventDrivenObject {
     
     private List<LogItem> _logItems;
 
+    public void ClearAllLog() {
+        _logItems = new List<LogItem>();
+        PublishEvent(nameof(ClearAllLog), null);
+        UpdateLog("Log cleared.", LogTypeEnum.SYSTEM_NOTIFICATION);
+    }
+
     public void UpdateLog(string logContent, LogTypeEnum logType) {
         DateTime timeStamp = DateTime.Now;
         LogItem logItem = new LogItem(logType, timeStamp, logContent);

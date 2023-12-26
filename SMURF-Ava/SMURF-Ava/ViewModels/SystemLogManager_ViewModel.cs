@@ -19,8 +19,13 @@ public class SystemLogManager_ViewModel : AbstractEventDrivenViewModel{
 
     private string logInfo;
 
-    public void AddLogItem(LogItem_ViewModel logItemViewModel) {
+    private void AddLogItem(LogItem_ViewModel logItemViewModel) {
         this.LogItemViewModels.Add(logItemViewModel);
+    }
+
+    private void ClearAll() {
+        this.LogItemViewModels = new ObservableCollection<LogItem_ViewModel>();
+        RisePropertyChanged(nameof(LogItemViewModels));
     }
 
     public string LogInfo {
@@ -34,16 +39,16 @@ public class SystemLogManager_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    private void UpdateLog(string logContent) {
-        DateTime timeStamp = DateTime.Now;
-        string log = "\n" + timeStamp.ToString() + " " + logContent;
-        LogInfo += log;
-    }
-
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(SystemLogger.UpdateLog))) {
             LogItem_ViewModel logItemViewModel = new LogItem_ViewModel((LogItem)o);
             AddLogItem(logItemViewModel);
+            return;
+        }
+
+        if (propertyName.Equals(nameof(SystemLogger.ClearAllLog))) {
+            ClearAll();
+            return;
         }
     }
 }

@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 
 namespace SMURF_Ava.Views;
 
@@ -43,14 +44,18 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
 
 
     private void SystemLogListBox_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
-        if (e.Property.Name == "ItemCount") {
+        if (e.Property.Name == "ItemCount" ) {
             SystemInfo_ScrollViewer.ScrollToEnd();
         }
+        
+    }
+    
+    private void SystemLogListBox_OnSizeChanged(object? sender, SizeChangedEventArgs e) {
+        if(SystemInfo_ScrollViewer != null) SystemInfo_ScrollViewer.ScrollToEnd();
     }
 
     private void Button_OnClick(object? sender, RoutedEventArgs e) {
         this.ShowTimeStamp = !ShowTimeStamp;
-        if(SystemInfo_ScrollViewer != null) SystemInfo_ScrollViewer.ScrollToEnd();
     }
     
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -61,4 +66,6 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
             return;
         this.PropertyChanged((object) this, new PropertyChangedEventArgs(propertyName));
     }
+
+    
 }

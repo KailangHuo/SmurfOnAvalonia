@@ -2,7 +2,7 @@
 
 public class UIH_Command {
 
-    public UihCommandType UihCommandType;
+    public UihCommandEnum UihCommandEnum;
 
     public string ClientPath;
 
@@ -33,7 +33,7 @@ public class UIH_Command {
 
 }
 
-public enum UihCommandType {
+public enum UihCommandEnum {
     COMMAND_LINE,
     WEBSOCKET,
     RESTFUL

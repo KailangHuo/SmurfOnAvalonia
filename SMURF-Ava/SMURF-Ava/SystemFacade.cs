@@ -17,6 +17,7 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     private void InitSystem() {
         this.ExceptionManager = Models.ExceptionManager.GetInstance();
+        this.TcpShortServer = TcpShortServer.GetInstance();
         this.SystemLogger = new SystemLogger();
         PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
@@ -50,6 +51,8 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     private CommandLineCommunicator CommandLineCommunicator;
 
+    private TcpShortServer TcpShortServer;
+
     public void RegisterMainWindow(Window window) {
         this.MainWindow = window;
     }
@@ -73,8 +76,12 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     public void InvokeCommand(string cmdName, MetaDataObject metaDataObject) {
         UIH_Command uihCommand = UihCommandFactory.GetInstance()
-            .CreateUihCommand(cmdName, metaDataObject, UihCommandType.COMMAND_LINE);
+            .CreateUihCommand(cmdName, metaDataObject, UihCommandEnum.COMMAND_LINE);
         this.CommandLineCommunicator.SendCommand(uihCommand);
+    }
+
+    public void ClearLogCommand() {
+        this.SystemLogger.ClearAllLog();
     }
 
 }

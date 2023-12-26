@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using SMURF_Ava.ViewModels;
 
 namespace SMURF_Ava.Views;
 
@@ -13,6 +14,7 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
         ShowTimeStamp = false;
         TimestampButtonContent = "show timestamp";
         InitializeComponent();
+        this.Closing += CloseApplication;
     }
 
     private string _timestampButtonContent;
@@ -67,5 +69,20 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
         this.PropertyChanged((object) this, new PropertyChangedEventArgs(propertyName));
     }
 
-    
+
+    private void InputElement_OnPointerEntered(object? sender, PointerEventArgs e) {
+        Grid element = (Grid)sender;
+        LogItem_ViewModel logItemViewModel = (LogItem_ViewModel)element.DataContext;
+        logItemViewModel.CopyAble = true;
+    }
+
+    private void InputElement_OnPointerExited(object? sender, PointerEventArgs e) {
+        Grid element = (Grid)sender;
+        LogItem_ViewModel logItemViewModel = (LogItem_ViewModel)element.DataContext;
+        logItemViewModel.CopyAble = false;
+    }
+
+    private void CloseApplication(object o, WindowClosingEventArgs e) {
+        System.Environment.Exit(0);
+    }
 }

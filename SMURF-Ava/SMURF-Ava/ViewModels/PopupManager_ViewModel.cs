@@ -24,13 +24,13 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     private Dictionary<UIH_Command, InProgressWindow> commandPopupMap;
 
     private void PopupExceptionWindow(string content) {
-        ExceptionWindow window = new ExceptionWindow(content);
+        PopupWindow window = new PopupWindow(content);
         window.ShowDialog(this.DefaultMainWindow);
     }
 
     private void PopupCommandProcessing_BlockWindow(UIH_Command uihCommand) {
         if(commandPopupMap.ContainsKey(uihCommand)) return;
-        InProgressWindow inProgressWindow = new InProgressWindow(uihCommand.CommandName);
+        InProgressWindow inProgressWindow = new InProgressWindow(uihCommand.CommandName + " is processing...");
         commandPopupMap.Add(uihCommand, inProgressWindow);
         inProgressWindow.ShowDialog(this.DefaultMainWindow);
     }

@@ -8,8 +8,8 @@ namespace SMURF_Ava.Models;
 public class CommandLineCommunicator : AbstractEventDrivenObject {
 
     public CommandLineCommunicator() {
-        this.INTEGRATION_EXECUTEABLE = @"\integration.exe";
-        //this.INTEGRATION_EXECUTEABLE = @"\IntegrationSImulator.exe";
+        //this.INTEGRATION_EXECUTEABLE = @"\integration.exe";
+        this.INTEGRATION_EXECUTEABLE = @"E:\GitHub\IntegrationExe\IntegrationSImulator\IntegrationSImulator\bin\Debug\net7.0\IntegrationSImulator.exe";
     }
 
     private readonly string INTEGRATION_EXECUTEABLE;
@@ -51,4 +51,5 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
     public void PublishRespondReceived(string responds) {
         PublishEvent(nameof(PublishRespondReceived), responds);
     }
+    
 }

@@ -1,4 +1,7 @@
-﻿using EventDrivenElements;
+﻿using System.Collections.Generic;
+using System.Reflection;
+using EventDrivenElements;
+using SMURF_Ava.configuration;
 using SMURF_Ava.ViewModels;
 
 namespace SMURF_Ava.Models;
@@ -27,14 +30,23 @@ public class UihCommandFactory {
         UIH_Command uihCommand = null;
         if (commandEnum == UihCommandEnum.COMMAND_LINE) {
             uihCommand = new UIH_Command();
-            uihCommand.ClientPath = metaDataObject.ClientPath;
+            uihCommand.ClientPath = metaDataObject.clientPath;
             uihCommand.CommandName = commandName;
             uihCommand.UihCommandEnum = commandEnum;
-            uihCommand.UserName = metaDataObject.UserAccountViewModel.UserName;
-            uihCommand.Password = metaDataObject.UserAccountViewModel.Password;
-            uihCommand.DomainUrl = metaDataObject.UserAccountViewModel.DomainUrl;
-            uihCommand.ApplicationName = metaDataObject.SelectedApplication;
-            uihCommand.StudyUid = metaDataObject.StudyUid;
+            uihCommand.Content = commandName;
+            
+            List<string> cmdParamsNames = SystemConfiguration.GetInstance().GetCommandParamsByName(uihCommand.CommandName);
+            HashSet<string> cmdParamsNameSet = new HashSet<string>(cmdParamsNames);
+            FieldInfo[] fields = metaDataObject.GetType().GetFields();
+            foreach (FieldInfo fieldInfo in fields) {
+                if (cmdParamsNameSet.Contains(fieldInfo.Name)) {
+                    string fieldValue = (string)fieldInfo.GetValue(metaDataObject);
+                    uihCommand.Content += " --"
+                                          + fieldInfo.Name
+                                          + "="
+                                          + fieldValue;
+                }
+            }
         }
 
         return uihCommand;

@@ -7,4 +7,15 @@
         <Application Name="Filming"/>
         <Application Name="Report"/>
     </Applications>
+    
+    <CmdlineCommands>
+        <Command CommandName="loginLaunch" CommandParameterNames="user,selectedStudy,application,serverDomain" />
+        <Command CommandName="setTcpPort" CommandParameterNames="portNumber" />
+        <Command CommandName="append" CommandParameterNames="user,selectedStudy" />
+        <Command CommandName="closeTab" CommandParameterNames="selectedStudy" />
+        <Command CommandName="exit" CommandParameterNames="" />
+        <Command CommandName="logout" CommandParameterNames="" />
+        <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,application,serverDomain" />
+    </CmdlineCommands>
+    
 </Root>

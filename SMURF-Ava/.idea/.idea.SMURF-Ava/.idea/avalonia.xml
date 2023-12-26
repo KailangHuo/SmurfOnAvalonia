@@ -5,6 +5,7 @@
       <map>
         <entry key="SMURF-Ava/App.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/ExceptionWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
+        <entry key="SMURF-Ava/Views/InProgressWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/MainWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/PopupWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/TestWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />

@@ -18,14 +18,13 @@
         
         <Grid>
                 <Border CornerRadius="13" BorderThickness="1" Background="DarkGray" BorderBrush="Black"/>
-                <Grid ColumnDefinitions="6* 4*">
-                        <TextBlock Grid.Column="0" Name="MessageText"  
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBlock Name="MessageText"  
                                    FontWeight="Light"
                                    TextAlignment="Center"
                                    VerticalAlignment="Center" 
                         />
                         <ProgressRing:ProgressRing
-                                Grid.Column="1"
                                 Width="35"
                                 Height="35"
                                 IsActive="True"
@@ -33,6 +32,6 @@
                                 VerticalAlignment="Center"
                                 Margin="10 0 0 0"
                         /> 
-                </Grid>
+                </StackPanel>
         </Grid>
 </Window>

@@ -5,8 +5,8 @@ using Avalonia.Markup.Xaml;
 
 namespace SMURF_Ava.Views;
 
-public partial class ExceptionWindow : Window {
-    public ExceptionWindow(string content) {
+public partial class PopupWindow : Window {
+    public PopupWindow(string content) {
         InitializeComponent();
         ExceptionTextBlock.Text = content;
     }

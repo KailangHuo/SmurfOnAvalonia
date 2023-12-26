@@ -4,11 +4,21 @@ namespace SMURF_Ava.ViewModels;
 
 public class MetaDataObject {
 
-    public string ClientPath;
+    public MetaDataObject() {
+        this.portNumber = 3506 + "";
+    }
 
-    public UserAccountViewModel UserAccountViewModel;
+    public string clientPath;
 
-    public string StudyUid;
+    public string user;
 
-    public string SelectedApplication;
+    public string password;
+
+    public string serverDomain;
+
+    public string selectedStudy;
+
+    public string application;
+
+    public string portNumber;
 }

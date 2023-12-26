@@ -18,14 +18,16 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     public MainWindowViewModel(MetaDataObject metaDataObject = null) {
         this._metaDataObject = new MetaDataObject();
-        this.UserAccountObject = new UserAccountViewModel();
         Init();
     }
 
     private void Init() {
-        this.SystemLogManagerViewModel = new SystemLogManager_ViewModel();
+        this.LogManagerViewModel = LogManager_ViewModel.GetInstance();
         this.PopupManagerViewModel = new PopupManager_ViewModel();
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
+        this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
+        this.CommandItemContainerViewModel.RegisterObserver(this);
+        
         this.SelectedAppName = ApplicationList[0];
     }
     
@@ -41,22 +43,51 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     
     public ObservableCollection<string> ApplicationList { get; private set; }
 
-    public SystemLogManager_ViewModel SystemLogManagerViewModel { get; private set; }
+    public LogManager_ViewModel LogManagerViewModel { get; private set; }
 
     public PopupManager_ViewModel PopupManagerViewModel { get; private set; }
 
-    private UserAccountViewModel _userAccountViewModel;
-    
-    public UserAccountViewModel UserAccountObject {
+    public CommandItemContainer_ViewModel CommandItemContainerViewModel { get; private set; }
+
+    private string _userName;
+
+    public string UserName {
         get {
-            return _userAccountViewModel;
+            return _userName;
         }
-        private set {
-            if (_userAccountViewModel == value) return;
-            _userAccountViewModel = value;
-            this._metaDataObject.UserAccountViewModel = value;
-            this.Saved = false;
-            RisePropertyChanged(nameof(UserAccountObject));
+        set {
+            if(_userName == value)return;
+            _userName = value;
+            this._metaDataObject.user = value;
+            RisePropertyChanged(nameof(UserName));
+        }
+    }
+    
+    private string _password;
+
+    public string Password {
+        get {
+            return _password;
+        }
+        set {
+            if(_password == value)return;
+            _password = value;
+            this._metaDataObject.password = value;
+            RisePropertyChanged(nameof(Password));
+        }
+    }
+    
+    private string _domainUrl;
+
+    public string DomainUrl {
+        get {
+            return _domainUrl;
+        }
+        set {
+            if(_domainUrl == value)return;
+            _domainUrl = value;
+            this._metaDataObject.serverDomain = value;
+            RisePropertyChanged(nameof(DomainUrl));
         }
     }
 
@@ -69,7 +100,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         set {
             if(_clientPath == value)return;
             _clientPath = value;
-            this._metaDataObject.ClientPath = value;
+            this._metaDataObject.clientPath = value;
             this.Saved = false;
             RisePropertyChanged(nameof(ClientPath));
         }
@@ -84,7 +115,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         set {
             if(_selectedAppName == value)return;
             _selectedAppName = value;
-            this._metaDataObject.SelectedApplication = value;
+            this._metaDataObject.application = value;
             this.Saved = false;
             RisePropertyChanged(nameof(SelectedAppName));
         }
@@ -99,7 +130,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         set {
             if(_studyUid == value)return;
             _studyUid = value;
-            this._metaDataObject.StudyUid = value;
+            this._metaDataObject.selectedStudy = value;
             this.Saved = false;
             RisePropertyChanged(nameof(StudyUid));
         }
@@ -165,7 +196,13 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
         if (propertyName.Equals(nameof(SystemFacade.PublishSystemLogger))) {
             SystemLogger systemLogger = (SystemLogger)o;
-            systemLogger.RegisterObserver(this.SystemLogManagerViewModel);
+            systemLogger.RegisterObserver(this.LogManagerViewModel);
+            return;
+        }
+
+        if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeCommand))) {
+            string commandName = (string)o;
+            SystemFacade.GetInstance().InvokeCommand(commandName, _metaDataObject);
             return;
         }
     }

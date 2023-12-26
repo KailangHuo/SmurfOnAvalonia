@@ -7,12 +7,26 @@ using SMURF_Ava.Models;
 
 namespace SMURF_Ava.ViewModels;
 
-public class SystemLogManager_ViewModel : AbstractEventDrivenViewModel{
+public class LogManager_ViewModel : AbstractEventDrivenViewModel {
 
-    public SystemLogManager_ViewModel() {
+    private static LogManager_ViewModel _instance;
+
+    private LogManager_ViewModel() {
         LogItemViewModels = new ObservableCollection<LogItem_ViewModel>();
         LogInfo = "";
         LogInfo += "System Init!";
+    }
+
+    public static LogManager_ViewModel GetInstance() {
+        if (_instance == null) {
+            lock (typeof(LogManager_ViewModel)) {
+                if (_instance == null) {
+                    _instance = new LogManager_ViewModel();
+                }
+            }
+        }
+
+        return _instance;
     }
 
     public ObservableCollection<LogItem_ViewModel> LogItemViewModels { get; private set; }

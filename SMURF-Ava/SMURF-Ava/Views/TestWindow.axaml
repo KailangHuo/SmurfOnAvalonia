@@ -5,20 +5,14 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SMURF_Ava.Views.TestWindow"
         Title="TestWindow">
-    <Grid ColumnDefinitions="Auto *" Name="templateGrid">
-                
-        <TextBlock Grid.Column="0" Text="BIndingTimeStamp" 
-                   IsVisible="{Binding ShowTimeStamp, RelativeSource={RelativeSource AncestorType=Window}}"
-                   TextWrapping="Wrap" 
-                   FontSize="14"
-                   FontWeight="Normal"
-                   Margin="7 0 0 0" Foreground="{Binding ForeGroundColorStr}"/>  
-                
-        <TextBlock Grid.Column="1" Text=" || Binding Content}"
-                   TextWrapping="Wrap"
-                   Margin="7 0 0 0" Foreground="{Binding ForeGroundColorStr}"/>
-        
-        <Button Grid.Column="1" Content="Copy" HorizontalAlignment="Right" IsVisible="{Binding #templateGrid.is}"/>
+    <Grid>
+        <Grid Grid.ColumnDefinitions="Auto * Auto">
+            <ProgressBar Grid.Column="0" MinHeight="40" Orientation="Vertical" Value="100"/>
+            <TextBlock Grid.Column="1" Text="CommandName"
+                       FontWeight="Normal"
+                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Button Grid.Column="2" Content="send" Command="{Binding SendCommand}"/>
+        </Grid>
                 
     </Grid>
 </Window>

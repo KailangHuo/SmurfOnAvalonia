@@ -35,6 +35,10 @@ public class SystemConfiguration {
 
     private Dictionary<string, string> CmdResultMap;
 
+    private List<string> LangNameList;
+
+    private Dictionary<string, string> LanguageConfigMap;
+
     private XmlDocument _document;
 
     #endregion
@@ -47,6 +51,7 @@ public class SystemConfiguration {
         InitApplicationList();
         InitCmdlineCommandsList();
         InitCmdlineResultMap();
+        InitLanguageConfigMap();
     }
 
     private void InitApplicationList() {
@@ -87,7 +92,7 @@ public class SystemConfiguration {
 
     private void InitCmdlineResultMap() {
         this.CmdResultMap = new Dictionary<string, string>();
-        XmlNode commandResultNode = _document.SelectSingleNode(@"/Root/CmdlineCommandResultCdoes");
+        XmlNode commandResultNode = _document.SelectSingleNode(@"/Root/CmdlineCommandResultCodes");
         XmlNodeList childNodes = commandResultNode.ChildNodes;
         foreach (XmlNode node in childNodes) {
             string indexStr = "";
@@ -108,8 +113,36 @@ public class SystemConfiguration {
         }
     }
 
+    private void InitLanguageConfigMap() {
+        this.LangNameList = new List<string>();
+        this.LanguageConfigMap = new Dictionary<string, string>();
+        XmlNode commandResultNode = _document.SelectSingleNode(@"/Root/LanguageList");
+        XmlNodeList childNodes = commandResultNode.ChildNodes;
+        foreach (XmlNode node in childNodes) {
+            string langName = "";
+            string langValue = "";
+            XmlAttributeCollection attributeCollection = node.Attributes;
+            foreach (XmlAttribute xmlAttribute in attributeCollection) {
+                if (xmlAttribute.Name == "Name") {
+                    langName = xmlAttribute.Value;
+                    this.LangNameList.Add(langName);
+                    continue;
+                }
+
+                if (xmlAttribute.Name == "Value") {
+                    langValue = xmlAttribute.Value;
+                    this.LanguageConfigMap.Add(langName, langValue);
+                }
+            }
+        }
+    }
+
     public List<string> GetAppList() {
         return this.applicationList;
+    }
+
+    public List<string> GetLangNameList() {
+        return this.LangNameList;
     }
 
     public List<string> GetCommandParamsByName(string commandName) {
@@ -134,6 +167,11 @@ public class SystemConfiguration {
     public string GetCmdlineResultByCodeStr(string codeStr) {
         if (!this.CmdResultMap.ContainsKey(codeStr)) return "UNDEFINED CODE";
         return this.CmdResultMap[codeStr];
+    }
+
+    public string GetLanguageValueByName(string langName) {
+        if (!this.LanguageConfigMap.ContainsKey(langName)) return "UNDEFINED LANGUAGE";
+        return this.LanguageConfigMap[langName];
     }
 
 }

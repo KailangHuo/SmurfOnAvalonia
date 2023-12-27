@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
+using DynamicData;
 using EventDrivenElements;
 using SMURF_Ava.configuration;
 using SMURF_Ava.Models;
@@ -26,14 +27,27 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.PopupManagerViewModel = new PopupManager_ViewModel();
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
+        
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
         this.SelectedAppName = ApplicationList[0];
 
+        InitLanguageList();
+
         MetaDataObject metaDataObject = DataStorageManager_ViewModel.GetInstance().ReadFromFile();
         if (metaDataObject != null) LoadMetaData(metaDataObject);
     }
-    
+
+    private void InitLanguageList() {
+        this.LanguageOptionList = new ObservableCollection<string>();
+        List<string> list = SystemConfiguration.GetInstance().GetLangNameList();
+        for (int i = 0; i < list.Count; i++) {
+            this.LanguageOptionList.Add(list[i]);
+        }
+
+        this.SelectedLanguage = this.LanguageOptionList[0];
+    }
+
     #endregion
 
     #region PROPERTIES
@@ -51,6 +65,8 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     public PopupManager_ViewModel PopupManagerViewModel { get; private set; }
 
     public CommandItemContainer_ViewModel CommandItemContainerViewModel { get; private set; }
+
+    public ObservableCollection<string> LanguageOptionList { get; private set; }
 
     private string _userName;
 
@@ -127,6 +143,21 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+    private string _selectedLanguage;
+
+    public string SelectedLanguage {
+        get {
+            return _selectedLanguage;
+        }
+        set {
+            if(_selectedLanguage == value)return;
+            _selectedLanguage = value;
+            this._metaDataObject.language = value;
+            this.Saved = false;
+            RisePropertyChanged(nameof(SelectedLanguage));
+        }
+    }
+
     private string _studyUid;
 
     public string StudyUid {
@@ -166,8 +197,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.UserName = metaDataObject.user;
         this.Password = metaDataObject.password;
         this.DomainUrl = metaDataObject.serverDomain;
+        this.SelectedLanguage = metaDataObject.language;
         this.StudyUid = metaDataObject.selectedStudy;
         this.SelectedAppName = metaDataObject.application;
+        this.Saved = true;
     }
 
     #endregion
@@ -197,7 +230,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     }
 
     public void OpenInCmdCommand() {
-        Process.Start("cmd.exe", "/k cd " + this.ClientPath);
+        string cmdString = "/k cd " + this.ClientPath;
+        ProcessStartInfo processStartInfo = new ProcessStartInfo("cmd.exe", cmdString);
+        processStartInfo.WorkingDirectory = this.ClientPath;
+        Process.Start(processStartInfo);
     }
 
     #endregion

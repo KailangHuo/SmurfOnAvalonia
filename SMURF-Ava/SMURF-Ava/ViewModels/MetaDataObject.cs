@@ -14,6 +14,8 @@ public class MetaDataObject {
 
     public string password;
 
+    public string language;
+
     public string serverDomain;
 
     public string selectedStudy;

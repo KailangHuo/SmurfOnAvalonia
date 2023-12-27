@@ -35,7 +35,21 @@ public class CommandItem_ViewModel : AbstractEventDrivenViewModel {
             RisePropertyChanged(nameof(CommandName));
         }
     }
-    
+
+    private bool _isHovered;
+
+    public bool IsHovered {
+        get {
+            return _isHovered;
+        }
+        set {
+            if(_isHovered == value)return;
+            _isHovered = value;
+            IsDetailed = _isSelected || _isHovered;
+            RisePropertyChanged(nameof(IsHovered));
+        }
+    }
+
     private bool _isSelected;
 
     public bool IsSelected {
@@ -45,10 +59,24 @@ public class CommandItem_ViewModel : AbstractEventDrivenViewModel {
         set {
             if(_isSelected ==value)return;
             _isSelected = value;
+            IsDetailed = _isSelected || _isHovered;
             RisePropertyChanged(nameof(IsSelected));
         }
     }
-    
+
+    private bool _isDetailed;
+
+    public bool IsDetailed {
+        get {
+            return _isDetailed;
+        }
+        set {
+            if(_isDetailed == value)return;
+            _isDetailed = value;
+            RisePropertyChanged(nameof(IsDetailed));
+        }
+    }
+
     public void InvokeRpcCommand() {
         PublishEvent(nameof(InvokeRpcCommand), CommandName);
     }

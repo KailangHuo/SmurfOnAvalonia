@@ -32,22 +32,25 @@
         <DataTemplate x:Key="CommandTabTemplate">
             <Grid Grid.ColumnDefinitions="Auto * Auto"
                   Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}"
+                  PointerEntered="CommandPanel_OnPointerEntered"
+                  PointerExited="CommandPanel_OnPointerExited"
                   Height="60" >
 
-                <ProgressBar Grid.Column="0" MinHeight="40" 
-                             Margin="10 0 0 0"
+                <ProgressBar Grid.Column="0" 
+                             Width="6"
                              Orientation="Vertical" 
+                             IsVisible="{Binding IsDetailed}"
                              Background="Black"
-                             Value="{Binding IsSelected, Converter={StaticResource BoolValueConverter}}"/>
+                             Value="{Binding IsDetailed, Converter={StaticResource BoolValueConverter}}"/>
                 <TextBlock Grid.Column="1" Text="{Binding CommandName}"
-                           Margin="50 0 0 0"
+                           Margin="10 0 0 0"
                            FontWeight="Normal" FontSize="20"
                            VerticalAlignment="Center" HorizontalAlignment="Left"/>
                 <Button Grid.Column="2" 
-                        Margin="0 0 10 0"
+                        Margin="0 0 5 0"
                         Foreground="White"
                         Background="#FF007FE3"
-                        Content="Invoke" Command="{Binding InvokeRpcCommand}" IsVisible="{Binding IsSelected}"/>
+                        Content="Invoke" Command="{Binding InvokeRpcCommand}" IsVisible="{Binding IsDetailed}"/>
             </Grid>
         </DataTemplate>
         
@@ -88,7 +91,6 @@
         </DataTemplate>
         
     </Window.Resources>
-    
     
     <Panel>
         <ExperimentalAcrylicBorder IsHitTestVisible="False">
@@ -173,7 +175,7 @@
                                           CornerRadius="8"
                                           ItemsSource="{Binding LogManagerViewModel.LogItemViewModels}"
                                           ItemTemplate="{StaticResource SystemLogItemTemplate}"
-                                          SizeChanged="SystemLogListBox_OnSizeChanged"
+                                          PropertyChanged="SystemLogListBox_OnPropertyChanged"
                                           
                             />
                             
@@ -250,6 +252,22 @@
                                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                                  TextWrapping="NoWrap"
                                                  Padding="1 1 1 1"/>
+                                        
+                                        <TextBlock Text="语言首选项 language pref: " Margin="0,0,0,3" HorizontalAlignment="Right"/> 
+                            
+                                        <ComboBox Grid.Column="1" Margin="0,0,0,3" 
+                                                  HorizontalAlignment="Right"
+                                                  MinHeight="22" MinWidth="150"
+                                                  FontWeight="Normal"
+                                                  ItemsSource="{Binding LanguageOptionList}"
+                                                  SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                                        >
+                                            <ComboBox.Styles>
+                                                <Style Selector="ComboBoxItem">
+                                                    <Setter Property="FontWeight" Value="Normal"/>
+                                                </Style>
+                                            </ComboBox.Styles>
+                                        </ComboBox>
                                     </StackPanel>
                                     
                                     <StackPanel Grid.Column="1" Margin="10 0 0 0" VerticalAlignment="Bottom">
@@ -345,16 +363,53 @@
                 </Grid>
                 
                 <!-- Respond Panel -->
-                <Grid Grid.Column="2" RowDefinitions="Auto * *">
-                    <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkGray" Margin="0 0 -1 0"/>
+                <Grid Grid.Column="2" RowDefinitions="Auto *  Auto">
+                    <Border Grid.RowSpan="4" BorderThickness="1" BorderBrush="DarkGray" Margin="0 0 -1 0"/>
                     
                     <!-- Title Area -->
                     <TextBlock Grid.Row="0" Text="3. Receive your response" FontSize="23"  Margin="5 10 0 0"/>
                     
-                    <!-- Content panel -->
-                    <Grid Grid.Row="1">
+                    <!-- Response content panel -->
+                    <Grid Grid.Row="1" Margin="7 23 7 0"
+                          Grid.RowDefinitions="Auto *"
+                          >
                         
+                        <!-- Tcp indicator grid -->
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Bottom"
+                                    Margin="0 0 0 5">
+                            <TextBlock Text="TCP listening on: "/>
+                            <TextBlock Text="3506"/>
+                        </StackPanel>
+                        
+                        <!-- Received Preview Grid -->
+                        <Grid Grid.Row="1" Grid.RowDefinitions="3* 7*">
+                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1"/>
+                            
+                            <!-- Selected Preview Grid -->
+                            <Grid Grid.Row="0" Grid.ColumnDefinitions="4* 6*">
+                                <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5"/>
+                                
+                                <!-- Image Grid -->
+                                <Grid>
+                                    <Border CornerRadius="10" ClipToBounds="True">
+                                        <Panel Background="#7FFF22DD">
+                                            <Image Width="400" Stretch="Uniform"/>
+                                            <Panel Height="400">
+                                                <PathIcon Height="75" Width="75" Data="{StaticResource image_off_regular}"/>
+                                            </Panel>
+                                        </Panel>
+                                    </Border>
+                                </Grid>
+                                
+                            </Grid>
+                            
+                        </Grid>
 
+                    </Grid>
+                    
+                    <!-- Temp PlaceHolder -->
+                    <Grid Grid.Row="2" Height="20" >
+                        
                     </Grid>
                     
                 </Grid>

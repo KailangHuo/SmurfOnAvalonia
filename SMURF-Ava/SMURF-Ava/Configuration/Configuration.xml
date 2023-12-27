@@ -20,7 +20,7 @@
         <Command CommandName="launch" CommandParameterNames="user,selectedStudy,application"/>
     </CmdlineCommands>
     
-    <CmdlineCommandResultCdoes>
+    <CmdlineCommandResultCodes>
         <ResultCode Index="0" Interpretation="命令执行成功" />
         <ResultCode Index="1" Interpretation="启动客户端失败" />
         <ResultCode Index="2" Interpretation="连接服务器失败" />
@@ -40,6 +40,18 @@
         <ResultCode Index="19" Interpretation="命令超时" />
         <ResultCode Index="20" Interpretation="客户端未启动" />
 
-    </CmdlineCommandResultCdoes>
+    </CmdlineCommandResultCodes>
+    
+    <LanguageList>
+        <Language Name = "简体中文" Value="zh-CN"/>
+        <Language Name = "English" Value="en-US"/>
+        <Language Name = "Português" Value="pt-BR"/>
+        <Language Name = "Deutsch" Value="de-DE"/>ja-JP
+        <Language Name = "Español" Value="es-ES"/>
+        <Language Name = "Italiano" Value="it-IT"/>
+        <Language Name = "日本語" Value="ja-JP"/>
+        <Language Name = "Français" Value="fr-FR"/>
+        <Language Name = "русский" Value="ru-RU"/>
+    </LanguageList>
     
 </Root>

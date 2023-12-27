@@ -90,4 +90,15 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
         System.Environment.Exit(0);
     }
 
+    private void CommandPanel_OnPointerEntered(object? sender, PointerEventArgs e) {
+        Grid grid = (Grid)sender;
+        CommandItem_ViewModel commandItemViewModel = (CommandItem_ViewModel)grid.DataContext;
+        commandItemViewModel.IsHovered = true;
+    }
+
+    private void CommandPanel_OnPointerExited(object? sender, PointerEventArgs e) {
+        Grid grid = (Grid)sender;
+        CommandItem_ViewModel commandItemViewModel = (CommandItem_ViewModel)grid.DataContext;
+        commandItemViewModel.IsHovered = false;
+    }
 }

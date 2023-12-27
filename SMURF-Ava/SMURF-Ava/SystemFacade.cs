@@ -74,7 +74,7 @@ public class SystemFacade : AbstractEventDrivenObject{
         this.SystemLogger.UpdateLog(content, logType);
     }
 
-    public void InvokeCommand(string cmdName, MetaDataObject metaDataObject) {
+    public void InvokeRpcCommand(string cmdName, MetaDataObject metaDataObject) {
         UIH_Command uihCommand = UihCommandFactory.GetInstance()
             .CreateUihCommand(cmdName, metaDataObject, UihCommandEnum.COMMAND_LINE);
         this.CommandLineCommunicator.SendCommand(uihCommand);

@@ -33,6 +33,8 @@ public class SystemConfiguration {
 
     private OrderedDictionary CmdlineCommandsMap;
 
+    private Dictionary<string, string> CmdResultMap;
+
     private XmlDocument _document;
 
     #endregion
@@ -44,6 +46,7 @@ public class SystemConfiguration {
         _document.Load(ConfigurationFilePath);
         InitApplicationList();
         InitCmdlineCommandsList();
+        InitCmdlineResultMap();
     }
 
     private void InitApplicationList() {
@@ -62,8 +65,8 @@ public class SystemConfiguration {
 
     private void InitCmdlineCommandsList() {
         this.CmdlineCommandsMap = new OrderedDictionary();
-        XmlNode constantAppListNode = _document.SelectSingleNode(@"/Root/CmdlineCommands");
-        XmlNodeList childNodes = constantAppListNode.ChildNodes;
+        XmlNode CmdlineCommandNode = _document.SelectSingleNode(@"/Root/CmdlineCommands");
+        XmlNodeList childNodes = CmdlineCommandNode.ChildNodes;
         foreach (XmlNode node in childNodes) {
             List<string> list = new List<string>();
             XmlAttributeCollection attributeCollection = node.Attributes;
@@ -77,6 +80,29 @@ public class SystemConfiguration {
                     for (int i = 0; i < cmdNameArr.Length; i++) {
                         list.Add(cmdNameArr[i]);
                     }
+                }
+            }
+        }
+    }
+
+    private void InitCmdlineResultMap() {
+        this.CmdResultMap = new Dictionary<string, string>();
+        XmlNode commandResultNode = _document.SelectSingleNode(@"/Root/CmdlineCommandResultCdoes");
+        XmlNodeList childNodes = commandResultNode.ChildNodes;
+        foreach (XmlNode node in childNodes) {
+            string indexStr = "";
+            string interpretationStr = "";
+            XmlAttributeCollection attributeCollection = node.Attributes;
+            foreach (XmlAttribute xmlA in attributeCollection) {
+                
+                if (xmlA.Name == "Index") {
+                    indexStr = xmlA.Value;
+                    continue;
+                }
+
+                if (xmlA.Name == "Interpretation") {
+                    interpretationStr = xmlA.Value;
+                    this.CmdResultMap.Add(indexStr, interpretationStr);
                 }
             }
         }
@@ -105,6 +131,9 @@ public class SystemConfiguration {
         return nameList;
     }
 
-
+    public string GetCmdlineResultByCodeStr(string codeStr) {
+        if (!this.CmdResultMap.ContainsKey(codeStr)) return "UNDEFINED CODE";
+        return this.CmdResultMap[codeStr];
+    }
 
 }

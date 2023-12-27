@@ -274,3 +274,8 @@ E:\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\SMURF-Ava.pdb
 E:\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\SMURF-Ava.csproj.CopyComplete
 E:\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\SMURF-Ava.genruntimeconfig.cache
 E:\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\net6.0\ref\SMURF-Ava.dll
+D:\System\DeskTop\SmurfOnAva\net6.0\SMURF-Ava.exe
+D:\System\DeskTop\SmurfOnAva\net6.0\SMURF-Ava.deps.json
+D:\System\DeskTop\SmurfOnAva\net6.0\SMURF-Ava.runtimeconfig.json
+D:\System\DeskTop\SmurfOnAva\net6.0\SMURF-Ava.dll
+D:\System\DeskTop\SmurfOnAva\net6.0\SMURF-Ava.pdb

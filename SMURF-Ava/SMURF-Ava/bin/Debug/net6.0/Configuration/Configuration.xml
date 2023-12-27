@@ -16,6 +16,8 @@
         <Command CommandName="exit" CommandParameterNames="" />
         <Command CommandName="logout" CommandParameterNames="" />
         <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,application,serverDomain" />
+        <Command CommandName="login" CommandParameterNames="user,serverDomain" />
+        <Command CommandName="launch" CommandParameterNames="user,selectedStudy,application"/>
     </CmdlineCommands>
     
 </Root>

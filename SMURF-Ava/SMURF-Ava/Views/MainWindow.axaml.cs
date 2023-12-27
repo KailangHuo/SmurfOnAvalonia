@@ -1,9 +1,12 @@
 using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 using SMURF_Ava.ViewModels;
 
@@ -83,6 +86,8 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
     }
 
     private void CloseApplication(object o, WindowClosingEventArgs e) {
+        Process.GetCurrentProcess().Kill();
         System.Environment.Exit(0);
     }
+
 }

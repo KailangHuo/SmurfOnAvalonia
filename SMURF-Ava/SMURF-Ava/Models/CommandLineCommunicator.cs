@@ -2,31 +2,34 @@
 using System.Diagnostics;
 using System.Threading;
 using EventDrivenElements;
+using SMURF_Ava.configuration;
 
 namespace SMURF_Ava.Models;
 
 public class CommandLineCommunicator : AbstractEventDrivenObject {
 
     public CommandLineCommunicator() {
-        //this.INTEGRATION_EXECUTEABLE = @"\integration.exe";
-        this.INTEGRATION_EXECUTEABLE = @"E:\GitHub\IntegrationExe\IntegrationSImulator\IntegrationSImulator\bin\Debug\net7.0\IntegrationSImulator.exe";
+        this.INTEGRATION_EXECUTEABLE = "integration.exe";
+        //this.INTEGRATION_EXECUTEABLE = @"E:\GitHub\IntegrationExe\IntegrationSImulator\IntegrationSImulator\bin\Debug\net7.0\IntegrationSImulator.exe";
     }
 
     private readonly string INTEGRATION_EXECUTEABLE;
 
     public void SendCommand(UIH_Command uihCommand) {
+        uihCommand.CommandHeader = this.INTEGRATION_EXECUTEABLE;
         PublishCommandStart(uihCommand);
         string respond = "";
         Thread thread = new Thread(() => {
             try { 
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = uihCommand.ClientPath + this.INTEGRATION_EXECUTEABLE;
-                processStartInfo.Arguments = uihCommand.GetIntegrationArgs();
+                processStartInfo.FileName = uihCommand.ClientPath + @"\" +this.INTEGRATION_EXECUTEABLE;
+                processStartInfo.Arguments = uihCommand.CommandBody;
                 processStartInfo.CreateNoWindow = true;
                 Process process = Process.Start(processStartInfo);
                 process.WaitForExit();
                 int exitCode = process.ExitCode;
-                respond = uihCommand.CommandName + " respond! ==> " + exitCode;
+                string codeInterpretation = SystemConfiguration.GetInstance().GetCmdlineResultByCodeStr(exitCode + "");
+                respond = uihCommand.CommandName + " respond! ==> " + exitCode + " : " + codeInterpretation;
                 PublishRespondReceived(respond);
                 PublishCommandFinished(uihCommand);
             }

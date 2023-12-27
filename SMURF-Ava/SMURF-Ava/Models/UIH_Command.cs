@@ -8,6 +8,8 @@ public class UIH_Command {
 
     public string CommandName;
 
+    public string CommandHeader;
+
     public string UserName;
 
     public string Password;
@@ -18,18 +20,7 @@ public class UIH_Command {
 
     public string ApplicationName;
 
-    public string Content;
-
-    public string GetIntegrationArgs() {
-        string args = "";
-        args += this.CommandName + " ";
-        args += "--user=" + this.UserName + " ";
-        args += "--password=" + this.Password + " ";
-        args += "--selectedStudy=" + this.StudyUid + " ";
-        args += "--application=" + this.ApplicationName + " ";
-        args += "--serverDomain=" + this.DomainUrl + " ";
-        return args;
-    }
+    public string CommandBody;
 
 }
 

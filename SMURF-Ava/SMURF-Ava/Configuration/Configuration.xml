@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Root>
+    <Applications>
+        <Application Name="Review2D"/>
+        <Application Name="Review3D"/>
+        <Application Name="MMFusion"/>
+        <Application Name="Filming"/>
+        <Application Name="Report"/>
+    </Applications>
+    
+    <CmdlineCommands>
+        <Command CommandName="loginLaunch" CommandParameterNames="user,selectedStudy,application,serverDomain" />
+        <Command CommandName="setTcpPort" CommandParameterNames="portNumber" />
+        <Command CommandName="append" CommandParameterNames="user,selectedStudy" />
+        <Command CommandName="closeTab" CommandParameterNames="selectedStudy" />
+        <Command CommandName="exit" CommandParameterNames="" />
+        <Command CommandName="logout" CommandParameterNames="" />
+        <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,application,serverDomain" />
+        <Command CommandName="login" CommandParameterNames="user,serverDomain" />
+        <Command CommandName="launch" CommandParameterNames="user,selectedStudy,application"/>
+    </CmdlineCommands>
+    
+    <CmdlineCommandResultCdoes>
+        <ResultCode Index="0" Interpretation="命令执行成功" />
+        <ResultCode Index="1" Interpretation="启动客户端失败" />
+        <ResultCode Index="2" Interpretation="连接服务器失败" />
+        <ResultCode Index="3" Interpretation="无效的参数" />
+        <ResultCode Index="4" Interpretation="调整窗口显示失败" />
+        <ResultCode Index="5" Interpretation="无效的数据" />
+        <ResultCode Index="6" Interpretation="上一条指令未完成" />
+        <ResultCode Index="7" Interpretation="用户信息验证失败" />
+        <ResultCode Index="8" Interpretation="许可信息验证失败" />
+        <ResultCode Index="9" Interpretation="无法确认的异常" />
+        <ResultCode Index="10" Interpretation="命令失败" />
+        <ResultCode Index="14" Interpretation="用户关闭了输入界面" />
+        <ResultCode Index="15" Interpretation="用户关闭了选择界面" />
+        <ResultCode Index="16" Interpretation="用户选择了停止" />
+        <ResultCode Index="17" Interpretation="数据不存在" />
+        <ResultCode Index="18" Interpretation="用户信息不一致" />
+        <ResultCode Index="19" Interpretation="命令超时" />
+        <ResultCode Index="20" Interpretation="客户端未启动" />
+
+    </CmdlineCommandResultCdoes>
+    
+</Root>

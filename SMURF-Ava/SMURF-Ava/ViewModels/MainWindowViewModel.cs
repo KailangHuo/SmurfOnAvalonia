@@ -29,6 +29,9 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
         this.SelectedAppName = ApplicationList[0];
+
+        MetaDataObject metaDataObject = DataStorageManager_ViewModel.GetInstance().ReadFromFile();
+        if (metaDataObject != null) LoadMetaData(metaDataObject);
     }
     
     #endregion
@@ -59,6 +62,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             if(_userName == value)return;
             _userName = value;
             this._metaDataObject.user = value;
+            this.Saved = false;
             RisePropertyChanged(nameof(UserName));
         }
     }
@@ -73,6 +77,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             if(_password == value)return;
             _password = value;
             this._metaDataObject.password = value;
+            this.Saved = false;
             RisePropertyChanged(nameof(Password));
         }
     }
@@ -87,6 +92,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             if(_domainUrl == value)return;
             _domainUrl = value;
             this._metaDataObject.serverDomain = value;
+            this.Saved = false;
             RisePropertyChanged(nameof(DomainUrl));
         }
     }
@@ -153,27 +159,37 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     #endregion
 
     #region METHODS
-    
+
+    private void LoadMetaData(MetaDataObject metaDataObject) {
+        this._metaDataObject = metaDataObject;
+        this.ClientPath = metaDataObject.clientPath;
+        this.UserName = metaDataObject.user;
+        this.Password = metaDataObject.password;
+        this.DomainUrl = metaDataObject.serverDomain;
+        this.StudyUid = metaDataObject.selectedStudy;
+        this.SelectedAppName = metaDataObject.application;
+    }
 
     #endregion
 
     #region COMMANDS
 
     public void LoginLaunchCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeCommand("loginLaunch", _metaDataObject);
+        SystemFacade.GetInstance().InvokeRpcCommand("loginLaunch", _metaDataObject);
     }
 
     public void VerticalLoginCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeCommand("verticalLogin", _metaDataObject);
+        SystemFacade.GetInstance().InvokeRpcCommand("verticalLogin", _metaDataObject);
     }
 
     public void SaveCommand(object o = null) {
         this.Saved = true;
-        SystemFacade.GetInstance().InvokeCommand("save", _metaDataObject);
+        DataStorageManager_ViewModel dataStorageManagerViewModel = DataStorageManager_ViewModel.GetInstance();
+        dataStorageManagerViewModel.SaveToFile(this._metaDataObject);
     }
 
     public void CloseClientCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeCommand("closeClient", _metaDataObject);
+        SystemFacade.GetInstance().InvokeRpcCommand("exit", _metaDataObject);
     }
 
     public void ClearLogCommand() {
@@ -200,9 +216,9 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             return;
         }
 
-        if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeCommand))) {
+        if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {
             string commandName = (string)o;
-            SystemFacade.GetInstance().InvokeCommand(commandName, _metaDataObject);
+            SystemFacade.GetInstance().InvokeRpcCommand(commandName, _metaDataObject);
             return;
         }
     }

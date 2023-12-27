@@ -13,7 +13,8 @@ public class LogItem_ViewModel : AbstractEventDrivenViewModel {
         this.ForeGroundColorStr = logItem.LogType == LogTypeEnum.RESPOND ? "Yellow" : "White";
         this.CopyAble = false;
         this.TimeStamp = logItem.TimeStamp.ToString();
-        this.Content = ">>> " + logItem.Content;
+        string prefix = logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? ">>> " : "  =>  ";
+        this.Content = prefix + logItem.Content;
         this.ContentWithTimeStamp = logItem.TimeStamp.ToString() + " " + logItem.Content;
     }
 
@@ -87,8 +88,7 @@ public class LogItem_ViewModel : AbstractEventDrivenViewModel {
 
 
     public void CopyCommand() {
-        IClipboard clipboard = SystemFacade.GetInstance().MainWindow.Clipboard;
-        clipboard.SetTextAsync(this._logItem.Content);
+        this._logItem.CopyContent();
         
     }
 

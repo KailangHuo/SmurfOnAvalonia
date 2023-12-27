@@ -17,10 +17,12 @@ public class CommandItemContainer_ViewModel : AbstractEventDrivenViewModel{
     private void InitCommands() {
         List<string> cmdNameList = SystemConfiguration.GetInstance().GetCmdlineCommandNameList();
         for (int i = 0; i < cmdNameList.Count; i++) {
-            CommandItem_ViewModel commandItemViewModel = new CommandItem_ViewModel(cmdNameList[i]);
+            CommandItem_ViewModel commandItemViewModel = new CommandItem_ViewModel(cmdNameList[i], i);
             commandItemViewModel.RegisterObserver(this);
             this.CommandItemViewModels.Add(commandItemViewModel);
         }
+
+        this.SelectedItem = CommandItemViewModels[0];
     }
 
     public ObservableCollection<CommandItem_ViewModel> CommandItemViewModels { get; private set; }
@@ -41,8 +43,8 @@ public class CommandItemContainer_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
-        if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeCommand))) {
-            PublishEvent(nameof(CommandItem_ViewModel.InvokeCommand), o);
+        if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {
+            PublishEvent(nameof(CommandItem_ViewModel.InvokeRpcCommand), o);
         }
     }
 }

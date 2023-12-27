@@ -4,9 +4,23 @@ namespace SMURF_Ava.ViewModels;
 
 public class CommandItem_ViewModel : AbstractEventDrivenViewModel {
 
-    public CommandItem_ViewModel(string name) {
+    public CommandItem_ViewModel(string name, int indexNum) {
         this.CommandName = name;
         this.IsSelected = false;
+        this.IndexNumber = indexNum;
+    }
+
+    private int _indexNumber;
+
+    public int IndexNumber {
+        get {
+            return _indexNumber;
+        }
+        set {
+            if(_indexNumber == value)return;
+            _indexNumber = value;
+            RisePropertyChanged(nameof(IndexNumber));
+        }
     }
 
     private string _commandName;
@@ -35,8 +49,8 @@ public class CommandItem_ViewModel : AbstractEventDrivenViewModel {
         }
     }
     
-    public void InvokeCommand() {
-        PublishEvent(nameof(InvokeCommand), CommandName);
+    public void InvokeRpcCommand() {
+        PublishEvent(nameof(InvokeRpcCommand), CommandName);
     }
 
 }

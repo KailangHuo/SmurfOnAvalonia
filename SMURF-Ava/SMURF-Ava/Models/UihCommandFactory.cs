@@ -33,7 +33,7 @@ public class UihCommandFactory {
             uihCommand.ClientPath = metaDataObject.clientPath;
             uihCommand.CommandName = commandName;
             uihCommand.UihCommandEnum = commandEnum;
-            uihCommand.Content = commandName;
+            uihCommand.CommandBody = commandName;
             
             List<string> cmdParamsNames = SystemConfiguration.GetInstance().GetCommandParamsByName(uihCommand.CommandName);
             HashSet<string> cmdParamsNameSet = new HashSet<string>(cmdParamsNames);
@@ -41,7 +41,7 @@ public class UihCommandFactory {
             foreach (FieldInfo fieldInfo in fields) {
                 if (cmdParamsNameSet.Contains(fieldInfo.Name)) {
                     string fieldValue = (string)fieldInfo.GetValue(metaDataObject);
-                    uihCommand.Content += " --"
+                    uihCommand.CommandBody += " --"
                                           + fieldInfo.Name
                                           + "="
                                           + fieldValue;

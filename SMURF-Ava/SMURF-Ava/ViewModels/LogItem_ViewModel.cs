@@ -11,11 +11,11 @@ public class LogItem_ViewModel : AbstractEventDrivenViewModel {
     public LogItem_ViewModel(LogItem logItem):base(logItem) {
         this._logItem = logItem;
         this.ForeGroundColorStr = logItem.LogType == LogTypeEnum.RESPOND ? "Yellow" :
-            logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? "White" : "DarkGray";
+            logItem.LogType == LogTypeEnum.COMMAND_OPERATION ? "White" : "DarkGray";
         this.CopyAble = false;
         this.TimeStamp = logItem.TimeStamp.ToString();
-        string prefix = logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? ">>> " :
-            logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? "  =>  " : "[SYSTEM]: ";
+        string prefix = logItem.LogType == LogTypeEnum.COMMAND_OPERATION ? ">>> " : "[SYSTEM]: ";
+        
         this.Content = prefix + logItem.Content;
         this.ContentWithTimeStamp = logItem.TimeStamp.ToString() + " " + logItem.Content;
     }
@@ -81,7 +81,7 @@ public class LogItem_ViewModel : AbstractEventDrivenViewModel {
             return _copyAble;
         }
         set {
-            if(this._logItem.LogType != LogTypeEnum.SYSTEM_OPERATION) return;
+            if(this._logItem.LogType != LogTypeEnum.COMMAND_OPERATION) return;
             if(_copyAble == value)return;
             _copyAble = value;
             RisePropertyChanged(nameof(CopyAble));

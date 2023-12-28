@@ -29,6 +29,6 @@ public class LogItem {
 
 public enum LogTypeEnum {
     SYSTEM_NOTIFICATION,
-    SYSTEM_OPERATION,
+    COMMAND_OPERATION,
     RESPOND
 }

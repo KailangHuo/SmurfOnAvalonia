@@ -135,14 +135,14 @@
             <!-- Content Grid-->
             <Grid Grid.Row="1" ColumnDefinitions="2* * *">
                 
-                <!-- CmdBox & basic params -->
+                <!-- SystemLog & basic params -->
                 <Grid Grid.Column="0" RowDefinitions="Auto * *">
                     <Border Grid.RowSpan="3" BorderThickness="1" BorderBrush="DarkGray" Margin="-1 0 0 0"/>
                     
                     <!-- Title Area -->
                     <TextBlock Grid.Row="0" Text="1.Callup the Client" FontSize="23"  Margin="5 10 0 0"/>
                     
-                    <!-- SystemInfo grid -->
+                    <!-- SystemLog grid -->
                     <Grid Grid.Row="1" Grid.RowDefinitions="Auto * Auto" Margin="7 20 7 0">
                         
                         <!-- Grid Title -->
@@ -161,7 +161,6 @@
                                               Click="Button_OnClick"/>
                                 
                             </StackPanel>
-                           
                             
                             <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
                                 
@@ -174,8 +173,6 @@
                                         Content="clear"/>
                                 
                             </StackPanel>
-                            
-                            
                             
                         </Grid>
                         

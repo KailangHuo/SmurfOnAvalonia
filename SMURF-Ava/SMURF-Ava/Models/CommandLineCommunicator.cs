@@ -30,7 +30,7 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
                 process.WaitForExit();
                 int exitCode = process.ExitCode;
                 string codeInterpretation = SystemConfiguration.GetInstance().GetCmdlineResultByCodeStr(exitCode + "");
-                respond = uihCommand.CommandName + " respond! ==> " + exitCode + " : " + codeInterpretation;
+                respond = uihCommand.CommandName + " respond! >> " + exitCode + " : " + codeInterpretation;
                 PublishRespondReceived(respond);
                 PublishCommandFinished(uihCommand);
             }

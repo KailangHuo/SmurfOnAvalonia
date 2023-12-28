@@ -45,7 +45,7 @@ public class SystemLogger : AbstractEventDrivenObject {
             UIH_Command uihCommand = (UIH_Command)o;
             string logContent = uihCommand.CommandBody;
             string copyContent = uihCommand.CommandHeader + " " + uihCommand.CommandBody;
-            UpdateLog(logContent, LogTypeEnum.SYSTEM_OPERATION, copyContent);
+            UpdateLog(logContent, LogTypeEnum.COMMAND_OPERATION, copyContent);
             return;
         }
 

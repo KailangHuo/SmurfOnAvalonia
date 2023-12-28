@@ -41,6 +41,7 @@ public class UihCommandFactory {
             foreach (FieldInfo fieldInfo in fields) {
                 if (cmdParamsNameSet.Contains(fieldInfo.Name)) {
                     string fieldValue = (string)fieldInfo.GetValue(metaDataObject);
+                    if(string.IsNullOrEmpty(fieldValue))continue;
                     uihCommand.CommandBody += " --"
                                           + fieldInfo.Name
                                           + "="

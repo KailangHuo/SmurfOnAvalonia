@@ -27,6 +27,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.PopupManagerViewModel = new PopupManager_ViewModel();
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
+        this.TcpReceivedItemViewModels = new ObservableCollection<TcpReceivedItem_ViewModel>();
         
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
@@ -67,6 +68,9 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     public CommandItemContainer_ViewModel CommandItemContainerViewModel { get; private set; }
 
     public ObservableCollection<string> LanguageOptionList { get; private set; }
+
+    public ObservableCollection<TcpReceivedItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
+
 
     private string _userName;
 
@@ -152,7 +156,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         set {
             if(_selectedLanguage == value)return;
             _selectedLanguage = value;
-            this._metaDataObject.language = value;
+            this._metaDataObject.language = SystemConfiguration.GetInstance().GetLanguageValueByName(value);
             this.Saved = false;
             RisePropertyChanged(nameof(SelectedLanguage));
         }
@@ -173,6 +177,22 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+
+    private string _seriesUid;
+
+    public string SeriesUid {
+        get {
+            return _seriesUid;
+        }
+        set {
+            if (_seriesUid == value) return;
+            _seriesUid = value;
+            this._metaDataObject.selectedSeries = value;
+            this.Saved = false;
+            RisePropertyChanged(nameof(SeriesUid));
+        }
+    }
+
     private bool _saved;
 
     public bool Saved {
@@ -183,6 +203,19 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             if(_saved == value)return;
             _saved = value;
             RisePropertyChanged(nameof(Saved));
+        }
+    }
+
+    private TcpReceivedItem_ViewModel _selectedTcpReceived;
+
+    public TcpReceivedItem_ViewModel SelectedTcpReceived {
+        get {
+            return _selectedTcpReceived;
+        }
+        set {
+            if(_selectedTcpReceived == value)return;
+            _selectedTcpReceived = value;
+            RisePropertyChanged(nameof(SelectedTcpReceived));
         }
     }
 
@@ -197,8 +230,9 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.UserName = metaDataObject.user;
         this.Password = metaDataObject.password;
         this.DomainUrl = metaDataObject.serverDomain;
-        this.SelectedLanguage = metaDataObject.language;
+        this.SelectedLanguage = SystemConfiguration.GetInstance().GetLanguageNameByValue(metaDataObject.language);
         this.StudyUid = metaDataObject.selectedStudy;
+        this.SeriesUid = metaDataObject.selectedSeries;
         this.SelectedAppName = metaDataObject.application;
         this.Saved = true;
     }
@@ -250,6 +284,18 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             SystemLogger systemLogger = (SystemLogger)o;
             systemLogger.RegisterObserver(this.LogManagerViewModel);
             return;
+        }
+
+        if (propertyName.Equals(nameof(SystemFacade.PublishTcpServer))) {
+            TcpShortServer tcpShortServer = (TcpShortServer)o;
+            tcpShortServer.RegisterObserver(this);
+        }
+
+        if (propertyName.Equals(nameof(TcpShortServer.ResponseReceived))) {
+            string content = (string)o;
+            TcpReceivedItem_ViewModel itemViewModel = new TcpReceivedItem_ViewModel(content, this.TcpReceivedItemViewModels.Count);
+            this.TcpReceivedItemViewModels.Add(itemViewModel);
+            this.SelectedTcpReceived = itemViewModel;
         }
 
         if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {

@@ -18,7 +18,8 @@ public class SystemFacade : AbstractEventDrivenObject{
     private void InitSystem() {
         this.ExceptionManager = Models.ExceptionManager.GetInstance();
         this.TcpShortServer = TcpShortServer.GetInstance();
-        this.SystemLogger = new SystemLogger();
+        PublishTcpServer();
+        this.SystemLogger = SystemLogger.GetInstance();
         PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
         PublishCmdCommunicator();
@@ -68,6 +69,10 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     public void PublishSystemLogger() {
         PublishEvent(nameof(PublishSystemLogger), this.SystemLogger);
+    }
+
+    public void PublishTcpServer() {
+        PublishEvent(nameof(PublishTcpServer), this.TcpShortServer);
     }
 
     public void Log(string content, LogTypeEnum logType = LogTypeEnum.SYSTEM_NOTIFICATION) {

@@ -9,15 +9,15 @@
     </Applications>
     
     <CmdlineCommands>
-        <Command CommandName="loginLaunch" CommandParameterNames="user,selectedStudy,application,serverDomain" />
-        <Command CommandName="setTcpPort" CommandParameterNames="portNumber" />
-        <Command CommandName="append" CommandParameterNames="user,selectedStudy" />
+        <Command CommandName="loginLaunch" CommandParameterNames="user,selectedStudy,language,selectedSeries,application,serverDomain" />
+        <Command CommandName="setTCPPort" CommandParameterNames="portNumber" />
+        <Command CommandName="append" CommandParameterNames="user,selectedSeries,selectedStudy" />
         <Command CommandName="closeTab" CommandParameterNames="selectedStudy" />
         <Command CommandName="exit" CommandParameterNames="" />
         <Command CommandName="logout" CommandParameterNames="" />
-        <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,application,serverDomain" />
-        <Command CommandName="login" CommandParameterNames="user,serverDomain" />
-        <Command CommandName="launch" CommandParameterNames="user,selectedStudy,application"/>
+        <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,selectedSeries,application,serverDomain" />
+        <Command CommandName="login" CommandParameterNames="user,language,serverDomain" />
+        <Command CommandName="launch" CommandParameterNames="user,selectedStudy,selectedSeries,application"/>
     </CmdlineCommands>
     
     <CmdlineCommandResultCodes>
@@ -46,7 +46,7 @@
         <Language Name = "简体中文" Value="zh-CN"/>
         <Language Name = "English" Value="en-US"/>
         <Language Name = "Português" Value="pt-BR"/>
-        <Language Name = "Deutsch" Value="de-DE"/>ja-JP
+        <Language Name = "Deutsch" Value="de-DE"/>
         <Language Name = "Español" Value="es-ES"/>
         <Language Name = "Italiano" Value="it-IT"/>
         <Language Name = "日本語" Value="ja-JP"/>

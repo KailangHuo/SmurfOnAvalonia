@@ -54,7 +54,6 @@
             </Grid>
         </DataTemplate>
         
-        
         <DataTemplate x:Key="SystemLogItemTemplate" >
             
             <Grid ColumnDefinitions="Auto *"  Background="Transparent" 
@@ -88,6 +87,24 @@
                 </Button>
             </Grid>
             
+        </DataTemplate>
+        
+        <DataTemplate x:Key="TcpReceivedDataTemplate">
+            <Grid ColumnDefinitions="* *" Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}" >
+                
+                <TextBlock Text="{Binding TimeStamp}" Margin="3 0 0 0"/>
+                
+                <Border BorderThickness="0 0 1 0" BorderBrush="Black"/>
+                
+                <TextBlock Grid.Column="1" Text="{Binding Content}" Margin="3 0 0 0 " HorizontalAlignment="Left"/>
+                
+                <Grid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Copy Content" Command="{Binding CopyContentCommand}"/>
+                    </ContextMenu>
+                </Grid.ContextMenu>
+                
+            </Grid>
         </DataTemplate>
         
     </Window.Resources>
@@ -272,9 +289,21 @@
                                     
                                     <StackPanel Grid.Column="1" Margin="10 0 0 0" VerticalAlignment="Bottom">
                                         
+                                        <!-- Study -->
                                         <TextBlock Text="Study Uid: " Margin="0,0,0,3" /> 
                                         <TextBox Text="{Binding StudyUid, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
                                                  Watermark="确保Study来自对应的服务器"
+                                                 MinHeight="22"
+                                                 FontWeight="Normal"
+                                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                 TextWrapping="NoWrap"
+                                                 Padding="1 1 1 1"/>
+                                        
+                                        
+                                        <!-- Series -->
+                                        <TextBlock Text="Series uid: " Margin="0 0 0 3"/>
+                                        <TextBox Text="{Binding SeriesUid, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                 Watermark="确保Study series来自对应的Study"
                                                  MinHeight="22"
                                                  FontWeight="Normal"
                                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -382,24 +411,56 @@
                         </StackPanel>
                         
                         <!-- Received Preview Grid -->
-                        <Grid Grid.Row="1" Grid.RowDefinitions="3* 7*">
-                            <Border CornerRadius="5" BorderBrush="Black" BorderThickness="1"/>
+                        <Grid Grid.Row="1" Grid.RowDefinitions="3* 1* 6*">
                             
                             <!-- Selected Preview Grid -->
-                            <Grid Grid.Row="0" Grid.ColumnDefinitions="4* 6*">
-                                <Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="5"/>
+                            <Grid Grid.Row="0" Grid.ColumnDefinitions="Auto *">
                                 
                                 <!-- Image Grid -->
-                                <Grid>
+                                <Grid Grid.Column="0">
                                     <Border CornerRadius="10" ClipToBounds="True">
-                                        <Panel Background="#7FFF22DD">
-                                            <Image Width="400" Stretch="Uniform"/>
-                                            <Panel Height="400">
+                                        <Panel Width="200" Height="200" Background="#7FFF22DD">
+                                            <Image Stretch="Uniform"/>
+                                            <Panel >
                                                 <PathIcon Height="75" Width="75" Data="{StaticResource image_off_regular}"/>
                                             </Panel>
                                         </Panel>
                                     </Border>
                                 </Grid>
+                                
+                            </Grid>
+                            
+                            <!-- Description Grid -->
+                            <Grid Grid.Row="1" Margin="0 5 0 5">
+                                <Border Background="White" BorderBrush="Black" BorderThickness="1" CornerRadius="5" />
+                                <TextBlock TextWrapping="Wrap"
+                                           Background="Transparent"
+                                           Text=" Guid: XXX StatusType: XXX StatusParam: XXX "/>
+                            </Grid>
+                            
+                            <!-- List of received -->
+                            <Grid Grid.Row="2" Grid.RowDefinitions="Auto *">
+                                
+                                <TextBlock Grid.Row="0" Text="Received history:"/>
+                                
+                                <ListBox Grid.Row="1" 
+                                         Background="Transparent"
+                                         ItemsSource="{Binding TcpReceivedItemViewModels}"
+                                         ItemTemplate="{StaticResource TcpReceivedDataTemplate}"
+                                         SelectedItem="{Binding SelectedTcpReceived}"
+                                         >
+                                    <ListBox.Styles>
+                                        <Style Selector="ListBoxItem">
+                                            <Setter Property="Padding" Value="0"/>
+                                            <Setter Property="BorderBrush" Value="DarkGray"/>
+                                            <Setter Property="BorderThickness" Value="0 0 0 1"/>
+                                            <Setter Property="Background" Value="Transparent"/>
+                                        </Style>
+                                    </ListBox.Styles>
+                                </ListBox>
+                                <Border Grid.Row="1" 
+                                        BorderBrush="Black" BorderThickness="1" CornerRadius="5"/>
+                                
                                 
                             </Grid>
                             

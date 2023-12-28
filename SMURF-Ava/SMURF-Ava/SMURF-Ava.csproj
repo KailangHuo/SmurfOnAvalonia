@@ -8,6 +8,7 @@
         <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
       <OutputPath>D:\System\DeskTop\SmurfOnAva</OutputPath>
     </PropertyGroup>
 

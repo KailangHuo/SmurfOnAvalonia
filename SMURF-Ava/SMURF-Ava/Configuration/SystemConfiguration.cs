@@ -174,4 +174,12 @@ public class SystemConfiguration {
         return this.LanguageConfigMap[langName];
     }
 
+    public string GetLanguageNameByValue(string langValue) {
+        foreach (KeyValuePair<string,string> keyValuePair in LanguageConfigMap) {
+            if (keyValuePair.Value == langValue) return keyValuePair.Key;
+        }
+
+        return "简体中文";
+    }
+
 }

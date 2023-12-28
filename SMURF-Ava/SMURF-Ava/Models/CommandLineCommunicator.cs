@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Threading;
 using EventDrivenElements;
 using SMURF_Ava.configuration;
+using SMURF_Ava.ViewModels;
 
 namespace SMURF_Ava.Models;
 

@@ -20,6 +20,8 @@ public class MetaDataObject {
 
     public string selectedStudy;
 
+    public string selectedSeries;
+
     public string application;
 
     public string portNumber;

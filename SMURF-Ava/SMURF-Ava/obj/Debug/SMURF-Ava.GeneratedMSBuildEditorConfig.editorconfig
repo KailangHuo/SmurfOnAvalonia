@@ -1,0 +1,34 @@
+is_global = true
+build_property.AvaloniaNameGeneratorIsEnabled = true
+build_property.AvaloniaNameGeneratorBehavior = InitializeComponent
+build_property.AvaloniaNameGeneratorDefaultFieldModifier = internal
+build_property.AvaloniaNameGeneratorFilterByPath = *
+build_property.AvaloniaNameGeneratorFilterByNamespace = *
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SMURF-Ava
+build_property.ProjectDir = D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/App.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/Icons.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/InProgressWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/PopupWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/TestWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

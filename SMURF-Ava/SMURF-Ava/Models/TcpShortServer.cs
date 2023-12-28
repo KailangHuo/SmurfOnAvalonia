@@ -76,23 +76,26 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
                 server = new TcpListener(IPAddress.Parse(ip), port);
                 server.Start();
                 LogServerInfo("Listening on port: " + port);
-                byte[] bytes = new byte[1024 * 1024];
+                string incomingStr = "";
                 do {
                     if (client == null) {
                         client = server.AcceptSocket();
-                        LogServerInfo("Client Connected!");
+                        //LogServerInfo("Client Connected!");
                     }
 
+                    byte[] bytes = new byte[1024 * 1024];
                     int len = client.Receive(bytes);
                     if (len == 0) {
-                        LogServerInfo("Client Disconnected!");
+                        //LogServerInfo("Client Disconnected!");
+                        LogServerInfo("Software response received!");
+                        ResponseReceived(DateTime.Now + "@###@" + incomingStr);
                         client.Close();
                         client = null;
+                        incomingStr = "";
                         continue;
                     }
 
-                    string incomingStr = Encoding.UTF8.GetString(bytes, 0, len);
-                    LogServerInfo("\n>>>\n" + incomingStr + "\n>>>");
+                    incomingStr += Encoding.UTF8.GetString(bytes, 0, len);
                 } while (true);
             }
             catch (Exception e) {
@@ -104,9 +107,12 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
         
     }
 
-    public void LogServerInfo(String s) {
-        string timeStamp = DateTime.Now.ToString();
-        ServerLog += "[" + timeStamp + "]" + s + "\n";
+    private void LogServerInfo(string content) {
+        SystemLogger.GetInstance().UpdateLog(content, LogTypeEnum.SYSTEM_NOTIFICATION, content);
+    }
+
+    public void ResponseReceived(string content) {
+        PublishEvent(nameof(ResponseReceived), content);
     }
 
 }

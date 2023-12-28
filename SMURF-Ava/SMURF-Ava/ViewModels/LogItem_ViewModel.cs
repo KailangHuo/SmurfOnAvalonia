@@ -10,10 +10,12 @@ public class LogItem_ViewModel : AbstractEventDrivenViewModel {
 
     public LogItem_ViewModel(LogItem logItem):base(logItem) {
         this._logItem = logItem;
-        this.ForeGroundColorStr = logItem.LogType == LogTypeEnum.RESPOND ? "Yellow" : "White";
+        this.ForeGroundColorStr = logItem.LogType == LogTypeEnum.RESPOND ? "Yellow" :
+            logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? "White" : "DarkGray";
         this.CopyAble = false;
         this.TimeStamp = logItem.TimeStamp.ToString();
-        string prefix = logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? ">>> " : "  =>  ";
+        string prefix = logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? ">>> " :
+            logItem.LogType == LogTypeEnum.SYSTEM_OPERATION ? "  =>  " : "[SYSTEM]: ";
         this.Content = prefix + logItem.Content;
         this.ContentWithTimeStamp = logItem.TimeStamp.ToString() + " " + logItem.Content;
     }

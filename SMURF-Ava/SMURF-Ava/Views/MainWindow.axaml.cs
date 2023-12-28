@@ -101,4 +101,5 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
         CommandItem_ViewModel commandItemViewModel = (CommandItem_ViewModel)grid.DataContext;
         commandItemViewModel.IsHovered = false;
     }
+    
 }

@@ -6,10 +6,25 @@ namespace SMURF_Ava.Models;
 
 public class SystemLogger : AbstractEventDrivenObject {
 
-    public SystemLogger() {
+    private static SystemLogger _instance;
+
+    private SystemLogger() {
         this._logItems = new List<LogItem>();
     }
-    
+
+    public static SystemLogger GetInstance() {
+        if (_instance == null) {
+            lock (typeof(SystemLogger)) {
+                if (_instance == null) {
+                    _instance = new SystemLogger();
+                }
+            }
+        }
+
+        return _instance;
+    }
+
+
     private List<LogItem> _logItems;
 
     public void ClearAllLog() {

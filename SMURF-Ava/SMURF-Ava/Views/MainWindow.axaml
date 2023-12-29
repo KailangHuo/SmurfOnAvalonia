@@ -29,6 +29,7 @@
         <converters:BoolValueConverter x:Key="BoolValueConverter"/>
         <converters:IntToBackgroundConverter x:Key="IntToBackgroundConverter"/>
         
+        <!-- command item Template -->
         <DataTemplate x:Key="CommandTabTemplate">
             <Grid Grid.ColumnDefinitions="Auto * Auto"
                   Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}"
@@ -54,6 +55,7 @@
             </Grid>
         </DataTemplate>
         
+        <!-- LogItem Template -->
         <DataTemplate x:Key="SystemLogItemTemplate" >
             
             <Grid ColumnDefinitions="Auto *"  Background="Transparent" 
@@ -89,6 +91,7 @@
             
         </DataTemplate>
         
+        <!-- TcpReceivedItem Template -->
         <DataTemplate x:Key="TcpReceivedDataTemplate">
             <Grid ColumnDefinitions="* *" Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}" >
                 
@@ -444,7 +447,7 @@
                                          Background="Transparent"
                                          ItemsSource="{Binding TcpReceivedItemViewModels}"
                                          ItemTemplate="{StaticResource TcpReceivedDataTemplate}"
-                                         SelectedItem="{Binding SelectedTcpReceived}"
+                                         SelectedItem="{Binding SelectedTcp}"
                                          >
                                     <ListBox.Styles>
                                         <Style Selector="ListBoxItem">

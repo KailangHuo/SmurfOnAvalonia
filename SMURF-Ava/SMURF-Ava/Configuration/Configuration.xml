@@ -6,6 +6,7 @@
         <Application Name="MMFusion"/>
         <Application Name="Filming"/>
         <Application Name="Report"/>
+        <Application Name="CTVessel"/>
     </Applications>
     
     <CmdlineCommands>

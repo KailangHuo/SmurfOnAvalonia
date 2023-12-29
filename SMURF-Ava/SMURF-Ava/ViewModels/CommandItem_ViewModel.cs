@@ -60,6 +60,7 @@ public class CommandItem_ViewModel : AbstractEventDrivenViewModel {
             if(_isSelected ==value)return;
             _isSelected = value;
             IsDetailed = _isSelected || _isHovered;
+            PublishEvent(nameof(IsSelected), this);
             RisePropertyChanged(nameof(IsSelected));
         }
     }
@@ -78,6 +79,7 @@ public class CommandItem_ViewModel : AbstractEventDrivenViewModel {
     }
 
     public void InvokeRpcCommand() {
+        this.IsSelected = true;
         PublishEvent(nameof(InvokeRpcCommand), CommandName);
     }
 

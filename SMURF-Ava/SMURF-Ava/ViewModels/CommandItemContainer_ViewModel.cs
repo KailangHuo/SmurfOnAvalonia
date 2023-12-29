@@ -45,6 +45,13 @@ public class CommandItemContainer_ViewModel : AbstractEventDrivenViewModel{
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {
             PublishEvent(nameof(CommandItem_ViewModel.InvokeRpcCommand), o);
+            return;
+        }
+
+        if (propertyName.Equals(nameof(CommandItem_ViewModel.IsSelected))) {
+            CommandItem_ViewModel commandItemViewModel = (CommandItem_ViewModel)o;
+            this.SelectedItem = commandItemViewModel;
+            return;
         }
     }
 }

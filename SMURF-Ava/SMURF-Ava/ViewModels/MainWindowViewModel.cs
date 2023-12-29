@@ -27,7 +27,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.PopupManagerViewModel = new PopupManager_ViewModel();
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
-        this.TcpReceivedItemViewModels = new ObservableCollection<TcpReceivedItem_ViewModel>();
+        this.TcpReceivedItemViewModels = new ObservableCollection<TcpItem_ViewModel>();
         
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
@@ -69,7 +69,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     public ObservableCollection<string> LanguageOptionList { get; private set; }
 
-    public ObservableCollection<TcpReceivedItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
+    public ObservableCollection<TcpItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
 
 
     private string _userName;
@@ -206,16 +206,16 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
-    private TcpReceivedItem_ViewModel _selectedTcpReceived;
+    private TcpItem_ViewModel _selectedTcp;
 
-    public TcpReceivedItem_ViewModel SelectedTcpReceived {
+    public TcpItem_ViewModel SelectedTcp {
         get {
-            return _selectedTcpReceived;
+            return _selectedTcp;
         }
         set {
-            if(_selectedTcpReceived == value)return;
-            _selectedTcpReceived = value;
-            RisePropertyChanged(nameof(SelectedTcpReceived));
+            if(_selectedTcp == value)return;
+            _selectedTcp = value;
+            RisePropertyChanged(nameof(SelectedTcp));
         }
     }
 
@@ -293,9 +293,9 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
         if (propertyName.Equals(nameof(TcpShortServer.ResponseReceived))) {
             string content = (string)o;
-            TcpReceivedItem_ViewModel itemViewModel = new TcpReceivedItem_ViewModel(content, this.TcpReceivedItemViewModels.Count);
+            TcpItem_ViewModel itemViewModel = new TcpItem_ViewModel(content, this.TcpReceivedItemViewModels.Count);
             this.TcpReceivedItemViewModels.Add(itemViewModel);
-            this.SelectedTcpReceived = itemViewModel;
+            this.SelectedTcp = itemViewModel;
         }
 
         if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {

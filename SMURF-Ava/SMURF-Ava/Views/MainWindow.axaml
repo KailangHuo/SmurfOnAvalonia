@@ -180,23 +180,28 @@
                         </Grid>
                         
                         <!-- ScrollView -->
-                        <ScrollViewer Grid.Row="1" Name="SystemInfo_ScrollViewer"
-                                      Margin="0 5 0 0"
-                                      HorizontalScrollBarVisibility="Disabled"
-                                      CornerRadius="8"
-                        >
-                            <ItemsControl BorderThickness="1" 
-                                          Name="SystemLogListBox"
-                                          Background="Black"
-                                          BorderBrush="DarkGray"
+                        <Border Grid.Row="1" 
+                                CornerRadius="8"
+                                BorderBrush="DarkGray"
+                                Background="Black"
+                                ClipToBounds="True">
+                            <ScrollViewer Name="SystemInfo_ScrollViewer"
+                                          Margin="0 5 0 0"
+                                          HorizontalScrollBarVisibility="Disabled"
                                           CornerRadius="8"
-                                          ItemsSource="{Binding LogManagerViewModel.LogItemViewModels}"
-                                          ItemTemplate="{StaticResource SystemLogItemTemplate}"
-                                          PropertyChanged="SystemLogListBox_OnPropertyChanged"
+                            >
+                                <ItemsControl BorderThickness="1" 
+                                              Name="SystemLogListBox"
+                                              Background="Transparent"
+                                              ItemsSource="{Binding LogManagerViewModel.LogItemViewModels}"
+                                              ItemTemplate="{StaticResource SystemLogItemTemplate}"
+                                              PropertyChanged="SystemLogListBox_OnPropertyChanged"
                                           
-                            />
+                                />
                             
-                        </ScrollViewer>
+                            </ScrollViewer>
+                        </Border>
+                       
                         
                     </Grid>
                     
@@ -407,36 +412,47 @@
                         <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Bottom"
                                     Margin="0 0 0 5">
                             <TextBlock Text="TCP listening on: "/>
-                            <TextBlock Text="3506"/>
+                            <TextBlock Text="3506" FontWeight="Normal"/>
                         </StackPanel>
                         
                         <!-- Received Preview Grid -->
-                        <Grid Grid.Row="1" Grid.RowDefinitions="3* 1* 6*">
+                        <Grid Grid.Row="1" Grid.RowDefinitions="3* 2* 5*">
                             
                             <!-- Selected Preview Grid -->
                             <Grid Grid.Row="0" Grid.ColumnDefinitions="Auto *">
                                 
                                 <!-- Image Grid -->
                                 <Grid Grid.Column="0">
-                                    <Border CornerRadius="10" ClipToBounds="True">
-                                        <Panel Width="200" Height="200" Background="#7FFF22DD">
+                                    <Border CornerRadius="10" ClipToBounds="True" 
+                                            Height="200">
+                                        <Panel Width="{Binding $parent[Border].Height}" 
+                                               Height="{Binding $parent[Border].Height}" 
+                                               Background="#7FFF22DD">
+                                        
                                             <Image Stretch="Uniform"/>
                                             <Panel >
                                                 <PathIcon Height="75" Width="75" Data="{StaticResource image_off_regular}"/>
                                             </Panel>
                                         </Panel>
                                     </Border>
+                                    
                                 </Grid>
                                 
                             </Grid>
                             
                             <!-- Description Grid -->
-                            <Grid Grid.Row="1" Margin="0 5 0 5">
-                                <Border Background="White" BorderBrush="Black" BorderThickness="1" CornerRadius="5" />
-                                <TextBlock TextWrapping="Wrap"
-                                           Background="Transparent"
-                                           Text=" Guid: XXX StatusType: XXX StatusParam: XXX "/>
-                            </Grid>
+                            <Border Grid.Row="1" Margin="0 5 0 5" ClipToBounds="True"
+                                    Background="White" BorderBrush="Black" BorderThickness="1" CornerRadius="5"  >
+                                <Grid ColumnDefinitions="Auto *" RowDefinitions="Auto Auto Auto">
+                                    <TextBlock Text=" Guid: "/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="[TEST GUID]"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text=" StatusType: "/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="[TEST STATUS TYPE]"/>
+                                    <TextBlock Grid.Row="2" Grid.Column="0" Text=" StatusParam: "/>
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="[TEST STATUS PARAM]"/>
+                                </Grid>
+                                
+                            </Border>
                             
                             <!-- List of received -->
                             <Grid Grid.Row="2" Grid.RowDefinitions="Auto *">
@@ -476,6 +492,8 @@
                 </Grid>
                 
             </Grid>
+                <!--~1~ Content cover @1@
+            <Grid Grid.Row="1" Background="Transparent"/>-->
             
             <!-- Footer -->
             <Grid Grid.Row="2">

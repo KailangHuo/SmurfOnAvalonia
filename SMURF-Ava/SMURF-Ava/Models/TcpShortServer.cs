@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Input;
 using EventDrivenElements;
+using Newtonsoft.Json;
 
 namespace SMURF_Ava.Models;
 
@@ -88,6 +89,10 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
                     if (len == 0) {
                         //LogServerInfo("Client Disconnected!");
                         LogServerInfo("Software response received!");
+                        if (!string.IsNullOrEmpty(incomingStr)) {
+                            TcpItem tcpItem = JsonConvert.DeserializeObject<TcpItem>(incomingStr);
+                        }
+                        
                         ResponseReceived(DateTime.Now + "@###@" + incomingStr);
                         client.Close();
                         client = null;

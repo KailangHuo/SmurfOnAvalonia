@@ -117,7 +117,7 @@
             <ExperimentalAcrylicBorder.Material>
                 <ExperimentalAcrylicMaterial 
                     BackgroundSource="Digger"
-                    TintColor="Black"
+                    TintColor="DarkGray"
                     TintOpacity="0"
                     MaterialOpacity="0.6"
                     />
@@ -157,10 +157,13 @@
                                 <TextBlock Text=" system log" FontSize="20" 
                                            HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                                 
-                                <ToggleButton Content="{Binding TimestampButtonContent
+                                <ToggleButton Name="TimeStamp_ToggleButton" 
+                                              Content="{Binding TimestampButtonContent
                                               , RelativeSource={RelativeSource AncestorType=Window}}" 
                                               Padding="3"
                                               Margin="10 0 0 0"
+                                              IsChecked="{Binding ShowTimeStamp}"
+                                              Command="{Binding ShowTimeStampCommand}"
                                               Click="Button_OnClick"/>
                                 
                             </StackPanel>

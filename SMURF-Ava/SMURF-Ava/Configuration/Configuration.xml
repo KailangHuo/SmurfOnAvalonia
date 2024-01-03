@@ -11,14 +11,15 @@
     
     <CmdlineCommands>
         <Command CommandName="loginLaunch" CommandParameterNames="user,selectedStudy,language,selectedSeries,application,serverDomain" />
+        <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,selectedSeries,application,serverDomain" />
         <Command CommandName="setTCPPort" CommandParameterNames="portNumber" />
+        <Command CommandName="login" CommandParameterNames="user,language,serverDomain" />
+        <Command CommandName="launch" CommandParameterNames="user,selectedStudy,selectedSeries,application"/>
         <Command CommandName="append" CommandParameterNames="user,selectedSeries,selectedStudy" />
         <Command CommandName="closeTab" CommandParameterNames="selectedStudy" />
         <Command CommandName="exit" CommandParameterNames="" />
         <Command CommandName="logout" CommandParameterNames="" />
-        <Command CommandName="verticalLogin" CommandParameterNames="user,password,selectedStudy,selectedSeries,application,serverDomain" />
-        <Command CommandName="login" CommandParameterNames="user,language,serverDomain" />
-        <Command CommandName="launch" CommandParameterNames="user,selectedStudy,selectedSeries,application"/>
+
     </CmdlineCommands>
     
     <CmdlineCommandResultCodes>

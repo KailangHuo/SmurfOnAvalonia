@@ -19,6 +19,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     public MainWindowViewModel(MetaDataObject metaDataObject = null) {
         this._metaDataObject = new MetaDataObject();
+        this.ShowTimeStamp = false;
         Init();
     }
 
@@ -193,6 +194,21 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+    private bool _showTimeStamp;
+
+    public bool ShowTimeStamp {
+        get {
+            return _showTimeStamp;
+        }
+        set {
+            if(_showTimeStamp == value)return;
+            _showTimeStamp = value;
+            this._metaDataObject.showTimeStamp = value.ToString();
+            this.Saved = false;
+            RisePropertyChanged(nameof(ShowTimeStamp));
+        }
+    }
+
     private bool _saved;
 
     public bool Saved {
@@ -234,12 +250,17 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.StudyUid = metaDataObject.selectedStudy;
         this.SeriesUid = metaDataObject.selectedSeries;
         this.SelectedAppName = metaDataObject.application;
+        this.ShowTimeStamp = Convert.ToBoolean(metaDataObject.showTimeStamp);
         this.Saved = true;
     }
 
     #endregion
 
     #region COMMANDS
+
+    public void ShowTimeStampCommand() {
+        this.ShowTimeStamp = !ShowTimeStamp;
+    }
 
     public void LoginLaunchCommand(object o = null) {
         SystemFacade.GetInstance().InvokeRpcCommand("loginLaunch", _metaDataObject);

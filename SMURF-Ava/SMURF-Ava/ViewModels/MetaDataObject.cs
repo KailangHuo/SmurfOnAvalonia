@@ -24,5 +24,7 @@ public class MetaDataObject {
 
     public string application;
 
+    public string showTimeStamp;
+
     public string portNumber;
 }

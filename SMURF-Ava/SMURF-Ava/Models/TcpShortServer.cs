@@ -89,10 +89,6 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
                     if (len == 0) {
                         //LogServerInfo("Client Disconnected!");
                         LogServerInfo("Software response received!");
-                        if (!string.IsNullOrEmpty(incomingStr)) {
-                            TcpItem tcpItem = JsonConvert.DeserializeObject<TcpItem>(incomingStr);
-                        }
-                        
                         ResponseReceived(DateTime.Now + "@###@" + incomingStr);
                         client.Close();
                         client = null;

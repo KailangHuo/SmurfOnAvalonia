@@ -162,9 +162,9 @@
                                               , RelativeSource={RelativeSource AncestorType=Window}}" 
                                               Padding="3"
                                               Margin="10 0 0 0"
-                                              IsChecked="{Binding ShowTimeStamp}"
-                                              Command="{Binding ShowTimeStampCommand}"
-                                              Click="Button_OnClick"/>
+                                              IsChecked="{Binding ShowTimeStamp, Mode=TwoWay}"
+                                              IsCheckedChanged="TimeStamp_ToggleButton_OnIsCheckedChanged"
+                                              />
                                 
                             </StackPanel>
                             

@@ -14,8 +14,6 @@ namespace SMURF_Ava.Views;
 
 public partial class MainWindow : Window , INotifyPropertyChanged{
     public MainWindow() {
-        ShowTimeStamp = false;
-        TimestampButtonContent = "show timestamp";
         InitializeComponent();
         this.Closing += CloseApplication;
     }
@@ -24,12 +22,8 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
 
     public string TimestampButtonContent {
         get {
+            _timestampButtonContent = _showTimeStamp ? "disable timestamp" : "show timestamp";
             return _timestampButtonContent;
-        }
-        set {
-            if(_timestampButtonContent == value)return;
-            _timestampButtonContent = value;
-            RisePropertyChanged(nameof(TimestampButtonContent));
         }
     }
 
@@ -41,8 +35,7 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
         set {
             if(_showTimeStamp == value)return;
             _showTimeStamp = value;
-            if (_showTimeStamp) TimestampButtonContent = "disable timestamp";
-            else TimestampButtonContent = "show timestamp";
+            RisePropertyChanged(nameof(TimestampButtonContent));
             RisePropertyChanged(nameof(ShowTimeStamp));
         }
     }
@@ -101,5 +94,8 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
         CommandItem_ViewModel commandItemViewModel = (CommandItem_ViewModel)grid.DataContext;
         commandItemViewModel.IsHovered = false;
     }
-    
+
+    private void TimeStamp_ToggleButton_OnIsCheckedChanged(object? sender, RoutedEventArgs e) {
+        this.ShowTimeStamp = !ShowTimeStamp;
+    }
 }

@@ -63,6 +63,7 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     private object _locker;
     
     private Window DefaultMainWindow;
+     
     
 
     private void PopupExceptionWindow(string content) {

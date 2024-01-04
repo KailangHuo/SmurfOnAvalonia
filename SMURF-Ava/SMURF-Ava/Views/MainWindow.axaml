@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:converters="clr-namespace:SMURF_Ava.ViewModels.Converters"
+        xmlns:views="clr-namespace:SMURF_Ava.Views"
         mc:Ignorable="d" d:DesignWidth="1250" d:DesignHeight="800"
         x:Class="SMURF_Ava.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
@@ -31,28 +32,30 @@
         
         <!-- command item Template -->
         <DataTemplate x:Key="CommandTabTemplate">
-            <Grid Grid.ColumnDefinitions="Auto * Auto"
-                  Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}"
-                  PointerEntered="CommandPanel_OnPointerEntered"
-                  PointerExited="CommandPanel_OnPointerExited"
-                  Height="60" >
+            <Border ClipToBounds="True">
+                <Grid Grid.ColumnDefinitions="Auto * Auto"
+                      Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}"
+                      PointerEntered="CommandPanel_OnPointerEntered"
+                      PointerExited="CommandPanel_OnPointerExited"
+                      Height="60" >
 
-                <ProgressBar Grid.Column="0" 
-                             Width="6"
-                             Orientation="Vertical" 
-                             IsVisible="{Binding IsDetailed}"
-                             Background="Black"
-                             Value="{Binding IsDetailed, Converter={StaticResource BoolValueConverter}}"/>
-                <TextBlock Grid.Column="1" Text="{Binding CommandName}"
-                           Margin="10 0 0 0"
-                           FontWeight="Normal" FontSize="20"
-                           VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                <Button Grid.Column="2" 
-                        Margin="0 0 5 0"
-                        Foreground="White"
-                        Background="#FF007FE3"
-                        Content="Invoke" Command="{Binding InvokeRpcCommand}" IsVisible="{Binding IsDetailed}"/>
-            </Grid>
+                    <ProgressBar Grid.Column="0" 
+                                 Width="6"
+                                 Orientation="Vertical" 
+                                 IsVisible="{Binding IsDetailed}"
+                                 Background="Black"
+                                 Value="{Binding IsDetailed, Converter={StaticResource BoolValueConverter}}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding CommandName}"
+                               Margin="10 0 0 0"
+                               FontWeight="Normal" FontSize="20"
+                               VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    <Button Grid.Column="2" 
+                            Margin="0 0 5 0"
+                            Foreground="White"
+                            Background="#FF007FE3"
+                            Content="Invoke" Command="{Binding InvokeRpcCommand}" IsVisible="{Binding IsDetailed}"/>
+                </Grid>
+            </Border>
         </DataTemplate>
         
         <!-- LogItem Template -->
@@ -342,22 +345,21 @@
                         <!-- Buttons -->
                         <Grid Grid.Row="2" VerticalAlignment="Top" Margin="0,10,0,0">
                             <StackPanel 
-                                Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="login launch" Margin="0 0 3 0 "
-                                        Padding="3"
-                                        Command="{Binding LoginLaunchCommand}" 
-                                        CommandParameter="{Binding $parent[Window]}"/>
-                                <Button Content="vertical login" Command="{Binding VerticalLoginCommand}" 
-                                        Padding="3" Margin="0 0 3 0 "/>
-                                <Button Content="save" Command="{Binding SaveCommand}" 
+                                Orientation="Horizontal" HorizontalAlignment="Center" Spacing="3">
+                                <Button Content="save" Command="{Binding SaveCommand}"
+                                        Name="SaveButton"
+                                        Width="75"
+                                        HorizontalContentAlignment="Center"
                                         IsEnabled="{Binding !Saved}"
                                         Foreground="White"
                                         Background="#FF007FE3"
-                                        Padding="3" Margin="0 0 3 0 "/>
+                                        Padding="3" />
                                 <Button Content="client exit" Command="{Binding CloseClientCommand}"
+                                        Width="{Binding #SaveButton.Width}"
+                                        HorizontalContentAlignment="Center"
                                         Foreground="White"
                                         Background="#FFFF4343"
-                                        Padding="3" Margin="0 0 3 0 "/>
+                                        Padding="3" />
                             </StackPanel>
                         </Grid>
                         
@@ -373,23 +375,26 @@
                     <TextBlock Grid.Row="0" Text="2. Send Command" FontSize="23"  Margin="5 10 0 0"/>
                     
                     <!-- Command ListBox -->
-                    <ListBox Grid.Row="1" Margin="7 58 7 7"
-                             BorderBrush="DarkGray"
-                             Background="Transparent"
-                             ItemsSource="{Binding CommandItemContainerViewModel.CommandItemViewModels}"
-                             ItemTemplate="{StaticResource CommandTabTemplate}"
-                             SelectedItem="{Binding CommandItemContainerViewModel.SelectedItem}"
-                             >
-                        <ListBox.Styles>
-                            <Style Selector="ListBoxItem">
-                                <Setter Property="Padding" Value="0"/>
-                                <Setter Property="Height" Value="60"/>
-                                <Setter Property="Background" Value="Transparent"/>
-                            </Style>
-                        </ListBox.Styles>
-                    </ListBox>
-                    <Border Grid.Row="1" CornerRadius="5"
-                            BorderThickness="1" BorderBrush="Black" Margin="6 57 6 6"/>
+                    <Border Grid.Row="1" CornerRadius="5" ClipToBounds="True"
+                            Name="CommandListBoxBorder"
+                            BorderThickness="1" BorderBrush="Black" Margin="6 57 6 6">
+                        <ListBox Background="Transparent"
+                                 ItemsSource="{Binding CommandItemContainerViewModel.CommandItemViewModels}"
+                                 ItemTemplate="{StaticResource CommandTabTemplate}"
+                                 SelectedItem="{Binding CommandItemContainerViewModel.SelectedItem}"
+                        >
+                            <ListBox.Styles>
+                                <Style Selector="ListBoxItem">
+                                    <Setter Property="Padding" Value="0"/>
+                                    <Setter Property="Height" Value="60"/>
+                                    <Setter Property="Background" Value="Transparent"/>
+                                </Style>
+                            </ListBox.Styles>
+                        </ListBox>
+                    </Border>
+                        <!-- CommandCover -->
+                    <Panel Grid.Row="1" Margin="{Binding #CommandListBoxBorder.Margin}" Background="#3D999999"
+                           IsVisible="{Binding PopupManagerViewModel.IsBusy}"/>
                     
                     
                     <!-- Temp PlaceHolder -->
@@ -466,7 +471,7 @@
                                          Background="Transparent"
                                          ItemsSource="{Binding TcpReceivedItemViewModels}"
                                          ItemTemplate="{StaticResource TcpReceivedDataTemplate}"
-                                         SelectedItem="{Binding SelectedTcp}"
+                                         SelectedItem="{Binding SelectedReceived}"
                                          >
                                     <ListBox.Styles>
                                         <Style Selector="ListBoxItem">
@@ -495,8 +500,13 @@
                 </Grid>
                 
             </Grid>
-                <!--~1~ Content cover @1@
-            <Grid Grid.Row="1" Background="Transparent"/>-->
+                <!-- Content cover popup -->
+            <Grid Grid.Row="1" >
+                <views:InPorgressBar_UserControl
+                    DataContext="{Binding PopupManagerViewModel}"
+                    NotificationText = "{Binding Notification}"
+                    IsVisible="{Binding IsBusy}"/>
+            </Grid>
             
             <!-- Footer -->
             <Grid Grid.Row="2">

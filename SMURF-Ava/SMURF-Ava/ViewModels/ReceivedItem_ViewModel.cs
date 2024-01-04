@@ -3,9 +3,9 @@ using EventDrivenElements;
 
 namespace SMURF_Ava.ViewModels;
 
-public class TcpItem_ViewModel : AbstractEventDrivenViewModel{
+public class ReceivedItem_ViewModel : AbstractEventDrivenViewModel{
 
-    public TcpItem_ViewModel(string contentStr, int indexNum) {
+    public ReceivedItem_ViewModel(string contentStr, int indexNum) {
         string[] strs = contentStr.Split("@###@");
         this.TimeStamp = strs[0];
         this.Content = strs[1];

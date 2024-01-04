@@ -3,9 +3,9 @@ using EventDrivenElements;
 
 namespace SMURF_Ava.Models;
 
-public class TcpItem : AbstractEventDrivenObject{
+public class ResponseItem : AbstractEventDrivenObject{
 
-    public TcpItem(string content) {
+    public ResponseItem(string content) {
         this.TimeStamp = DateTime.Now.ToString();
     }
 
@@ -15,7 +15,7 @@ public class TcpItem : AbstractEventDrivenObject{
 
     public string StatusType;
 
-    public TcpItemStatusParam StatusParam;
+    public string StatusParam;
 
 
 

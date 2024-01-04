@@ -15,47 +15,76 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
 
     public PopupManager_ViewModel() {
         this.DefaultMainWindow = SystemFacade.GetInstance().MainWindow;
-        this.commandPopupMap = new Dictionary<UIH_Command, InProgressWindow>();
+        this._locker = new object();
+        IsBusy = false;
+        Notification = "";
         ExceptionManager.GetInstance().RegisterObserver(this);
     }
 
-    private Window DefaultMainWindow;
+    #region NOTIFIABLE_PROPERTIES
 
-    private Dictionary<UIH_Command, InProgressWindow> commandPopupMap;
+    private bool _isBusy;
+
+    public bool IsBusy {
+        get {
+            return _isBusy;
+        }
+        set {
+            if (_isBusy == value) return;
+            _isBusy = value;
+            RisePropertyChanged(nameof(IsBusy));
+        }
+    }
+
+    private string _notification;
+
+    public string Notification {
+        get {
+            return _notification;
+        }
+        set {
+            if(_notification == value)return;
+            _notification = value;
+            RisePropertyChanged(nameof(Notification));
+        }
+    }
+
+    #endregion
+
+    #region COMMANDS
+
+    public void CancelCommand() {
+        
+    }
+
+    #endregion
+
+
+    private object _locker;
+    
+    private Window DefaultMainWindow;
+    
 
     private void PopupExceptionWindow(string content) {
         PopupWindow window = new PopupWindow(content);
         window.ShowDialog(this.DefaultMainWindow);
     }
 
-    private void PopupCommandProcessing_BlockWindow(UIH_Command uihCommand) {
-        if(commandPopupMap.ContainsKey(uihCommand)) return;
-        InProgressWindow inProgressWindow = new InProgressWindow(uihCommand.CommandName + " is processing...");
-        commandPopupMap.Add(uihCommand, inProgressWindow);
-        inProgressWindow.ShowDialog(this.DefaultMainWindow);
-    }
 
-    private void CloseCommandProcessing_BlockWindow(UIH_Command uihCommand) {
-        if (commandPopupMap.ContainsKey(uihCommand)) {
-            InProgressWindow progressWindow = commandPopupMap[uihCommand];
-            //Dispatcher.UIThread.Invoke(() => { } );
-            progressWindow.Close();
-            commandPopupMap.Remove(uihCommand);
-        }
-
-    }
 
     public override void UpdateByEvent(string propertyName, object o) {
         Dispatcher.UIThread.Invoke(() => {
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {
                 UIH_Command command = (UIH_Command)o;
-                PopupCommandProcessing_BlockWindow(command);
+                IsBusy = true;
+                Notification = command.CommandName + " is processing...";
                 return;
             }
 
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandFinished))) {
                 UIH_Command command = (UIH_Command)o;
-                CloseCommandProcessing_BlockWindow(command);
+                IsBusy = false;
+                Notification = "";
                 return;
             }
 

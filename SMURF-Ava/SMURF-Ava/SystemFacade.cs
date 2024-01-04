@@ -19,6 +19,8 @@ public class SystemFacade : AbstractEventDrivenObject{
         this.ExceptionManager = Models.ExceptionManager.GetInstance();
         this.TcpShortServer = TcpShortServer.GetInstance();
         PublishTcpServer();
+        this.ResponseItemContainer = new ResponseItemContainer();
+        PublishResponseItemContainer();
         this.SystemLogger = SystemLogger.GetInstance();
         PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
@@ -54,6 +56,8 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     private TcpShortServer TcpShortServer;
 
+    private ResponseItemContainer ResponseItemContainer;
+
     public void RegisterMainWindow(Window window) {
         this.MainWindow = window;
     }
@@ -73,6 +77,10 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     public void PublishTcpServer() {
         PublishEvent(nameof(PublishTcpServer), this.TcpShortServer);
+    }
+
+    public void PublishResponseItemContainer() {
+        PublishEvent(nameof(PublishResponseItemContainer), this.ResponseItemContainer);
     }
 
     public void Log(string content, LogTypeEnum logType = LogTypeEnum.SYSTEM_NOTIFICATION) {

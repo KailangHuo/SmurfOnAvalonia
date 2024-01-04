@@ -10,6 +10,7 @@ public class SystemLogger : AbstractEventDrivenObject {
 
     private SystemLogger() {
         this._logItems = new List<LogItem>();
+        this._locker = new object();
     }
 
     public static SystemLogger GetInstance() {
@@ -24,20 +25,25 @@ public class SystemLogger : AbstractEventDrivenObject {
         return _instance;
     }
 
+    private object _locker;
 
     private List<LogItem> _logItems;
 
     public void ClearAllLog() {
-        _logItems = new List<LogItem>();
-        PublishEvent(nameof(ClearAllLog), null);
-        UpdateLog("Log cleared.", LogTypeEnum.SYSTEM_NOTIFICATION);
+        lock (_locker) {
+            _logItems = new List<LogItem>();
+            PublishEvent(nameof(ClearAllLog), null);
+            UpdateLog("Log cleared.", LogTypeEnum.SYSTEM_NOTIFICATION);
+        }
     }
 
     public void UpdateLog(string logContent, LogTypeEnum logType, string copyContent = "") {
-        DateTime timeStamp = DateTime.Now;
-        LogItem logItem = new LogItem(logType, timeStamp, logContent, copyContent);
-        this._logItems.Add(logItem);
-        PublishEvent(nameof(UpdateLog), logItem);
+        lock (_locker) {
+            DateTime timeStamp = DateTime.Now;
+            LogItem logItem = new LogItem(logType, timeStamp, logContent, copyContent);
+            this._logItems.Add(logItem);
+            PublishEvent(nameof(UpdateLog), logItem);
+        }
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

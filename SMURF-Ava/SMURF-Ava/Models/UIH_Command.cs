@@ -1,4 +1,6 @@
-﻿namespace SMURF_Ava.Models;
+﻿using System.Threading;
+
+namespace SMURF_Ava.Models;
 
 public class UIH_Command {
 
@@ -21,6 +23,8 @@ public class UIH_Command {
     public string ApplicationName;
 
     public string CommandBody;
+
+    public Thread CurrentProcessingThread;
 
 }
 

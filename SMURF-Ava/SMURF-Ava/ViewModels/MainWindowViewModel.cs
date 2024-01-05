@@ -28,7 +28,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.PopupManagerViewModel = new PopupManager_ViewModel();
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
-        this.TcpReceivedItemViewModels = new ObservableCollection<ReceivedItem_ViewModel>();
+        this.TcpReceivedItemViewModels = new ObservableCollection<ResponseItem_ViewModel>();
         
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
@@ -70,7 +70,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     public ObservableCollection<string> LanguageOptionList { get; private set; }
 
-    public ObservableCollection<ReceivedItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
+    public ObservableCollection<ResponseItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
 
 
     private string _userName;
@@ -222,16 +222,16 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
-    private ReceivedItem_ViewModel _selectedReceived;
+    private ResponseItem_ViewModel _selectedResponse;
 
-    public ReceivedItem_ViewModel SelectedReceived {
+    public ResponseItem_ViewModel SelectedResponse {
         get {
-            return _selectedReceived;
+            return _selectedResponse;
         }
         set {
-            if(_selectedReceived == value)return;
-            _selectedReceived = value;
-            RisePropertyChanged(nameof(SelectedReceived));
+            if(_selectedResponse == value)return;
+            _selectedResponse = value;
+            RisePropertyChanged(nameof(SelectedResponse));
         }
     }
 
@@ -307,16 +307,16 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             return;
         }
 
-        if (propertyName.Equals(nameof(SystemFacade.PublishTcpServer))) {
-            TcpShortServer tcpShortServer = (TcpShortServer)o;
-            tcpShortServer.RegisterObserver(this);
+        if (propertyName.Equals(nameof(SystemFacade.PublishResponseItemManager))) {
+            ResponseItemManager responseItemManager = (ResponseItemManager)o;
+            responseItemManager.RegisterObserver(this);
         }
 
-        if (propertyName.Equals(nameof(TcpShortServer.ResponseReceived))) {
-            string content = (string)o;
-            ReceivedItem_ViewModel itemViewModel = new ReceivedItem_ViewModel(content, this.TcpReceivedItemViewModels.Count);
+        if (propertyName.Equals(nameof(ResponseItemManager.AddItem))) {
+            ResponseItem responseItem = (ResponseItem)o;
+            ResponseItem_ViewModel itemViewModel = new ResponseItem_ViewModel(responseItem, this.TcpReceivedItemViewModels.Count);
             this.TcpReceivedItemViewModels.Add(itemViewModel);
-            this.SelectedReceived = itemViewModel;
+            this.SelectedResponse = itemViewModel;
         }
 
         if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {

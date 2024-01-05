@@ -89,7 +89,8 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
                     if (len == 0) {
                         //LogServerInfo("Client Disconnected!");
                         LogServerInfo("Software response received!");
-                        ResponseReceived(DateTime.Now + "@###@" + incomingStr);
+                        TcpReceivedItem tcpReceivedItem = new TcpReceivedItem(DateTime.Now, incomingStr);
+                        ResponseReceived(tcpReceivedItem);
                         client.Close();
                         client = null;
                         incomingStr = "";
@@ -112,8 +113,8 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
         SystemLogger.GetInstance().UpdateLog(content, LogTypeEnum.SYSTEM_NOTIFICATION, content);
     }
 
-    public void ResponseReceived(string content) {
-        PublishEvent(nameof(ResponseReceived), content);
+    public void ResponseReceived(TcpReceivedItem tcpReceivedItem) {
+        PublishEvent(nameof(ResponseReceived), tcpReceivedItem);
     }
 
 }

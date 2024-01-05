@@ -11,7 +11,9 @@
             BorderThickness="1" Background="LightGray" BorderBrush="Black">
         <Grid RowDefinitions="Auto Auto">
             
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
+                        Margin="0 7 0 0"
+                        Spacing="10">
                 <TextBlock Name="MessageText"  
                            Text="{Binding NotificationText, RelativeSource={RelativeSource AncestorType=UserControl}}"
                            TextAlignment="Center"

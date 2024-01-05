@@ -5,11 +5,13 @@ namespace SMURF_Ava.Models;
 
 public class ResponseItem : AbstractEventDrivenObject{
 
-    public ResponseItem(string content) {
-        this.TimeStamp = DateTime.Now.ToString();
+    public ResponseItem() {
+        
     }
 
-    public string TimeStamp;
+    public DateTime TimeStamp { get; private set; }
+
+    public string RawContent { get; private set; }
 
     public string Guid;
 
@@ -17,6 +19,18 @@ public class ResponseItem : AbstractEventDrivenObject{
 
     public string StatusParam;
 
+    public ResponseItemStatusParamObject ResponseItemStatusParamObject { get;private set; }
 
+    public void SetResponseStatusParam(ResponseItemStatusParamObject o) {
+        this.ResponseItemStatusParamObject = o;
+    }
+
+    public void SetTimeStamp(DateTime dateTime) {
+        this.TimeStamp = dateTime;
+    }
+
+    public void SetRawContent(string jsonString) {
+        this.RawContent = jsonString;
+    }
 
 }

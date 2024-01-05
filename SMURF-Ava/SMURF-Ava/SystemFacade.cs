@@ -18,16 +18,15 @@ public class SystemFacade : AbstractEventDrivenObject{
     private void InitSystem() {
         this.ExceptionManager = Models.ExceptionManager.GetInstance();
         this.TcpShortServer = TcpShortServer.GetInstance();
-        PublishTcpServer();
-        this.ResponseItemContainer = new ResponseItemContainer();
-        PublishResponseItemContainer();
+        this._responseItemManager = new ResponseItemManager();
+        PublishResponseItemManager();
         this.SystemLogger = SystemLogger.GetInstance();
         PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
         PublishCmdCommunicator();
         
         this.CommandLineCommunicator.RegisterObserver(this.SystemLogger);
-        
+        this.TcpShortServer.RegisterObserver(this._responseItemManager);
         
 
     }
@@ -56,7 +55,7 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     private TcpShortServer TcpShortServer;
 
-    private ResponseItemContainer ResponseItemContainer;
+    private ResponseItemManager _responseItemManager;
 
     public void RegisterMainWindow(Window window) {
         this.MainWindow = window;
@@ -74,13 +73,9 @@ public class SystemFacade : AbstractEventDrivenObject{
     public void PublishSystemLogger() {
         PublishEvent(nameof(PublishSystemLogger), this.SystemLogger);
     }
-
-    public void PublishTcpServer() {
-        PublishEvent(nameof(PublishTcpServer), this.TcpShortServer);
-    }
-
-    public void PublishResponseItemContainer() {
-        PublishEvent(nameof(PublishResponseItemContainer), this.ResponseItemContainer);
+    
+    public void PublishResponseItemManager() {
+        PublishEvent(nameof(PublishResponseItemManager), this._responseItemManager);
     }
 
     public void Log(string content, LogTypeEnum logType = LogTypeEnum.SYSTEM_NOTIFICATION) {

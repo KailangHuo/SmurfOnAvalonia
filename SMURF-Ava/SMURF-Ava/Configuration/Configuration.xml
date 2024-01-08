@@ -23,6 +23,7 @@
     </CmdlineCommands>
     
     <CmdlineCommandResultCodes>
+        <ResultCode Index="-111" Interpretation="用户取消了监听命令回执" />
         <ResultCode Index="0" Interpretation="命令执行成功" />
         <ResultCode Index="1" Interpretation="启动客户端失败" />
         <ResultCode Index="2" Interpretation="连接服务器失败" />

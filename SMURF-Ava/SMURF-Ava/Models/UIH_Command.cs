@@ -24,15 +24,12 @@ public class UIH_Command {
     public string ApplicationName;
 
     public string CommandBody;
-
-    public Thread CurrentProcessingThread;
-
-    public Process CurrentProcessingProcess;
+    
+    public CancellationTokenSource CancellationTokenSource;
+    
 
     public void Cancel() {
-        this.CurrentProcessingThread.
-        this.CurrentProcessingThread.Join();
-        this.CurrentProcessingProcess.Kill();
+        this.CancellationTokenSource.Cancel();
     }
 
 }

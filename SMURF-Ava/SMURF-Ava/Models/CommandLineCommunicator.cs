@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using EventDrivenElements;
 using SMURF_Ava.configuration;
 using SMURF_Ava.ViewModels;
@@ -20,30 +21,41 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
         uihCommand.CommandHeader = this.INTEGRATION_EXECUTEABLE;
         PublishCommandStart(uihCommand);
         string respond = "";
-        Thread thread = new Thread(() => {
-            try { 
-                uihCommand.CurrentProcessingThread = Thread.CurrentThread;
-                ProcessStartInfo processStartInfo = new ProcessStartInfo();
-                processStartInfo.FileName = uihCommand.ClientPath + @"\" +this.INTEGRATION_EXECUTEABLE;
-                processStartInfo.Arguments = uihCommand.CommandBody;
-                processStartInfo.CreateNoWindow = true;
-                Process process = Process.Start(processStartInfo);
-                uihCommand.CurrentProcessingProcess = process;
+        ProcessStartInfo processStartInfo = new ProcessStartInfo();
+        processStartInfo.FileName = uihCommand.ClientPath + @"\" +this.INTEGRATION_EXECUTEABLE;
+        processStartInfo.Arguments = uihCommand.CommandBody;
+        processStartInfo.CreateNoWindow = true;
+        Process process = Process.Start(processStartInfo);
+        CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
+        uihCommand.CancellationTokenSource = cancellationTokenSource;
+        try {
+            Task.Run(() => {
                 process.WaitForExit();
                 int exitCode = process.ExitCode;
+                if (cancellationTokenSource.Token.IsCancellationRequested) {
+                    exitCode = -111;
+                }
                 string codeInterpretation = SystemConfiguration.GetInstance().GetCmdlineResultByCodeStr(exitCode + "");
                 respond = uihCommand.CommandName + " respond! >> " + exitCode + " : " + codeInterpretation;
                 PublishRespondReceived(respond);
                 PublishCommandFinished(uihCommand);
+            }, cancellationTokenSource.Token);
+        }
+        catch (Exception e) {
+            if (e is OperationCanceledException) {
+                respond = uihCommand.CommandName + " Cancelled! >> " + "用户取消了监听命令回执";
+                
             }
-            catch (Exception e) {
+            else {
                 respond = uihCommand.CommandName + " Failed!";
-                PublishRespondReceived(respond);
                 ExceptionManager.GetInstance().ThrowException(e.ToString());
-                PublishCommandFinished(uihCommand);
             }
-        });
-        thread.Start();
+
+            process.Kill();
+            PublishRespondReceived(respond);
+            PublishCommandFinished(uihCommand); 
+        }
+        
     }
 
     public void PublishCommandStart(UIH_Command uihCommand) {

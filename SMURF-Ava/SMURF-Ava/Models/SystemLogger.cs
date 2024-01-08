@@ -32,18 +32,19 @@ public class SystemLogger : AbstractEventDrivenObject {
     public void ClearAllLog() {
         lock (_locker) {
             _logItems = new List<LogItem>();
-            PublishEvent(nameof(ClearAllLog), null);
-            UpdateLog("Log cleared.", LogTypeEnum.SYSTEM_NOTIFICATION);
         }
+        PublishEvent(nameof(ClearAllLog), null);
+        UpdateLog("Log cleared.", LogTypeEnum.SYSTEM_NOTIFICATION);
     }
 
     public void UpdateLog(string logContent, LogTypeEnum logType, string copyContent = "") {
+        LogItem logItem = null;
         lock (_locker) {
             DateTime timeStamp = DateTime.Now;
-            LogItem logItem = new LogItem(logType, timeStamp, logContent, copyContent);
+            logItem = new LogItem(logType, timeStamp, logContent, copyContent);
             this._logItems.Add(logItem);
-            PublishEvent(nameof(UpdateLog), logItem);
         }
+        PublishEvent(nameof(UpdateLog), logItem);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

@@ -35,12 +35,15 @@ public class ResponseItemManager : AbstractEventDrivenObject{
             ResponseItem responseItem = new ResponseItem();
             try {
                 responseItem = JsonConvert.DeserializeObject<ResponseItem>(receivedContentJsonStr);
-                ResponseItemStatusParamObject statusParamObject =
-                    JsonConvert.DeserializeObject<ResponseItemStatusParamObject>(responseItem.StatusParam);
+                ResponseItemStatusParamObject statusParamObject = string.IsNullOrEmpty(responseItem.StatusParam)
+                    ? null
+                    : JsonConvert.DeserializeObject<ResponseItemStatusParamObject>(responseItem.StatusParam);
                 responseItem.SetResponseStatusParam(statusParamObject);
             }
             catch (Exception e) {
-                ExceptionManager.GetInstance().ThrowException("[JsonConvert]: failed" );
+                if (receivedContentJsonStr != ">>> Hello World!") {
+                    responseItem.SetResponseStatusParam(null);
+                }
             }
             responseItem.SetRawContent(receivedContentJsonStr); 
             responseItem.SetTimeStamp(tcpReceivedItem.TimeStamp);

@@ -17,18 +17,20 @@
         FontFamily="JetBrains Mono"
         FontWeight="Light"
         Icon="/Assets/avalonia-logo.ico"
+        Padding="{Binding $self.OffScreenMargin}"
         Title="SMURF_Ava">
     
-    <Window.Styles>
+    <!--<Window.Styles>
         <Style Selector="Window[WindowState=Maximized]">
             <Setter Property="Padding" Value="8" />
         </Style>
-    </Window.Styles>
+    </Window.Styles>-->
     
     <Window.Resources>
         
         <converters:BoolValueConverter x:Key="BoolValueConverter"/>
         <converters:IntToBackgroundConverter x:Key="IntToBackgroundConverter"/>
+        <converters:ImageCountToStrConverter x:Key="ImageCountToStrConverter"/>
         
         <!-- command item Template -->
         <DataTemplate x:Key="CommandTabTemplate">
@@ -106,7 +108,7 @@
                 
                 <Grid.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Copy Content" Command="{Binding CopyContentCommand}"/>
+                        <MenuItem Header="Copy" Command="{Binding CopyContentCommand}"/>
                     </ContextMenu>
                 </Grid.ContextMenu>
                 
@@ -430,17 +432,31 @@
                             <Grid Grid.Row="0" >
                                 
                                 <!-- Image Grid -->
-                                <Grid ColumnDefinitions="Auto *">
-                                    <Border Grid.Column="0" CornerRadius="10" ClipToBounds="True" Width="{Binding Bounds.Height, RelativeSource={RelativeSource Self}}"
+                                <Grid >
+                                    <Border CornerRadius="10" ClipToBounds="True" MinWidth="{Binding $self.Bounds.Height}"
+                                            MaxWidth="{Binding $parent[Grid].Bounds.Width}"
                                             HorizontalAlignment="Left">
-                                        <Grid Width="{Binding $parent[Border].Bounds.Height}" 
-                                               Height="{Binding $parent[Border].Bounds.Height}" 
-                                               Background="#7FFF22DD">
+                                        <Grid Name="SelectPreviewGrid" 
+                                              DataContext="{Binding SelectedResponse}"
+                                              PointerEntered="SelectPreviewGrid_OnPointerEntered"
+                                              PointerExited="SelectPreviewGrid_OnPointerExited"
+                                              Background="#7FFF22DD" >
                                             <Panel >
                                                 <PathIcon Height="75" Width="75" Data="{StaticResource image_off_regular}"/>
                                             </Panel>
-                                            <Image Width="{Binding $parent[Border].Bounds.Height}" Stretch="Uniform"  
-                                                   Source="{Binding SelectedResponse.ImageView}"/>
+                                            <Image Stretch="Uniform"  Name="SelectedPreviewImage"
+                                                   Source="{Binding ImageView}"/>
+                                            <Grid Name="PreviewImageGrid"
+                                                  Background="LightGray"
+                                                  Opacity="0.6">
+                                                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" 
+                                                           Foreground="Black"
+                                                           Opacity="0.8"
+                                                           FontSize="44" FontWeight="Bold"
+                                                           Text="{Binding ImageCount
+                                                                , Converter={StaticResource ImageCountToStrConverter}}"/>
+                                            </Grid>
+                                            
                                         </Grid>
                                     </Border>
                                     
@@ -456,13 +472,22 @@
                                           DataContext="{Binding SelectedResponse }">
                                         <TextBlock      Text=" Guid: "/>
                                         <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Guid}" 
+                                                   Background="Transparent"
                                                    ToolTip.Tip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
                                         <TextBlock Grid.Row="1" Grid.Column="0" Text=" StatusType: "/>
                                         <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding StatusType}"
+                                                   Background="Transparent"
                                                    ToolTip.Tip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
                                         <TextBlock Grid.Row="2" Grid.Column="0" Text=" StatusParam: "/>
                                         <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding StatusParam}"
-                                                   ToolTip.Tip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+                                                   Background="Transparent"
+                                                   ToolTip.Tip="{Binding Text, RelativeSource={RelativeSource Self}}">
+                                            <TextBlock.ContextMenu>
+                                                <ContextMenu>
+                                                    <MenuItem Header="Copy" Command="{Binding CopyContent}"/>
+                                                </ContextMenu>
+                                            </TextBlock.ContextMenu>
+                                        </TextBlock>
                                     </Grid>
                                 </ScrollViewer>
                                 
@@ -513,7 +538,8 @@
                 <views:InPorgressBar_UserControl
                     DataContext="{Binding PopupManagerViewModel}"
                     NotificationText = "{Binding Notification}"
-                    IsVisible="{Binding IsBusy}"/>
+                    IsVisible="{Binding IsBusy}"
+                    />
             </Grid>
             
             <!-- Footer -->

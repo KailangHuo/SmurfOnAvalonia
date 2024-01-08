@@ -15,6 +15,7 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
 
     public PopupManager_ViewModel() {
         this.DefaultMainWindow = SystemFacade.GetInstance().MainWindow;
+        this.RunningCommandStack = new List<UIH_Command>();
         this._locker = new object();
         IsBusy = false;
         Notification = "";
@@ -53,8 +54,14 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
 
     #region COMMANDS
 
-    public void CancelCommand() {
-        
+    public void CancelCurrentCommand() {
+        if(RunningCommandStack.Count == 0)return;
+        lock (_locker) {
+            if(RunningCommandStack.Count == 0)return;
+            UIH_Command uihCommand = RunningCommandStack[0];
+            uihCommand.Cancel();
+            RemoveRunningCommand(uihCommand);
+        }
     }
 
     #endregion
@@ -63,29 +70,51 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     private object _locker;
     
     private Window DefaultMainWindow;
-     
-    
+
+    private List<UIH_Command> RunningCommandStack;
+
+    private void PushRunningCommand(UIH_Command uihCommand) {
+        lock (_locker) {
+            RunningCommandStack.Insert(0, uihCommand);
+            UpdateTopCommand();
+        }
+    }
+
+    private void RemoveRunningCommand(UIH_Command uihCommand) {
+        lock (_locker) {
+            if(!this.RunningCommandStack.Contains(uihCommand)) return;
+            this.RunningCommandStack.Remove(uihCommand);
+            UpdateTopCommand();
+        }
+    }
+
+    private void UpdateTopCommand() {
+        if (RunningCommandStack.Count == 0) {
+            IsBusy = false;
+            Notification = "";
+            return;
+        }
+        UIH_Command uihCommand = RunningCommandStack[0];
+        IsBusy = true;
+        Notification = uihCommand.CommandName + " is processing...";
+    }
 
     private void PopupExceptionWindow(string content) {
         PopupWindow window = new PopupWindow(content);
         window.ShowDialog(this.DefaultMainWindow);
     }
-
-
-
+    
     public override void UpdateByEvent(string propertyName, object o) {
         Dispatcher.UIThread.Invoke(() => {
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {
                 UIH_Command command = (UIH_Command)o;
-                IsBusy = true;
-                Notification = command.CommandName + " is processing...";
+                PushRunningCommand(command);
                 return;
             }
 
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandFinished))) {
                 UIH_Command command = (UIH_Command)o;
-                IsBusy = false;
-                Notification = "";
+                RemoveRunningCommand(command);
                 return;
             }
 

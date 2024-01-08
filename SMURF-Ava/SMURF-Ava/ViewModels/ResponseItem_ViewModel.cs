@@ -5,6 +5,7 @@ using Avalonia.Input.Platform;
 using Avalonia.Media.Imaging;
 using EventDrivenElements;
 using SMURF_Ava.Models;
+using Image = System.Drawing.Image;
 
 namespace SMURF_Ava.ViewModels;
 
@@ -18,11 +19,12 @@ public class ResponseItem_ViewModel : AbstractEventDrivenViewModel{
 
     private void init() {
         this.TimeStamp = _responseItem.TimeStamp.ToString();
+        this.ImageCount = _responseItem.ResponseItemStatusParamObject?.ImageList.Count + "";
         this.Guid = _responseItem.Guid;
         this.StatusType = _responseItem.StatusType;
-        this.StatusParam = _responseItem.ResponseItemStatusParamObject.ToString();
+        this.StatusParam = _responseItem.ResponseItemStatusParamObject?.ToString();
         this.Content = _responseItem.RawContent;
-        this.ImageView = Base64ToImage(_responseItem.ResponseItemStatusParamObject.ImageList[0]);
+        this.ImageView = Base64ToImage(_responseItem.ResponseItemStatusParamObject?.ImageList[0]);
     }
 
     private ResponseItem _responseItem;
@@ -107,9 +109,9 @@ public class ResponseItem_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    private Bitmap _imageView;
+    private Bitmap? _imageView;
 
-    public Bitmap ImageView {
+    public Bitmap? ImageView {
         get {
             return _imageView;
         }
@@ -120,7 +122,31 @@ public class ResponseItem_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
+    private string _imageCount;
+
+    public string ImageCount {
+        get {
+            _imageCount = string.IsNullOrEmpty(_imageCount) ? "0" : _imageCount;
+            return _imageCount;
+        }
+        set {
+            if(_imageCount == value)return;
+            _imageCount = value;
+            RisePropertyChanged(nameof(ImageCount));
+        }
+    }
+
     #endregion
+
+    #region COMMANDS
+
+    public void CopyContent() {
+        IClipboard clipboard = SystemFacade.GetInstance().MainWindow.Clipboard;
+        clipboard.SetTextAsync(this._statusParam);
+    }
+
+    #endregion
+    
     
     public void CopyContentCommand() {
         IClipboard clipboard = SystemFacade.GetInstance().MainWindow.Clipboard;
@@ -128,10 +154,10 @@ public class ResponseItem_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private Bitmap Base64ToImage(string base64Str) {
+        if (string.IsNullOrEmpty(base64Str)) return null;
         byte[] imageBytes = Convert.FromBase64String(base64Str);
         MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
-        ms.Write(imageBytes, 0, imageBytes.Length);
-        Bitmap bitmap = new Bitmap(ms);
+        Bitmap bitmap = Bitmap.DecodeToWidth(ms,1600);
         return bitmap;
     }
 

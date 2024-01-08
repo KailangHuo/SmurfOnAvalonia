@@ -22,11 +22,13 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
         string respond = "";
         Thread thread = new Thread(() => {
             try { 
+                uihCommand.CurrentProcessingThread = Thread.CurrentThread;
                 ProcessStartInfo processStartInfo = new ProcessStartInfo();
                 processStartInfo.FileName = uihCommand.ClientPath + @"\" +this.INTEGRATION_EXECUTEABLE;
                 processStartInfo.Arguments = uihCommand.CommandBody;
                 processStartInfo.CreateNoWindow = true;
                 Process process = Process.Start(processStartInfo);
+                uihCommand.CurrentProcessingProcess = process;
                 process.WaitForExit();
                 int exitCode = process.ExitCode;
                 string codeInterpretation = SystemConfiguration.GetInstance().GetCmdlineResultByCodeStr(exitCode + "");

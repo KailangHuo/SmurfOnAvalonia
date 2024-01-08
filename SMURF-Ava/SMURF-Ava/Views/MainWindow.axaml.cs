@@ -8,6 +8,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Threading;
+using SMURF_Ava.Models;
 using SMURF_Ava.ViewModels;
 
 namespace SMURF_Ava.Views;
@@ -15,6 +16,7 @@ namespace SMURF_Ava.Views;
 public partial class MainWindow : Window , INotifyPropertyChanged{
     public MainWindow() {
         InitializeComponent();
+        this.PreviewImageGrid.IsVisible = false;
         this.Closing += CloseApplication;
     }
 
@@ -97,5 +99,23 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
 
     private void TimeStamp_ToggleButton_OnIsCheckedChanged(object? sender, RoutedEventArgs e) {
         this.ShowTimeStamp = !ShowTimeStamp;
+    }
+
+    private void SelectPreviewGrid_OnPointerEntered(object? sender, PointerEventArgs e) {
+        Grid grid = (Grid)sender;
+        ResponseItem_ViewModel responseItemViewModel = (ResponseItem_ViewModel)grid.DataContext;
+        if (responseItemViewModel == null) return;
+        int imageCountNUmber = int.Parse(responseItemViewModel.ImageCount);
+        if(imageCountNUmber <= 1) return;
+        this.PreviewImageGrid.IsVisible = true;
+    }
+
+    private void SelectPreviewGrid_OnPointerExited(object? sender, PointerEventArgs e) {
+        Grid grid = (Grid)sender;
+        ResponseItem_ViewModel responseItemViewModel = (ResponseItem_ViewModel)grid.DataContext;
+        if (responseItemViewModel == null) return;
+        int imageCountNUmber = int.Parse(responseItemViewModel.ImageCount);
+        if(imageCountNUmber <= 1) return;
+        this.PreviewImageGrid.IsVisible = false;
     }
 }

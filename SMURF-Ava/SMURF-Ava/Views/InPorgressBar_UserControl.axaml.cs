@@ -1,8 +1,11 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Markup.Xaml;
+using SMURF_Ava.ViewModels;
 
 namespace SMURF_Ava.Views;
 
@@ -27,6 +30,15 @@ public partial class InPorgressBar_UserControl : UserControl , INotifyPropertyCh
             RisePropertyChanged(nameof(NotificationText));
         }
     }
+
+    #region COMMANDS
+    
+    public void CancelCommand () {
+        PopupManager_ViewModel popupManagerViewModel = (PopupManager_ViewModel)DataContext;
+        popupManagerViewModel.CancelCurrentCommand();
+    }
+
+    #endregion
     
     #region INotifyPropertyChanged
 

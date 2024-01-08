@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.Diagnostics;
+using System.Threading;
 
 namespace SMURF_Ava.Models;
 
@@ -25,6 +26,14 @@ public class UIH_Command {
     public string CommandBody;
 
     public Thread CurrentProcessingThread;
+
+    public Process CurrentProcessingProcess;
+
+    public void Cancel() {
+        this.CurrentProcessingThread.
+        this.CurrentProcessingThread.Join();
+        this.CurrentProcessingProcess.Kill();
+    }
 
 }
 

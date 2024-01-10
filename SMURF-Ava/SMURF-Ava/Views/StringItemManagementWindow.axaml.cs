@@ -25,6 +25,7 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
             RisePropertyChanged(nameof(TitleStr));
         }
     }
+    
 
     public void CloseThisCommand() {
         this.Close();

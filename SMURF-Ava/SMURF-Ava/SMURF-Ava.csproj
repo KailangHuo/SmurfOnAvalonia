@@ -10,7 +10,7 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
         <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
-      <OutputPath>D:\System\DeskTop\SmurfOnAva</OutputPath>
+      <OutputPath>E:\DeskTop\SMURF_Ava</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>

@@ -9,7 +9,7 @@ namespace SMURF_Ava.Views;
 public partial class StringItemManagementWindow : Window , INotifyPropertyChanged{
     
     public StringItemManagementWindow() {
-        this.TitleStr = "Study Management Window";
+        this.TitleStr = "Management Window";
         InitializeComponent();
     }
 

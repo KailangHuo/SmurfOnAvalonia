@@ -2,6 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:SMURF_Ava.ViewModels.Converters"
         mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="225"
         x:Class="SMURF_Ava.Views.StringItemManagementWindow"
         MinWidth="400" MaxWidth="400"
@@ -14,6 +15,9 @@
         Title="ManagementWindow">
         
         <Window.Resources>
+                
+                <converters:BoolValueConverter x:Key="BoolValueConverter"/>
+                <converters:NumberToBoolConverter x:Key="NumberToBoolConverter"/>
                 
                 <DataTemplate x:Key="StringItemTemplate">
                         <Grid ColumnDefinitions="Auto * Auto Auto" Margin="5 0 5 10">
@@ -29,9 +33,19 @@
                                          Padding="1 1 1 1"
                                          Margin="0 0 3 0"/>
                                 <Button Grid.Column="2" Content=" - " Command="{Binding RemoveThisCommand}" 
+                                        Width="{Binding #AddButton.Bounds.Width}"
+                                        HorizontalContentAlignment="Center"
                                         Margin="0 0 3 0"
+                                        Foreground="White"
+                                        Background="#FF007FE3"
+                                        IsEnabled="{Binding Index}"
                                         Padding="1" />
-                                <Button Grid.Column="3" Content=" + " Command="{Binding AddItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                <Button Grid.Column="3" 
+                                        Name="AddButton"
+                                        HorizontalContentAlignment="Center"
+                                        Content=" + " Command="{Binding AddItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        Foreground="White"
+                                        Background="#FFFF4343"
                                         Padding="1"/>
                         </Grid>
                 </DataTemplate>
@@ -75,8 +89,13 @@
                                 <!-- Buttons -->
                                 <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"
                                             Spacing="3" Margin="10">
-                                        <Button Content="OK"/>
-                                        <Button Content="Cancel" Command="{Binding CloseThisCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                        <Button Content="OK"
+                                                Foreground="White"
+                                                Background="#FF007FE3"/>
+                                        <Button Content="Cancel" 
+                                                Foreground="White"
+                                                Background="#FFFF4343"
+                                                Command="{Binding CloseThisCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                         </Grid>   
                 </Border>

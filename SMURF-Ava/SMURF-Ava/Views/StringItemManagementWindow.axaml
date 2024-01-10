@@ -20,7 +20,7 @@
                 <converters:NumberToBoolConverter x:Key="NumberToBoolConverter"/>
                 
                 <DataTemplate x:Key="StringItemTemplate">
-                        <Grid ColumnDefinitions="Auto * Auto Auto" Margin="5 0 5 10">
+                        <Grid ColumnDefinitions="Auto * Auto" Margin="5 0 0 10">
                                 <ToggleButton Grid.Column="0" Content="Mute" IsChecked="{Binding IsMuted}" 
                                               Padding="1" Margin="0 0 3 0"/>
                                 <TextBox Grid.Column="1" Text="{Binding Content, Mode=TwoWay}"
@@ -38,17 +38,11 @@
                                         Margin="0 0 3 0"
                                         Foreground="White"
                                         Background="#FF007FE3"
-                                        IsVisible="{Binding CollectionCount
+                                        IsEnabled="{Binding CollectionCount
                                                     , RelativeSource={RelativeSource AncestorType=Window}
                                                     , Converter={StaticResource NumberToBoolConverter}}"
+                                        Opacity="{Binding $self.IsEnabled, Converter={StaticResource BoolValueConverter}}"
                                         Padding="1" />
-                                <Button Grid.Column="3" 
-                                        Name="AddButton"
-                                        HorizontalContentAlignment="Center"
-                                        Content=" + " Command="{Binding AddItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                                        Foreground="White"
-                                        Background="#FFFF4343"
-                                        Padding="1"/>
                         </Grid>
                 </DataTemplate>
                 
@@ -79,13 +73,27 @@
                                 </Border>
                                 
                                 <!-- Content Grid-->
-                                <Grid Grid.Row="1" Margin="0 10 0 0">
-                                        <ItemsControl Name="ItemsControl"
+                                <Grid Grid.Row="1"
+                                      ColumnDefinitions="* Auto"
+                                      Margin="0 10 0 0">
+                                                <ItemsControl Grid.Column="0" Name="ItemsControl"
                                                       Background="Transparent"
                                                       HorizontalAlignment="Stretch"
                                                       ItemsSource="{Binding StringItemViewModels}"
                                                       ItemTemplate="{StaticResource StringItemTemplate}"
-                                                      />
+                                                      PropertyChanged="ItemsControl_OnPropertyChanged"
+                                                />
+                                                <Button Grid.Column="1" 
+                                                        Name="AddButton"
+                                                        VerticalAlignment="Top"
+                                                        HorizontalAlignment="Left"
+                                                        HorizontalContentAlignment="Center"
+                                                        Content=" + " 
+                                                        Command="{Binding AddItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                                        Foreground="White"
+                                                        Background="#FFFF4343"
+                                                        Margin="0 0 5 0"
+                                                        Padding="1"/>
                                 </Grid>
                                 
                                 <!-- Buttons -->

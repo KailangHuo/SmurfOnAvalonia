@@ -1,16 +1,29 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using DynamicData;
 using SMURF_Ava.Models;
 
 namespace SMURF_Ava.Views;
 
 public partial class StringItemManagementWindow : Window , INotifyPropertyChanged{
     
-    public StringItemManagementWindow() {
+    public StringItemManagementWindow(StringItemManager_ViewModel stringItemManagerViewModel) {
         this.TitleStr = "Management Window";
+        this.TempStringItemCollection = new ObservableCollection<StringItem_ViewModel>();
+        this.DataContext = this;
+        Init();
         InitializeComponent();
+        
+    }
+
+    private void Init() {
+        StringItemManager_ViewModel stringItemManagerViewModel = (StringItemManager_ViewModel)DataContext;
+        for (int i = 0; i < stringItemManagerViewModel.StringItemViewModels.Count; i++) {
+            this.TempStringItemCollection.Add( stringItemManagerViewModel.StringItemViewModels[i]);
+        }
     }
 
     private string _titleStr;
@@ -25,6 +38,15 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
             RisePropertyChanged(nameof(TitleStr));
         }
     }
+
+    public ObservableCollection<StringItem_ViewModel> TempStringItemCollection { get;private set; }
+
+    public int CollectionCount {
+        get {
+            StringItemManager_ViewModel stringItemManagerViewModel = (StringItemManager_ViewModel)DataContext;
+            return stringItemManagerViewModel.StringItemViewModels.Count;
+        }
+    }
     
 
     public void CloseThisCommand() {
@@ -34,6 +56,12 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
     public void AddItemCommand() {
         StringItemManager_ViewModel stringItemManagerViewModel = (StringItemManager_ViewModel)this.DataContext;
         stringItemManagerViewModel.AddItem(new StringItem_ViewModel());
+    }
+    
+    private void ItemsControl_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
+        if (e.Property.Name == "ItemCount") {
+            RisePropertyChanged(nameof(CollectionCount));
+        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;
@@ -45,4 +73,5 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
         this.PropertyChanged((object) this, new PropertyChangedEventArgs(propertyName));
     }
 
+    
 }

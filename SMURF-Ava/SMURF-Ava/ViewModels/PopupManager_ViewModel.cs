@@ -105,8 +105,7 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     public void PupupStringManagerWindow(StringItemManager_ViewModel stringItemManagerViewModel, string titleName) {
-        StringItemManagementWindow window = new StringItemManagementWindow();
-        window.DataContext = stringItemManagerViewModel;
+        StringItemManagementWindow window = new StringItemManagementWindow(stringItemManagerViewModel);
         window.TitleStr = titleName;
         window.ShowDialog(this.DefaultMainWindow);
     }

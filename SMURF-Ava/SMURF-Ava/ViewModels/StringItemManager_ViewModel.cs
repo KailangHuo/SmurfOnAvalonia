@@ -8,7 +8,10 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
 
     public StringItemManager_ViewModel() {
         this.StringItemViewModels = new ObservableCollection<StringItem_ViewModel>();
-        this.StringItemViewModels.Add(new StringItem_ViewModel());
+        StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
+        stringItemViewModel.RegisterObserver(this);
+        this.StringItemViewModels.Add(stringItemViewModel);
+        this.SelectedStringItem = stringItemViewModel;
     }
 
     private StringItem_ViewModel _selectedStringItem;

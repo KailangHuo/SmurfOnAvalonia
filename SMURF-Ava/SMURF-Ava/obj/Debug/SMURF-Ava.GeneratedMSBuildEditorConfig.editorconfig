@@ -27,7 +27,10 @@ build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 [D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/PopupWindow.axaml]
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/NotificationWindow.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
+
+[D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/StringItemManagementWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
 [D:/System/Documents/GitHub/SmurfOnAvalonia/SMURF-Ava/SMURF-Ava/Views/TestWindow.axaml]

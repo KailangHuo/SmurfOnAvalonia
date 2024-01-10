@@ -1,0 +1,89 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="225"
+        x:Class="SMURF_Ava.Views.StringItemManagementWindow"
+        MinWidth="400" MaxWidth="400"
+        MinHeight="150"
+        SizeToContent="Height"
+        WindowStartupLocation="CenterOwner" 
+        CanResize="False"
+        ShowInTaskbar="False"
+        SystemDecorations="BorderOnly"
+        Title="ManagementWindow">
+        
+        <Window.Resources>
+                
+                <DataTemplate x:Key="StringItemTemplate">
+                        <Grid ColumnDefinitions="Auto * Auto Auto" Margin="5 0 5 10">
+                                <ToggleButton Grid.Column="0" Content="Mute" IsChecked="{Binding IsMuted}" 
+                                              Padding="1" Margin="0 0 3 0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Content, Mode=TwoWay}"
+                                         Height="14" MinHeight="22"
+                                         FontWeight="Normal"
+                                         VerticalAlignment="Center"
+                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"     
+                                         IsEnabled="{Binding !IsMuted}"
+                                         TextWrapping="NoWrap"
+                                         Padding="1 1 1 1"
+                                         Margin="0 0 3 0"/>
+                                <Button Grid.Column="2" Content=" - " Command="{Binding RemoveThisCommand}" 
+                                        Margin="0 0 3 0"
+                                        Padding="1" />
+                                <Button Grid.Column="3" Content=" + " Command="{Binding AddItemCommand, RelativeSource={RelativeSource AncestorType=Window}}"
+                                        Padding="1"/>
+                        </Grid>
+                </DataTemplate>
+                
+        </Window.Resources>
+        
+        <Panel>
+                <ExperimentalAcrylicBorder IsHitTestVisible="False">
+                        <ExperimentalAcrylicBorder.Material>
+                                <ExperimentalAcrylicMaterial 
+                                        BackgroundSource="Digger"
+                                        TintColor="White"
+                                        TintOpacity="0"
+                                        MaterialOpacity="0.6"
+                                />
+                        </ExperimentalAcrylicBorder.Material>
+                </ExperimentalAcrylicBorder>
+                
+                <Border BorderBrush="DarkGray" BorderThickness="1">
+                        <Grid RowDefinitions="Auto * Auto">
+                                <Border Grid.Row="0" BorderThickness="0 0 0 1" 
+                                        Padding="5"
+                                        BorderBrush="Black">
+                                        <TextBlock Text="{Binding TitleStr
+                                                   , RelativeSource={RelativeSource AncestorType=Window}}"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   FontWeight="Bold"/>
+                                </Border>
+                                
+                                <!-- Content Grid-->
+                                <Grid Grid.Row="1" Margin="0 10 0 0">
+                                        <ItemsControl Name="ItemsControl"
+                                                      Background="Transparent"
+                                                      HorizontalAlignment="Stretch"
+                                                      ItemsSource="{Binding StringItemViewModels}"
+                                                      ItemTemplate="{StaticResource StringItemTemplate}"
+                                                      />
+                                </Grid>
+                                
+                                <!-- Buttons -->
+                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center"
+                                            Spacing="3" Margin="10">
+                                        <Button Content="OK"/>
+                                        <Button Content="Cancel" Command="{Binding CloseThisCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                </StackPanel>
+                        </Grid>   
+                </Border>
+                
+                
+                
+                
+        </Panel>
+    
+</Window>

@@ -18,7 +18,7 @@ public class SystemFacade : AbstractEventDrivenObject{
     private void InitSystem() {
         this.ExceptionManager = Models.ExceptionManager.GetInstance();
         this.TcpShortServer = TcpShortServer.GetInstance();
-        this._responseItemManager = new ResponseItemManager();
+        this.ResponseItemManager = new ResponseItemManager();
         PublishResponseItemManager();
         this.SystemLogger = SystemLogger.GetInstance();
         PublishSystemLogger();
@@ -26,7 +26,7 @@ public class SystemFacade : AbstractEventDrivenObject{
         PublishCmdCommunicator();
         
         this.CommandLineCommunicator.RegisterObserver(this.SystemLogger);
-        this.TcpShortServer.RegisterObserver(this._responseItemManager);
+        this.TcpShortServer.RegisterObserver(this.ResponseItemManager);
         
 
     }
@@ -55,7 +55,7 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     private TcpShortServer TcpShortServer;
 
-    private ResponseItemManager _responseItemManager;
+    private ResponseItemManager ResponseItemManager;
 
     public void RegisterMainWindow(Window window) {
         this.MainWindow = window;
@@ -75,7 +75,7 @@ public class SystemFacade : AbstractEventDrivenObject{
     }
     
     public void PublishResponseItemManager() {
-        PublishEvent(nameof(PublishResponseItemManager), this._responseItemManager);
+        PublishEvent(nameof(PublishResponseItemManager), this.ResponseItemManager);
     }
 
     public void Log(string content, LogTypeEnum logType = LogTypeEnum.SYSTEM_NOTIFICATION) {
@@ -90,6 +90,10 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     public void ClearLogCommand() {
         this.SystemLogger.ClearAllLog();
+    }
+
+    public void ClearAllRespondsCommand() {
+        this.ResponseItemManager.RemoveAllItems();
     }
 
 }

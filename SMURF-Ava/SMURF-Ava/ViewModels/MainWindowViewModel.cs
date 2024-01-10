@@ -29,6 +29,8 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
         this.TcpReceivedItemViewModels = new ObservableCollection<ResponseItem_ViewModel>();
+        this.StudiesStringItemManagerViewModel = new StringItemManager_ViewModel();
+        this.SeriesStringItemManagerViewModel = new StringItemManager_ViewModel();
         
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
@@ -71,6 +73,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     public ObservableCollection<string> LanguageOptionList { get; private set; }
 
     public ObservableCollection<ResponseItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
+
+    public StringItemManager_ViewModel StudiesStringItemManagerViewModel { get; private set; }
+
+    public StringItemManager_ViewModel SeriesStringItemManagerViewModel { get; private set; }
 
 
     private string _userName;
@@ -262,14 +268,6 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.ShowTimeStamp = !ShowTimeStamp;
     }
 
-    public void LoginLaunchCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeRpcCommand("loginLaunch", _metaDataObject);
-    }
-
-    public void VerticalLoginCommand(object o = null) {
-        SystemFacade.GetInstance().InvokeRpcCommand("verticalLogin", _metaDataObject);
-    }
-
     public void SaveCommand(object o = null) {
         this.Saved = true;
         DataStorageManager_ViewModel dataStorageManagerViewModel = DataStorageManager_ViewModel.GetInstance();
@@ -291,6 +289,18 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         Process.Start(processStartInfo);
     }
 
+    public void ClearAllRespondsCommand() {
+        SystemFacade.GetInstance().ClearAllRespondsCommand();
+    }
+
+    public void ManageStudyCommand() {
+        this.PopupManagerViewModel.PupupStringManagerWindow(this.StudiesStringItemManagerViewModel, "Studies");
+    }
+
+    public void ManageSeriesCommand() {
+        this.PopupManagerViewModel.PupupStringManagerWindow(this.SeriesStringItemManagerViewModel, "Series");
+    }
+
     #endregion
 
 
@@ -310,6 +320,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         if (propertyName.Equals(nameof(SystemFacade.PublishResponseItemManager))) {
             ResponseItemManager responseItemManager = (ResponseItemManager)o;
             responseItemManager.RegisterObserver(this);
+            return;
         }
 
         if (propertyName.Equals(nameof(ResponseItemManager.AddItem))) {
@@ -317,6 +328,14 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             ResponseItem_ViewModel itemViewModel = new ResponseItem_ViewModel(responseItem, this.TcpReceivedItemViewModels.Count);
             this.TcpReceivedItemViewModels.Add(itemViewModel);
             this.SelectedResponse = itemViewModel;
+            return;
+        }
+
+        if (propertyName.Equals(nameof(ResponseItemManager.RemoveAllItems))) {
+            this.SelectedResponse = null;
+            this.TcpReceivedItemViewModels = new ObservableCollection<ResponseItem_ViewModel>();
+            RisePropertyChanged(nameof(TcpReceivedItemViewModels));
+            return;
         }
 
         if (propertyName.Equals(nameof(CommandItem_ViewModel.InvokeRpcCommand))) {

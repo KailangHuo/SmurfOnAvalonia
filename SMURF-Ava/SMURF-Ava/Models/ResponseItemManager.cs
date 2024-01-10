@@ -17,7 +17,9 @@ public class ResponseItemManager : AbstractEventDrivenObject{
     private HashSet<ResponseItem> ResponseItemSet;
 
     public void AddItem(ResponseItem responseItem) {
+        if(ResponseItemSet.Contains(responseItem)) return;
         this.ResponseItemList.Add(responseItem);
+        this.ResponseItemSet.Add(responseItem);
         PublishEvent(nameof(AddItem), responseItem);
     }
 
@@ -26,6 +28,13 @@ public class ResponseItemManager : AbstractEventDrivenObject{
             this.ResponseItemList.Remove(responseItem);
             this.ResponseItemSet.Remove(responseItem);
         }
+    }
+
+    public void RemoveAllItems() {
+        if (this.ResponseItemSet.Count == 0) return;
+        this.ResponseItemList = new List<ResponseItem>();
+        this.ResponseItemSet = new HashSet<ResponseItem>();
+        PublishEvent(nameof(RemoveAllItems), null);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

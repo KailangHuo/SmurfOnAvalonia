@@ -9,7 +9,9 @@
         <entry key="SMURF-Ava/Views/InPorgressBar_UserControl.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/InProgressWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/MainWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
+        <entry key="SMURF-Ava/Views/NotificationWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/PopupWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
+        <entry key="SMURF-Ava/Views/StringItemManagementWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
         <entry key="SMURF-Ava/Views/TestWindow.axaml" value="SMURF-Ava/SMURF-Ava.csproj" />
       </map>
     </option>

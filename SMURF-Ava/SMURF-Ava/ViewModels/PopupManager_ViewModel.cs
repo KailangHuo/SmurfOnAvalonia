@@ -100,10 +100,17 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     }
 
     private void PopupExceptionWindow(string content) {
-        PopupWindow window = new PopupWindow(content);
+        NotificationWindow window = new NotificationWindow(content);
         window.ShowDialog(this.DefaultMainWindow);
     }
-    
+
+    public void PupupStringManagerWindow(StringItemManager_ViewModel stringItemManagerViewModel, string titleName) {
+        StringItemManagementWindow window = new StringItemManagementWindow();
+        window.DataContext = stringItemManagerViewModel;
+        window.TitleStr = titleName;
+        window.ShowDialog(this.DefaultMainWindow);
+    }
+
     public override void UpdateByEvent(string propertyName, object o) {
         Dispatcher.UIThread.Invoke(() => {
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {

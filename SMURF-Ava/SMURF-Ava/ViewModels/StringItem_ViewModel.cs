@@ -18,6 +18,7 @@ public class StringItem_ViewModel : AbstractEventDrivenViewModel {
         set {
             if(_isMuted == value)return;
             _isMuted = value;
+            PublishEvent(nameof(IsMuted), this);
             RisePropertyChanged(nameof(IsMuted));
         }
     }

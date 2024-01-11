@@ -20,7 +20,11 @@ public class MetaDataObject {
 
     public string selectedStudy;
 
+    public string StudyStringItemManagerJson;
+
     public string selectedSeries;
+    
+    public string SeriesStringItemManagerJson;
 
     public string application;
 

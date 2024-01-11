@@ -27,24 +27,12 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         }
     }
 
-    private bool _canModifyContent;
-
-    public bool CanModifyContent {
-        get {
-            return _canModifyContent;
-        }
-        set {
-            if(_canModifyContent == value)return;
-            _canModifyContent = value;
-            RisePropertyChanged(nameof(CanModifyContent));
-        }
-    }
-
     public ObservableCollection<StringItem_ViewModel> StringItemViewModels { get; private set; }
 
     public void AddItem(StringItem_ViewModel stringItemViewModel) {
         this.StringItemViewModels.Add(stringItemViewModel);
         stringItemViewModel.RegisterObserver(this);
+        PublishSaveEvent();
     }
 
     public void RemoveItem(StringItem_ViewModel stringItemViewModel) {
@@ -52,6 +40,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         if(!this.StringItemViewModels.Contains(stringItemViewModel)) return;
         this.StringItemViewModels.Remove(stringItemViewModel);
         stringItemViewModel.DeregisterObserver(this);
+        PublishSaveEvent();
     }
 
     public void ReformContent() {
@@ -68,11 +57,8 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         RisePropertyChanged(nameof(ContentString));
     }
 
-    public void LoadContent(string str) {
-        
-    }
-
     private void LoadByContent() {
+        
         this.StringItemViewModels = new ObservableCollection<StringItem_ViewModel>();
         if (string.IsNullOrEmpty(_contentString)) {
             StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
@@ -87,6 +73,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
             stringItemViewModel.RegisterObserver(this);
             this.StringItemViewModels.Add(stringItemViewModel);
         }
+        
     }
 
     public void CopyCollection(StringItemManager_ViewModel stringItemManagerViewModel) {
@@ -102,12 +89,22 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         this.StringItemViewModels = collection;
         ReformContent();
         RisePropertyChanged(nameof(StringItemViewModels));
+        PublishSaveEvent();
+    }
+
+    public void PublishSaveEvent() {
+        PublishEvent(nameof(PublishSaveEvent), null);
     }
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(StringItem_ViewModel.RemoveThisCommand))) {
             StringItem_ViewModel stringItemViewModel = (StringItem_ViewModel)o;
             this.RemoveItem(stringItemViewModel);
+            return;
+        }
+
+        if (propertyName.Equals(nameof(StringItem_ViewModel.IsMuted))) {
+            PublishSaveEvent();
             return;
         }
     }

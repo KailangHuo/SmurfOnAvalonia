@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Net.Http.Json;
 using System.Windows.Input;
 using Avalonia;
 using Avalonia.Controls;
 using DynamicData;
 using EventDrivenElements;
+using Newtonsoft.Json;
 using SMURF_Ava.configuration;
 using SMURF_Ava.Models;
 using SMURF_Ava.Views;
@@ -29,8 +31,12 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.ApplicationList = new ObservableCollection<string>(SystemConfiguration.GetInstance().GetAppList());
         this.CommandItemContainerViewModel = new CommandItemContainer_ViewModel();
         this.TcpReceivedItemViewModels = new ObservableCollection<ResponseItem_ViewModel>();
+        
         this.StudiesStringItemManagerViewModel = new StringItemManager_ViewModel();
+        this.StudiesStringItemManagerViewModel.RegisterObserver(this);
+        
         this.SeriesStringItemManagerViewModel = new StringItemManager_ViewModel();
+        this.SeriesStringItemManagerViewModel.RegisterObserver(this);
         
         this.CommandItemContainerViewModel.RegisterObserver(this);
         
@@ -254,6 +260,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.DomainUrl = metaDataObject.serverDomain;
         this.SelectedLanguage = SystemConfiguration.GetInstance().GetLanguageNameByValue(metaDataObject.language);
         this.StudyUid = metaDataObject.selectedStudy;
+        this.StudiesStringItemManagerViewModel =
+            JsonConvert.DeserializeObject<StringItemManager_ViewModel>(metaDataObject.StudyStringItemManagerJson);
+        this.SeriesStringItemManagerViewModel =
+            JsonConvert.DeserializeObject<StringItemManager_ViewModel>(metaDataObject.SeriesStringItemManagerJson);
         this.SeriesUid = metaDataObject.selectedSeries;
         this.SelectedAppName = metaDataObject.application;
         this.ShowTimeStamp = Convert.ToBoolean(metaDataObject.showTimeStamp);
@@ -270,6 +280,8 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     public void SaveCommand(object o = null) {
         this.Saved = true;
+        this._metaDataObject.StudyStringItemManagerJson = JsonConvert.SerializeObject(this.StudiesStringItemManagerViewModel);
+        this._metaDataObject.SeriesStringItemManagerJson = JsonConvert.SerializeObject(this.SeriesStringItemManagerViewModel);
         DataStorageManager_ViewModel dataStorageManagerViewModel = DataStorageManager_ViewModel.GetInstance();
         dataStorageManagerViewModel.SaveToFile(this._metaDataObject);
     }
@@ -342,6 +354,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             string commandName = (string)o;
             SystemFacade.GetInstance().InvokeRpcCommand(commandName, _metaDataObject);
             return;
+        }
+
+        if (propertyName.Equals(nameof(StringItemManager_ViewModel.PublishSaveEvent))) {
+            this.Saved = false;
         }
     }
 }

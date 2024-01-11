@@ -11,19 +11,32 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
         stringItemViewModel.RegisterObserver(this);
         this.StringItemViewModels.Add(stringItemViewModel);
-        this.SelectedStringItem = stringItemViewModel;
     }
 
-    private StringItem_ViewModel _selectedStringItem;
+    private string _contentString;
 
-    public StringItem_ViewModel SelectedStringItem {
+    public string ContentString {
         get {
-            return _selectedStringItem;
+            return _contentString;
         }
         set {
-            if(_selectedStringItem == value)return;
-            _selectedStringItem = value;
-            RisePropertyChanged(nameof(SelectedStringItem));
+            if(_contentString == value)return;
+            _contentString = value;
+            LoadByContent();
+            RisePropertyChanged(nameof(ContentString));
+        }
+    }
+
+    private bool _canModifyContent;
+
+    public bool CanModifyContent {
+        get {
+            return _canModifyContent;
+        }
+        set {
+            if(_canModifyContent == value)return;
+            _canModifyContent = value;
+            RisePropertyChanged(nameof(CanModifyContent));
         }
     }
 
@@ -39,6 +52,56 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         if(!this.StringItemViewModels.Contains(stringItemViewModel)) return;
         this.StringItemViewModels.Remove(stringItemViewModel);
         stringItemViewModel.DeregisterObserver(this);
+    }
+
+    public void ReformContent() {
+        string s = "";
+        bool hasFirst = false;
+        for (int i = 0; i < this.StringItemViewModels.Count; i++) {
+            if(this.StringItemViewModels[i].IsMuted) continue;
+            if (hasFirst) s += ",";
+            s += this.StringItemViewModels[i].Content;
+            hasFirst = true;
+        }
+
+        this._contentString = s;
+        RisePropertyChanged(nameof(ContentString));
+    }
+
+    public void LoadContent(string str) {
+        
+    }
+
+    private void LoadByContent() {
+        this.StringItemViewModels = new ObservableCollection<StringItem_ViewModel>();
+        if (string.IsNullOrEmpty(_contentString)) {
+            StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
+            stringItemViewModel.RegisterObserver(this);
+            this.StringItemViewModels.Add(stringItemViewModel);
+            return;
+        }
+
+        string[] contentStrs = ContentString.Split(",");
+        for (int i = 0; i < contentStrs.Length; i++) {
+            StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel(contentStrs[i]);
+            stringItemViewModel.RegisterObserver(this);
+            this.StringItemViewModels.Add(stringItemViewModel);
+        }
+    }
+
+    public void CopyCollection(StringItemManager_ViewModel stringItemManagerViewModel) {
+        this.StringItemViewModels = new ObservableCollection<StringItem_ViewModel>();
+        for (int i = 0; i < stringItemManagerViewModel.StringItemViewModels.Count; i++) {
+            StringItem_ViewModel stringItemViewModel = stringItemManagerViewModel.StringItemViewModels[i].GetDeepCopy();
+            stringItemViewModel.RegisterObserver(this);
+            this.StringItemViewModels.Add(stringItemViewModel);
+        }
+    }
+
+    public void SetStringItemCollection(ObservableCollection<StringItem_ViewModel> collection) {
+        this.StringItemViewModels = collection;
+        ReformContent();
+        RisePropertyChanged(nameof(StringItemViewModels));
     }
 
     public override void UpdateByEvent(string propertyName, object o) {

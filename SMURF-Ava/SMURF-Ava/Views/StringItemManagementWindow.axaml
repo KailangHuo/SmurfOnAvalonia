@@ -22,7 +22,11 @@
                 <DataTemplate x:Key="StringItemTemplate">
                         <Grid ColumnDefinitions="Auto * Auto" Margin="5 0 0 10">
                                 <ToggleButton Grid.Column="0" Content="Mute" IsChecked="{Binding IsMuted}" 
-                                              Padding="1" Margin="0 0 3 0"/>
+                                              Padding="1" Margin="0 0 3 0"
+                                              IsEnabled="{Binding CollectionCount
+                                                    , RelativeSource={RelativeSource AncestorType=Window}
+                                                    , Converter={StaticResource NumberToBoolConverter}}"
+                                              />
                                 <TextBox Grid.Column="1" Text="{Binding Content, Mode=TwoWay}"
                                          Height="14" MinHeight="22"
                                          FontWeight="Normal"
@@ -41,7 +45,6 @@
                                         IsEnabled="{Binding CollectionCount
                                                     , RelativeSource={RelativeSource AncestorType=Window}
                                                     , Converter={StaticResource NumberToBoolConverter}}"
-                                        Opacity="{Binding $self.IsEnabled, Converter={StaticResource BoolValueConverter}}"
                                         Padding="1" />
                         </Grid>
                 </DataTemplate>
@@ -101,11 +104,12 @@
                                             Spacing="3" Margin="10">
                                         <Button Content="OK"
                                                 Foreground="White"
-                                                Background="#FF007FE3"/>
+                                                Background="#FF007FE3"
+                                                Command="{Binding ConfirmCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                         <Button Content="Cancel" 
                                                 Foreground="White"
                                                 Background="#FFFF4343"
-                                                Command="{Binding CloseThisCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
+                                                Command="{Binding CancelCommand, RelativeSource={RelativeSource AncestorType=Window}}"/>
                                 </StackPanel>
                         </Grid>   
                 </Border>

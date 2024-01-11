@@ -310,7 +310,7 @@
                                                          HorizontalContentAlignment="Center"
                                                          Padding="3 0 3 0" />
                                             </Grid>
-                                            <TextBox Text="{Binding StudiesStringItemManagerViewModel.SelectedStringItem.Content, Mode=TwoWay}"  
+                                            <TextBox Text="{Binding StudiesStringItemManagerViewModel.ContentString, Mode=TwoWay}"  
                                                      Watermark="确保Study来自对应的服务器"
                                                      MinHeight="22"
                                                      FontWeight="Normal"
@@ -339,7 +339,7 @@
                                                          HorizontalContentAlignment="Center"
                                                          Padding="3 0 3 0" />
                                             </Grid>
-                                            <TextBox Text="{Binding SeriesStringItemManagerViewModel.SelectedStringItem.Content, Mode=TwoWay}" Height="14" 
+                                            <TextBox Text="{Binding SeriesStringItemManagerViewModel.ContentString, Mode=TwoWay}" Height="14" 
                                                      Watermark="确保Study series来自对应的Study"
                                                      MinHeight="22"
                                                      FontWeight="Normal"

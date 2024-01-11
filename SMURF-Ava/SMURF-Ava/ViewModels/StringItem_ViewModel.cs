@@ -4,8 +4,8 @@ namespace SMURF_Ava.Models;
 
 public class StringItem_ViewModel : AbstractEventDrivenViewModel {
 
-    public StringItem_ViewModel() {
-        
+    public StringItem_ViewModel(string content = null) {
+        if (!string.IsNullOrEmpty(content)) Content = content;
     }
 
 
@@ -33,6 +33,13 @@ public class StringItem_ViewModel : AbstractEventDrivenViewModel {
             _content = value;
             RisePropertyChanged(nameof(Content));
         }
+    }
+
+    public StringItem_ViewModel GetDeepCopy() {
+        StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
+        stringItemViewModel.IsMuted = this.IsMuted;
+        stringItemViewModel.Content = this.Content;
+        return stringItemViewModel;
     }
 
     public void RemoveThisCommand() {

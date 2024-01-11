@@ -10,21 +10,16 @@ namespace SMURF_Ava.Views;
 
 public partial class StringItemManagementWindow : Window , INotifyPropertyChanged{
     
-    public StringItemManagementWindow(StringItemManager_ViewModel stringItemManagerViewModel) {
-        this.TitleStr = "Management Window";
-        this.TempStringItemCollection = new ObservableCollection<StringItem_ViewModel>();
-        this.DataContext = this;
-        Init();
+    public StringItemManagementWindow(StringItemManager_ViewModel stringItemManagerViewModel, string titleName) {
+        this.TitleStr = titleName;
+        this.originalStringItemManagerViewModel = stringItemManagerViewModel;
+        this.StringItemManagerViewModel = new StringItemManager_ViewModel();
+        this.StringItemManagerViewModel.CopyCollection(stringItemManagerViewModel);
+        this.DataContext =  this.StringItemManagerViewModel;
         InitializeComponent();
-        
     }
 
-    private void Init() {
-        StringItemManager_ViewModel stringItemManagerViewModel = (StringItemManager_ViewModel)DataContext;
-        for (int i = 0; i < stringItemManagerViewModel.StringItemViewModels.Count; i++) {
-            this.TempStringItemCollection.Add( stringItemManagerViewModel.StringItemViewModels[i]);
-        }
-    }
+    private StringItemManager_ViewModel originalStringItemManagerViewModel;
 
     private string _titleStr;
 
@@ -38,24 +33,28 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
             RisePropertyChanged(nameof(TitleStr));
         }
     }
-
-    public ObservableCollection<StringItem_ViewModel> TempStringItemCollection { get;private set; }
+    
+    public StringItemManager_ViewModel StringItemManagerViewModel { get; private set; }
 
     public int CollectionCount {
         get {
-            StringItemManager_ViewModel stringItemManagerViewModel = (StringItemManager_ViewModel)DataContext;
-            return stringItemManagerViewModel.StringItemViewModels.Count;
+            return this.StringItemManagerViewModel.StringItemViewModels.Count;
         }
     }
-    
 
-    public void CloseThisCommand() {
+    public void ConfirmCommand() {
+        this.StringItemManagerViewModel.ReformContent();
+        this.originalStringItemManagerViewModel.SetStringItemCollection(this.StringItemManagerViewModel.StringItemViewModels);
+        this.Close();
+    }
+
+    public void CancelCommand() {
         this.Close();
     }
 
     public void AddItemCommand() {
-        StringItemManager_ViewModel stringItemManagerViewModel = (StringItemManager_ViewModel)this.DataContext;
-        stringItemManagerViewModel.AddItem(new StringItem_ViewModel());
+        this.StringItemManagerViewModel.AddItem(new StringItem_ViewModel());
+        RisePropertyChanged(nameof(CollectionCount));
     }
     
     private void ItemsControl_OnPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
@@ -63,6 +62,8 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
             RisePropertyChanged(nameof(CollectionCount));
         }
     }
+
+    #region IPROPERTY_CHANGED
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -73,5 +74,6 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
         this.PropertyChanged((object) this, new PropertyChangedEventArgs(propertyName));
     }
 
+    #endregion
     
 }

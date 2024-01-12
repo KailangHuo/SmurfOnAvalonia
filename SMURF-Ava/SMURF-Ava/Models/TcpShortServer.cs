@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace SMURF_Ava.Models;
 
-public class TcpShortServer : AbstractEventDrivenViewModel{
+public class TcpShortServer : AbstractEventDrivenObject{
 
     private static TcpShortServer _TcpShortServer;
     private TcpShortServer() {
@@ -37,18 +37,6 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
 
     private TcpListener server;
 
-    private string _serverLog;
-
-    public string ServerLog {
-        get  {
-            return _serverLog;
-        }
-        set {
-            _serverLog = value;
-            RisePropertyChanged(nameof(ServerLog));
-        }
-    }
-
     #region COMMANDS
 
     public ICommand CleanLogCommand { get; set; }
@@ -58,7 +46,6 @@ public class TcpShortServer : AbstractEventDrivenViewModel{
     #region COMMAND_BINDING_METHODS
 
     public void CleanServerLog(object o = null) {
-        this.ServerLog = "";
         LogServerInfo("Listening on port: " + port);
     }
 

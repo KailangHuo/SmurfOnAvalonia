@@ -361,6 +361,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
         if (propertyName.Equals(nameof(StringItemManager_ViewModel.ContentString))) {
             StringItemManager_ViewModel managerViewModel = (StringItemManager_ViewModel)o;
+            this.Saved = false;
             if (managerViewModel == StudiesStringItemManagerViewModel) {
                 _metaDataObject.selectedStudy = managerViewModel.ContentString;
                 return;

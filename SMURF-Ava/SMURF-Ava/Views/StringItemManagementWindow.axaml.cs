@@ -43,6 +43,12 @@ public partial class StringItemManagementWindow : Window , INotifyPropertyChange
     }
 
     public void ConfirmCommand() {
+        for (int i = this.StringItemManagerViewModel.StringItemViewModels.Count - 1; i >= 0; i--) {
+            StringItem_ViewModel stringItem = this.StringItemManagerViewModel.StringItemViewModels[i];
+            if (string.IsNullOrEmpty(stringItem.Content)) {
+                this.StringItemManagerViewModel.RemoveItem(stringItem);
+            }
+        }
         this.StringItemManagerViewModel.ReformContent();
         this.originalStringItemManagerViewModel.SetStringItemCollection(this.StringItemManagerViewModel.StringItemViewModels);
         this.Close();

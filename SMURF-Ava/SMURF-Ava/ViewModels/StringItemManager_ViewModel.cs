@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using DynamicData;
 using EventDrivenElements;
+using Newtonsoft.Json;
 
 namespace SMURF_Ava.Models;
 
@@ -11,6 +12,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
         stringItemViewModel.RegisterObserver(this);
         this.StringItemViewModels.Add(stringItemViewModel);
+        UpdateCount();
     }
 
     private string _contentString;
@@ -21,9 +23,23 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         }
         set {
             if(_contentString == value)return;
-            _contentString = value;
+            _contentString = value; 
             LoadByContent();
+            PublishEvent(nameof(ContentString), this);
             RisePropertyChanged(nameof(ContentString));
+        }
+    }
+
+    private int _count;
+
+    public int Count {
+        get {
+            return _count;
+        }
+        set {
+            if(_count == value)return;
+            _count = value;
+            RisePropertyChanged(nameof(Count));
         }
     }
 
@@ -32,6 +48,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
     public void AddItem(StringItem_ViewModel stringItemViewModel) {
         this.StringItemViewModels.Add(stringItemViewModel);
         stringItemViewModel.RegisterObserver(this);
+        UpdateCount();
         PublishSaveEvent();
     }
 
@@ -40,6 +57,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         if(!this.StringItemViewModels.Contains(stringItemViewModel)) return;
         this.StringItemViewModels.Remove(stringItemViewModel);
         stringItemViewModel.DeregisterObserver(this);
+        UpdateCount();
         PublishSaveEvent();
     }
 
@@ -54,7 +72,12 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
         }
 
         this._contentString = s;
+        PublishEvent(nameof(ContentString), this);
         RisePropertyChanged(nameof(ContentString));
+    }
+
+    private void UpdateCount() {
+        this.Count = this.StringItemViewModels.Count;
     }
 
     private void LoadByContent() {
@@ -64,6 +87,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
             StringItem_ViewModel stringItemViewModel = new StringItem_ViewModel();
             stringItemViewModel.RegisterObserver(this);
             this.StringItemViewModels.Add(stringItemViewModel);
+            UpdateCount();
             return;
         }
 
@@ -73,6 +97,7 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
             stringItemViewModel.RegisterObserver(this);
             this.StringItemViewModels.Add(stringItemViewModel);
         }
+        UpdateCount();
         
     }
 
@@ -83,13 +108,23 @@ public class StringItemManager_ViewModel : AbstractEventDrivenViewModel{
             stringItemViewModel.RegisterObserver(this);
             this.StringItemViewModels.Add(stringItemViewModel);
         }
+        UpdateCount();
     }
 
     public void SetStringItemCollection(ObservableCollection<StringItem_ViewModel> collection) {
         this.StringItemViewModels = collection;
         ReformContent();
+        UpdateCount();
         RisePropertyChanged(nameof(StringItemViewModels));
         PublishSaveEvent();
+    }
+
+    public void LoadStringItemCollectionFromJson(string jsonStr) {
+        ObservableCollection<StringItem_ViewModel> stringItemViewModels = 
+            JsonConvert.DeserializeObject<ObservableCollection<StringItem_ViewModel>>(jsonStr);
+        this.StringItemViewModels = stringItemViewModels;
+        ReformContent();
+        UpdateCount();
     }
 
     public void PublishSaveEvent() {

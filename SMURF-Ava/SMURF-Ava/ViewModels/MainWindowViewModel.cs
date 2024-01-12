@@ -175,7 +175,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
-    private string _studyUid;
+    /*private string _studyUid;
 
     public string StudyUid {
         get {
@@ -204,7 +204,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             this.Saved = false;
             RisePropertyChanged(nameof(SeriesUid));
         }
-    }
+    }*/
 
     private bool _showTimeStamp;
 
@@ -259,12 +259,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.Password = metaDataObject.password;
         this.DomainUrl = metaDataObject.serverDomain;
         this.SelectedLanguage = SystemConfiguration.GetInstance().GetLanguageNameByValue(metaDataObject.language);
-        this.StudyUid = metaDataObject.selectedStudy;
-        this.StudiesStringItemManagerViewModel =
-            JsonConvert.DeserializeObject<StringItemManager_ViewModel>(metaDataObject.StudyStringItemManagerJson);
-        this.SeriesStringItemManagerViewModel =
-            JsonConvert.DeserializeObject<StringItemManager_ViewModel>(metaDataObject.SeriesStringItemManagerJson);
-        this.SeriesUid = metaDataObject.selectedSeries;
+        //this.StudyUid = metaDataObject.selectedStudy;
+        this.StudiesStringItemManagerViewModel.LoadStringItemCollectionFromJson(metaDataObject.StudyStringItemsJson);
+        this.SeriesStringItemManagerViewModel.LoadStringItemCollectionFromJson(metaDataObject.SeriesStringItemsJson); 
+        //this.SeriesUid = metaDataObject.selectedSeries;
         this.SelectedAppName = metaDataObject.application;
         this.ShowTimeStamp = Convert.ToBoolean(metaDataObject.showTimeStamp);
         this.Saved = true;
@@ -280,8 +278,8 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
     public void SaveCommand(object o = null) {
         this.Saved = true;
-        this._metaDataObject.StudyStringItemManagerJson = JsonConvert.SerializeObject(this.StudiesStringItemManagerViewModel);
-        this._metaDataObject.SeriesStringItemManagerJson = JsonConvert.SerializeObject(this.SeriesStringItemManagerViewModel);
+        this._metaDataObject.StudyStringItemsJson = JsonConvert.SerializeObject(this.StudiesStringItemManagerViewModel.StringItemViewModels);
+        this._metaDataObject.SeriesStringItemsJson = JsonConvert.SerializeObject(this.SeriesStringItemManagerViewModel.StringItemViewModels);
         DataStorageManager_ViewModel dataStorageManagerViewModel = DataStorageManager_ViewModel.GetInstance();
         dataStorageManagerViewModel.SaveToFile(this._metaDataObject);
     }
@@ -358,6 +356,20 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
         if (propertyName.Equals(nameof(StringItemManager_ViewModel.PublishSaveEvent))) {
             this.Saved = false;
+            return;
+        }
+
+        if (propertyName.Equals(nameof(StringItemManager_ViewModel.ContentString))) {
+            StringItemManager_ViewModel managerViewModel = (StringItemManager_ViewModel)o;
+            if (managerViewModel == StudiesStringItemManagerViewModel) {
+                _metaDataObject.selectedStudy = managerViewModel.ContentString;
+                return;
+            }
+
+            if (managerViewModel == SeriesStringItemManagerViewModel) {
+                _metaDataObject.selectedSeries = managerViewModel.ContentString;
+                return;
+            }
         }
     }
 }

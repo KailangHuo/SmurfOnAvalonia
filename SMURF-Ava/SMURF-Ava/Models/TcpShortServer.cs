@@ -101,7 +101,13 @@ public class TcpShortServer : AbstractEventDrivenObject{
     }
 
     public void ResponseReceived(TcpReceivedItem tcpReceivedItem) {
-        PublishEvent(nameof(ResponseReceived), tcpReceivedItem);
+        try {
+            PublishEvent(nameof(ResponseReceived), tcpReceivedItem);
+        }
+        catch (Exception e) {
+            ExceptionManager.GetInstance().ThrowException("[TcpServer.ResponseReceived]: " + e.Message);
+        }
+        
     }
 
 }

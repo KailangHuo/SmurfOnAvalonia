@@ -31,7 +31,6 @@
         <DataTemplate x:Key="CommandTabTemplate">
             <Border ClipToBounds="True">
                 <Grid Grid.ColumnDefinitions="Auto * Auto"
-                      Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}"
                       PointerEntered="CommandPanel_OnPointerEntered"
                       PointerExited="CommandPanel_OnPointerExited"
                       Height="60" >
@@ -93,7 +92,7 @@
         
         <!-- TcpReceivedItem Template -->
         <DataTemplate x:Key="TcpReceivedDataTemplate">
-            <Grid ColumnDefinitions="* *" Background="{Binding IndexNumber, Converter={StaticResource IntToBackgroundConverter}}" >
+            <Grid ColumnDefinitions="* *" >
                 
                 <TextBlock Text="{Binding TimeStamp}" Margin="3 0 0 0"/>
                 
@@ -434,8 +433,16 @@
                                 <Style Selector="ListBoxItem">
                                     <Setter Property="Padding" Value="0"/>
                                     <Setter Property="Height" Value="60"/>
-                                    <Setter Property="Background" Value="Transparent"/>
                                 </Style>
+                                
+                                <Style Selector="ListBoxItem:nth-child(odd) Grid">
+                                    <Setter Property="Background" Value="#65A8A8A8"/>
+                                </Style>
+                                
+                                <Style Selector="ListBoxItem:nth-child(even) Grid">
+                                    <Setter Property="Background" Value="#76292929"/>
+                                </Style>
+                                
                             </ListBox.Styles>
                         </ListBox>
                     </Border>
@@ -566,8 +573,16 @@
                                                 <Setter Property="Padding" Value="0"/>
                                                 <Setter Property="BorderBrush" Value="DarkGray"/>
                                                 <Setter Property="BorderThickness" Value="0 0 0 1"/>
-                                                <Setter Property="Background" Value="Transparent"/>
                                             </Style>
+                                            
+                                            <Style Selector="ListBoxItem:nth-child(odd) Grid">
+                                                <Setter Property="Background" Value="#65A8A8A8"/>
+                                            </Style>
+                                
+                                            <Style Selector="ListBoxItem:nth-child(even) Grid">
+                                                <Setter Property="Background" Value="#76292929"/>
+                                            </Style>
+                                            
                                         </ListBox.Styles>
                                     </ListBox>
                                 </Border>

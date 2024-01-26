@@ -71,6 +71,18 @@
               "target": "Package",
               "version": "[1.1.1, )"
             },
+            "FluentNHibernate": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "MySql.Data": {
+              "target": "Package",
+              "version": "[8.3.0, )"
+            },
+            "NHibernate": {
+              "target": "Package",
+              "version": "[5.5.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"

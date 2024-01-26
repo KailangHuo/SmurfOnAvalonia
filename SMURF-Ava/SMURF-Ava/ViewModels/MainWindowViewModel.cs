@@ -307,6 +307,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.PopupManagerViewModel.PupupStringManagerWindow(this.StudiesStringItemManagerViewModel, "Studies");
     }
 
+    public void OpenDatabaseCommand() {
+        
+    }
+
     public void ManageSeriesCommand() {
         this.PopupManagerViewModel.PupupStringManagerWindow(this.SeriesStringItemManagerViewModel, "Series");
     }

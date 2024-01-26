@@ -208,7 +208,7 @@
                     </Grid>
                     
                     <!-- Parameter Grid -->
-                    <Grid Grid.Row="2" Grid.RowDefinitions="Auto Auto Auto">
+                    <Grid Grid.Row="2" Grid.RowDefinitions="Auto Auto *">
                         
                          <!-- Title -->
                         <TextBlock Grid.Row="0" Height="25" 
@@ -300,12 +300,17 @@
                                           >
                                         <StackPanel Grid.Row="0" Spacing="3" Orientation="Vertical" VerticalAlignment="Top">
                                             <!-- Study Title Grid-->
-                                            <Grid ColumnDefinitions="Auto *">
+                                            <Grid ColumnDefinitions="Auto Auto *">
                                                 
                                                 <TextBlock Grid.Column="0" Text="Study Uid: "  VerticalAlignment="Bottom"/> 
                                                 
                                                 <Button  Grid.Column="1" Content="Add More" 
                                                          Command="{Binding ManageStudyCommand}"
+                                                         HorizontalContentAlignment="Center"
+                                                         Padding="3 0 3 0" />
+                                                
+                                                <Button  Grid.Column="2" Content="Open Database" 
+                                                         Command="{Binding OpenDatabaseCommand}"
                                                          HorizontalAlignment="Left"
                                                          HorizontalContentAlignment="Center"
                                                          Padding="3 0 3 0" />
@@ -379,6 +384,7 @@
                                                       SelectedItem="{Binding SelectedAppName, Mode=TwoWay}"
                                             />
                                         </Grid>
+                                        
                                     </Grid>
                                 </Grid>
                                 
@@ -388,9 +394,12 @@
                         </Grid>
                     
                         <!-- Buttons -->
-                        <Grid Grid.Row="2" VerticalAlignment="Top" Margin="0,10,0,0">
+                        <Grid Grid.Row="2"  Margin="0,0,0,5">
                             <StackPanel 
-                                Orientation="Horizontal" HorizontalAlignment="Center" Spacing="3">
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                VerticalAlignment="Bottom"
+                                Spacing="3">
                                 <Button Content="save" Command="{Binding SaveCommand}"
                                         Name="SaveButton"
                                         Width="75"

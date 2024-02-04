@@ -21,7 +21,8 @@ public class DatabaseConnector : AbstractEventDrivenObject {
         ISessionFactory sessionFactory = Fluently.Configure()
             .Database(MySQLConfiguration.Standard.ConnectionString(c => c
                 .Server("10.6.128.17")
-                .Database("studytable")
+                .Port(33306)
+                .Database("fenix_dicom")
                 .Username("root")
                 .Password("KqCUydwe7M#f")))
             .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Program>())

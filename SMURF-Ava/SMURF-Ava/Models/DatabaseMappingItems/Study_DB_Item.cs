@@ -5,6 +5,8 @@ namespace SMURF_Ava.Models.DatabaseMappingItems;
 
 public class Study_DB_Item {
 
+    public virtual string DataId { get; set; }
+
     public virtual string PatientID { get; set; }
 
     public virtual string StudyInstanceUID { get; set; }

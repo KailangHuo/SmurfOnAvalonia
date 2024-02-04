@@ -1,4 +1,8 @@
-﻿using EventDrivenElements;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Avalonia.Media;
+using EventDrivenElements;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
@@ -14,8 +18,16 @@ public class DatabaseConnector : AbstractEventDrivenObject {
     private static DatabaseConnector _instance;
 
     private DatabaseConnector() {
-        ConnectionString = "Server=10.6.128.17;Database=studytable;User Id=root;Password=KqCUydwe7M#f";
-        InitSessionFactory();
+        ISessionFactory sessionFactory = Fluently.Configure()
+            .Database(MySQLConfiguration.Standard.ConnectionString(c => c
+                .Server("10.6.128.17")
+                .Database("studytable")
+                .Username("root")
+                .Password("KqCUydwe7M#f")))
+            .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Program>())
+            .BuildSessionFactory();
+
+        this.SessionFactory = sessionFactory;
     }
 
     public static DatabaseConnector GetInstance() {
@@ -34,23 +46,23 @@ public class DatabaseConnector : AbstractEventDrivenObject {
 
     private ISessionFactory SessionFactory;
 
-    private void InitSessionFactory() {
-        if(SessionFactory != null)return;
-        SessionFactory = Fluently.Configure()
-            .Database(MySQLConfiguration.Standard.ConnectionString(ConnectionString))
-            .Mappings(m => m.FluentMappings.AddFromAssemblyOf<App>())
-            .BuildSessionFactory();
-    }
-
-    public Study_DB_Item GetStudyByUid(string uid) {
-        Study_DB_Item 
+    public List<Study_DB_Item> GetRandomStudy(int nums) {
         using (ISession session = this.SessionFactory.OpenSession()) {
-            string studyInstanceUID = uid;
-            var cretaria = session.CreateCriteria<Study_Mapper>()
-                .Add(Restrictions.Eq("StudyInstanceUID", studyInstanceUID));
-            var studyItems = cretaria.List<Study_Mapper>();
+            using (ITransaction transaction = session.BeginTransaction()) {
+                try {
+                    return session.Query<Study_DB_Item>()
+                        .Take(nums)
+                        .ToList();
+                }
+                catch (Exception e) {
+                    ExceptionManager.GetInstance().ThrowException("GetRandomStudy failed! => " + e.ToString());
+                }
+            }
+
         }
-        
+
+        return null;
+
     }
 
 }

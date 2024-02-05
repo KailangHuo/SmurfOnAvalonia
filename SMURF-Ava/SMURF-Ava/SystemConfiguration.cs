@@ -45,7 +45,7 @@ public class SystemConfiguration {
     
 
     private void Init() {
-        ConfigurationFilePath = System.Environment.CurrentDirectory + @"/Configuration/Configuration.xml";
+        ConfigurationFilePath = System.Environment.CurrentDirectory + @"/../AppConfig/Configuration.xml";
         _document = new XmlDocument();
         _document.Load(ConfigurationFilePath);
         InitApplicationList();

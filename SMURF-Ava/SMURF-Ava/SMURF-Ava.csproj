@@ -8,13 +8,19 @@
         <AvaloniaUseCompiledBindingsByDefault>false</AvaloniaUseCompiledBindingsByDefault>
         <ApplicationIcon>Assets\avalonia-logo.ico</ApplicationIcon>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-        <AppendTargetFrameWorkToOutPutPath>false</AppendTargetFrameWorkToOutPutPath>
-      <OutputPath>D:\System\DeskTop\SmurfOnAva</OutputPath>
+    
+    <PropertyGroup>
+        <EnableDynamicLoading>true</EnableDynamicLoading>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <OutputPath>..\SmurfPublished\SMURF_Ava\bin</OutputPath>
     </PropertyGroup>
 
     <ItemGroup>
         <AvaloniaResource Include="Assets\**"/>
+        <Content Include=".\Configuration\Configuration.xml">
+            <Link>..\AppConfig\Configuration.xml</Link>
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
     </ItemGroup>
 
 

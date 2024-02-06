@@ -7,3 +7,14 @@
 *.cache
 *.info
 *.editorconfig
+SMURF-Ava/SMURF-Ava/obj/SMURF-Ava.csproj.nuget.g.targets
+SMURF-Ava/SMURF-Ava/obj/SMURF-Ava.csproj.nuget.g.props
+SMURF-Ava/SMURF-Ava/obj/SMURF-Ava.csproj.nuget.dgspec.json
+SMURF-Ava/SMURF-Ava/obj/rider.project.restore.info
+SMURF-Ava/SMURF-Ava/obj/rider.project.model.nuget.info
+SMURF-Ava/SMURF-Ava/obj/project.packagespec.json
+SMURF-Ava/SMURF-Ava/obj/project.nuget.cache
+SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.GeneratedMSBuildEditorConfig.editorconfig
+SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.csproj.AssemblyReference.cache
+SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.assets.cache
+SMURF-Ava/SMURF-Ava/obj/Debug/Avalonia/Resources.Inputs.cache

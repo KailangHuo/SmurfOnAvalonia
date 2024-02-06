@@ -4,3 +4,6 @@
 *.so
 *.dylib
 *.cache
+*.cache
+*.info
+*.editorconfig

@@ -6,19 +6,19 @@ using SMURF_Ava.ViewModels;
 
 namespace SMURF_Ava.Models;
 
-public class UihCommandFactory {
+public class UuuCommandFactory {
     
-    private static UihCommandFactory _instance;
+    private static UuuCommandFactory _instance;
 
-    private UihCommandFactory() {
+    private UuuCommandFactory() {
         
     }
 
-    public static UihCommandFactory GetInstance() {
+    public static UuuCommandFactory GetInstance() {
         if (_instance == null) {
-            lock (typeof(UihCommandFactory)) {
+            lock (typeof(UuuCommandFactory)) {
                 if (_instance == null) {
-                    _instance = new UihCommandFactory();
+                    _instance = new UuuCommandFactory();
                 }
             }
         }
@@ -26,23 +26,23 @@ public class UihCommandFactory {
         return _instance;
     }
 
-    public UIH_Command CreateUihCommand(string commandName, MetaDataObject metaDataObject, UihCommandEnum commandEnum) {
-        UIH_Command uihCommand = null;
-        if (commandEnum == UihCommandEnum.COMMAND_LINE) {
-            uihCommand = new UIH_Command();
-            uihCommand.ClientPath = metaDataObject.clientPath;
-            uihCommand.CommandName = commandName;
-            uihCommand.UihCommandEnum = commandEnum;
-            uihCommand.CommandBody = commandName;
+    public Uuu_Command CreateUCommand(string commandName, MetaDataObject metaDataObject, UuuCommandEnum commandEnum) {
+        Uuu_Command uuuCommand = null;
+        if (commandEnum == UuuCommandEnum.COMMAND_LINE) {
+            uuuCommand = new Uuu_Command();
+            uuuCommand.ClientPath = metaDataObject.clientPath;
+            uuuCommand.CommandName = commandName;
+            uuuCommand.UuuCommandEnum = commandEnum;
+            uuuCommand.CommandBody = commandName;
             
-            List<string> cmdParamsNames = SystemConfiguration.GetInstance().GetCommandParamsByName(uihCommand.CommandName);
+            List<string> cmdParamsNames = SystemConfiguration.GetInstance().GetCommandParamsByName(uuuCommand.CommandName);
             HashSet<string> cmdParamsNameSet = new HashSet<string>(cmdParamsNames);
             FieldInfo[] fields = metaDataObject.GetType().GetFields();
             foreach (FieldInfo fieldInfo in fields) {
                 if (cmdParamsNameSet.Contains(fieldInfo.Name)) {
                     string fieldValue = (string)fieldInfo.GetValue(metaDataObject);
                     if(string.IsNullOrEmpty(fieldValue))continue;
-                    uihCommand.CommandBody += " --"
+                    uuuCommand.CommandBody += " --"
                                           + fieldInfo.Name
                                           + "="
                                           + fieldValue;
@@ -50,6 +50,6 @@ public class UihCommandFactory {
             }
         }
 
-        return uihCommand;
+        return uuuCommand;
     }
 }

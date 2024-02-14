@@ -83,9 +83,9 @@ public class SystemFacade : AbstractEventDrivenObject{
     }
 
     public void InvokeRpcCommand(string cmdName, MetaDataObject metaDataObject) {
-        UIH_Command uihCommand = UihCommandFactory.GetInstance()
-            .CreateUihCommand(cmdName, metaDataObject, UihCommandEnum.COMMAND_LINE);
-        this.CommandLineCommunicator.SendCommand(uihCommand);
+        Uuu_Command uuuCommand = UuuCommandFactory.GetInstance()
+            .CreateUCommand(cmdName, metaDataObject, UuuCommandEnum.COMMAND_LINE);
+        this.CommandLineCommunicator.SendCommand(uuuCommand);
     }
 
     public void ClearLogCommand() {

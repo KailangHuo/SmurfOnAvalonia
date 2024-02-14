@@ -15,7 +15,7 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
 
     public PopupManager_ViewModel() {
         this.DefaultMainWindow = SystemFacade.GetInstance().MainWindow;
-        this.RunningCommandStack = new List<UIH_Command>();
+        this.RunningCommandStack = new List<Uuu_Command>();
         this._locker = new object();
         IsBusy = false;
         Notification = "";
@@ -58,9 +58,9 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
         if(RunningCommandStack.Count == 0)return;
         lock (_locker) {
             if(RunningCommandStack.Count == 0)return;
-            UIH_Command uihCommand = RunningCommandStack[0];
-            uihCommand.Cancel();
-            RemoveRunningCommand(uihCommand);
+            Uuu_Command uuuCommand = RunningCommandStack[0];
+            uuuCommand.Cancel();
+            RemoveRunningCommand(uuuCommand);
         }
     }
 
@@ -71,19 +71,19 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     
     private Window DefaultMainWindow;
 
-    private List<UIH_Command> RunningCommandStack;
+    private List<Uuu_Command> RunningCommandStack;
 
-    private void PushRunningCommand(UIH_Command uihCommand) {
+    private void PushRunningCommand(Uuu_Command uuuCommand) {
         lock (_locker) {
-            RunningCommandStack.Insert(0, uihCommand);
+            RunningCommandStack.Insert(0, uuuCommand);
             UpdateTopCommand();
         }
     }
 
-    private void RemoveRunningCommand(UIH_Command uihCommand) {
+    private void RemoveRunningCommand(Uuu_Command uuuCommand) {
         lock (_locker) {
-            if(!this.RunningCommandStack.Contains(uihCommand)) return;
-            this.RunningCommandStack.Remove(uihCommand);
+            if(!this.RunningCommandStack.Contains(uuuCommand)) return;
+            this.RunningCommandStack.Remove(uuuCommand);
             UpdateTopCommand();
         }
     }
@@ -94,9 +94,9 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
             Notification = "";
             return;
         }
-        UIH_Command uihCommand = RunningCommandStack[0];
+        Uuu_Command uuuCommand = RunningCommandStack[0];
         IsBusy = true;
-        Notification = uihCommand.CommandName + " is processing...";
+        Notification = uuuCommand.CommandName + " is processing...";
     }
 
     private void PopupExceptionWindow(string content) {
@@ -112,13 +112,13 @@ public class PopupManager_ViewModel : AbstractEventDrivenViewModel{
     public override void UpdateByEvent(string propertyName, object o) {
         Dispatcher.UIThread.Invoke(() => {
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {
-                UIH_Command command = (UIH_Command)o;
+                Uuu_Command command = (Uuu_Command)o;
                 PushRunningCommand(command);
                 return;
             }
 
             if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandFinished))) {
-                UIH_Command command = (UIH_Command)o;
+                Uuu_Command command = (Uuu_Command)o;
                 RemoveRunningCommand(command);
                 return;
             }

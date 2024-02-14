@@ -12,7 +12,7 @@ public class ExceptionManager : AbstractEventDrivenObject {
 
     public static ExceptionManager GetInstance() {
         if (_instance == null) {
-            lock (typeof(UihCommandFactory)) {
+            lock (typeof(UuuCommandFactory)) {
                 if (_instance == null) {
                     _instance = new ExceptionManager();
                 }

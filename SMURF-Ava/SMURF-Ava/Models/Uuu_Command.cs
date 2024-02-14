@@ -3,9 +3,9 @@ using System.Threading;
 
 namespace SMURF_Ava.Models;
 
-public class UIH_Command {
+public class Uuu_Command {
 
-    public UihCommandEnum UihCommandEnum;
+    public UuuCommandEnum UuuCommandEnum;
 
     public string ClientPath;
 
@@ -34,7 +34,7 @@ public class UIH_Command {
 
 }
 
-public enum UihCommandEnum {
+public enum UuuCommandEnum {
     COMMAND_LINE,
     WEBSOCKET,
     RESTFUL

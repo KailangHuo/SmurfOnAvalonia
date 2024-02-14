@@ -49,9 +49,9 @@ public class SystemLogger : AbstractEventDrivenObject {
 
     public override void UpdateByEvent(string propertyName, object o) {
         if (propertyName.Equals(nameof(CommandLineCommunicator.PublishCommandStart))) {
-            UIH_Command uihCommand = (UIH_Command)o;
-            string logContent = uihCommand.CommandBody;
-            string copyContent = uihCommand.CommandHeader + " " + uihCommand.CommandBody;
+            Uuu_Command uuuCommand = (Uuu_Command)o;
+            string logContent = uuuCommand.CommandBody;
+            string copyContent = uuuCommand.CommandHeader + " " + uuuCommand.CommandBody;
             UpdateLog(logContent, LogTypeEnum.COMMAND_OPERATION, copyContent);
             return;
         }

@@ -18,46 +18,46 @@ public class CommandLineCommunicator : AbstractEventDrivenObject {
 
     private readonly string INTEGRATION_EXECUTABLE;
 
-    public async void SendCommand(UIH_Command uihCommand) {
-        uihCommand.CommandHeader = this.INTEGRATION_EXECUTABLE;
-        PublishCommandStart(uihCommand);
+    public async void SendCommand(Uuu_Command uuuCommand) {
+        uuuCommand.CommandHeader = this.INTEGRATION_EXECUTABLE;
+        PublishCommandStart(uuuCommand);
         string respond = "";
         Process process = null;
         try {
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = uihCommand.ClientPath + @"\" +this.INTEGRATION_EXECUTABLE;
-            processStartInfo.Arguments = uihCommand.CommandBody;
+            processStartInfo.FileName = uuuCommand.ClientPath + @"\" +this.INTEGRATION_EXECUTABLE;
+            processStartInfo.Arguments = uuuCommand.CommandBody;
             processStartInfo.CreateNoWindow = true;
             CancellationTokenSource cancellationTokenSource = new CancellationTokenSource();
-            uihCommand.CancellationTokenSource = cancellationTokenSource;
+            uuuCommand.CancellationTokenSource = cancellationTokenSource;
             process = Process.Start(processStartInfo);
             await process.WaitForExitAsync(cancellationTokenSource.Token);
             int exitCode = process.ExitCode;
             string codeInterpretation = SystemConfiguration.GetInstance().GetCmdlineResultByCodeStr(exitCode + "");
-            respond = uihCommand.CommandName + " respond! >> " + exitCode + " : " + codeInterpretation;
+            respond = uuuCommand.CommandName + " respond! >> " + exitCode + " : " + codeInterpretation;
             PublishRespondReceived(respond);
-            PublishCommandFinished(uihCommand);
+            PublishCommandFinished(uuuCommand);
         }
         catch (Exception e) {
             if (e is OperationCanceledException) {
-                respond = uihCommand.CommandName + " Cancelled! >> " + "用户取消了监听命令回执";
+                respond = uuuCommand.CommandName + " Cancelled! >> " + "用户取消了监听命令回执";
             }else {
-                respond = uihCommand.CommandName + " Failed!";
+                respond = uuuCommand.CommandName + " Failed!";
                 ExceptionManager.GetInstance().ThrowException(e.ToString());
             }
 
             process?.Kill();
             PublishRespondReceived(respond);
-            PublishCommandFinished(uihCommand); 
+            PublishCommandFinished(uuuCommand); 
         }
     }
 
-    public void PublishCommandStart(UIH_Command uihCommand) {
-        PublishEvent(nameof(PublishCommandStart), uihCommand);
+    public void PublishCommandStart(Uuu_Command uuuCommand) {
+        PublishEvent(nameof(PublishCommandStart), uuuCommand);
     }
 
-    public void PublishCommandFinished(UIH_Command uihCommand) {
-        PublishEvent(nameof(PublishCommandFinished), uihCommand);
+    public void PublishCommandFinished(Uuu_Command uuuCommand) {
+        PublishEvent(nameof(PublishCommandFinished), uuuCommand);
     }
 
     public void PublishRespondReceived(string responds) {

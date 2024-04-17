@@ -8690,25 +8690,26 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\huoka\\.nuget\\packages\\": {}
+    "E:\\NUGET\\packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SYSTEM\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
+      "projectUniqueName": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
       "projectName": "SMURF-Ava",
-      "projectPath": "D:\\SYSTEM\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
-      "packagesPath": "C:\\Users\\huoka\\.nuget\\packages\\",
-      "outputPath": "D:\\SYSTEM\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\obj\\",
+      "projectPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\SMURF-Ava.csproj",
+      "packagesPath": "E:\\NUGET\\packages",
+      "outputPath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF-Ava\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\huoka\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kailang.huo\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "https://api.nuget.org/v3/index.json": {}
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nexus.uihcloud.cn/repository/nuget-hswgroup-dev": {}
       },
       "frameworks": {
         "net6.0": {
@@ -8786,12 +8787,30 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.win-x64",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[6.0.27, 6.0.27]"
+          }
+        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.405\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   }

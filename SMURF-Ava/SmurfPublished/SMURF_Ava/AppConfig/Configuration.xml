@@ -19,6 +19,7 @@
         <Command CommandName="closeTab" CommandParameterNames="selectedStudy" />
         <Command CommandName="exit" CommandParameterNames="" />
         <Command CommandName="logout" CommandParameterNames="" />
+        <Command CommandName="test" CommandParameterNames="aeNodeName,authType,restfulUrl,token" />
 
     </CmdlineCommands>
     

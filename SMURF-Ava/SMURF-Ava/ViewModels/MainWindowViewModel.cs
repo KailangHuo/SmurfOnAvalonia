@@ -44,6 +44,8 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
 
         InitLanguageList();
 
+        InitAuthTypeList();
+
         MetaDataObject metaDataObject = DataStorageManager_ViewModel.GetInstance().ReadFromFile();
         if (metaDataObject != null) LoadMetaData(metaDataObject);
     }
@@ -56,6 +58,12 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
 
         this.SelectedLanguage = this.LanguageOptionList[0];
+    }
+
+    private void InitAuthTypeList()
+    {
+        this.AuthTypeList = new ObservableCollection<string>() { "PACS", "Windows"};
+        this.SelectedAuthType = this.AuthTypeList[0];
     }
 
     #endregion
@@ -77,6 +85,8 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
     public CommandItemContainer_ViewModel CommandItemContainerViewModel { get; private set; }
 
     public ObservableCollection<string> LanguageOptionList { get; private set; }
+
+    public ObservableCollection<string> AuthTypeList { get; private set; }
 
     public ObservableCollection<ResponseItem_ViewModel> TcpReceivedItemViewModels { get; private set; }
 
@@ -114,7 +124,62 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             RisePropertyChanged(nameof(Password));
         }
     }
-    
+
+    private string _aeNodeName;
+
+    public string AENodeName
+    {
+        get
+        {
+            return _aeNodeName;
+        }
+        set
+        {
+            if(_aeNodeName == value)return;
+            _aeNodeName = value;
+            this._metaDataObject.aeNodeName = value;
+            this.Saved = false;
+            RisePropertyChanged(nameof(AENodeName));
+        }
+    }
+
+    private string _token;
+
+    public string Token
+    {
+        get
+        {
+            return _token;
+        }
+        set
+        {
+            if(_token == value)return;
+            _token = value;
+            this._metaDataObject.token = value;
+            this.Saved = false;
+            RisePropertyChanged(nameof(Token));
+        }
+    }
+
+    private string _notificationUrl;
+
+    public string NotificationUrl
+    {
+        get
+        {
+            return _notificationUrl;
+        }
+        set
+        {
+            if(_notificationUrl == value)return;
+            _notificationUrl = value;
+            this._metaDataObject.notificationUrl = value;
+            this.Saved = false;
+            RisePropertyChanged(nameof(NotificationUrl));
+        }
+    }
+
+
     private string _domainUrl;
 
     public string DomainUrl {
@@ -160,6 +225,25 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         }
     }
 
+
+    private string _selectedAuthType;
+
+    public string SelectedAuthType 
+    {
+        get
+        {
+            return _selectedAuthType;
+        }
+        set
+        {
+            if(_selectedAuthType == value)return;
+            _selectedAuthType = value;
+            this._metaDataObject.authType = _selectedAuthType;
+            this.Saved = false;
+            RisePropertyChanged(nameof(SelectedAuthType));
+        }
+    }
+
     private string _selectedLanguage;
 
     public string SelectedLanguage {
@@ -174,38 +258,7 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
             RisePropertyChanged(nameof(SelectedLanguage));
         }
     }
-
-    /*private string _studyUid;
-
-    public string StudyUid {
-        get {
-            return _studyUid;
-        }
-        set {
-            if(_studyUid == value)return;
-            _studyUid = value;
-            this._metaDataObject.selectedStudy = value;
-            this.Saved = false;
-            RisePropertyChanged(nameof(StudyUid));
-        }
-    }
-
-
-    private string _seriesUid;
-
-    public string SeriesUid {
-        get {
-            return _seriesUid;
-        }
-        set {
-            if (_seriesUid == value) return;
-            _seriesUid = value;
-            this._metaDataObject.selectedSeries = value;
-            this.Saved = false;
-            RisePropertyChanged(nameof(SeriesUid));
-        }
-    }*/
-
+    
     private bool _showTimeStamp;
 
     public bool ShowTimeStamp {
@@ -265,6 +318,10 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         //this.SeriesUid = metaDataObject.selectedSeries;
         this.SelectedAppName = metaDataObject.application;
         this.ShowTimeStamp = Convert.ToBoolean(metaDataObject.showTimeStamp);
+        if(!string.IsNullOrEmpty(metaDataObject.authType)) this.SelectedAuthType = metaDataObject.authType;
+        this.Token = metaDataObject.token;
+        this.AENodeName = metaDataObject.aeNodeName;
+        this.NotificationUrl = metaDataObject.notificationUrl;
         this.Saved = true;
     }
 

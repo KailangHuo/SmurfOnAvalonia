@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMURF-Ava", "SMURF-Ava\SMURF-Ava.csproj", "{6A9AB374-DE99-460A-964B-A9993B75CD0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SMURF_Web_API", "SMURF_Web_API\SMURF_Web_API.csproj", "{7FF0B011-1797-4B7C-A302-588930E2B490}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6A9AB374-DE99-460A-964B-A9993B75CD0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A9AB374-DE99-460A-964B-A9993B75CD0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A9AB374-DE99-460A-964B-A9993B75CD0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FF0B011-1797-4B7C-A302-588930E2B490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FF0B011-1797-4B7C-A302-588930E2B490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FF0B011-1797-4B7C-A302-588930E2B490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FF0B011-1797-4B7C-A302-588930E2B490}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

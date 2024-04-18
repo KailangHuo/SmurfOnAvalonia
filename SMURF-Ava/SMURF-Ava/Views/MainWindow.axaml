@@ -46,7 +46,7 @@
                                Margin="10 0 0 0"
                                FontWeight="Normal" FontSize="20"
                                VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    <Button Grid.Column="2" 
+                    <Button Grid.Column="2"     
                             Margin="0 0 5 0"
                             Foreground="White"
                             Background="#FF007FE3"
@@ -243,56 +243,95 @@
                                 <Border BorderThickness="0 0 0 1" BorderBrush="Gray" Margin="0 3 0 3"/>
                                 
                                 <!-- Account and Study details grid -->
-                                <Grid Grid.ColumnDefinitions="3* 7*" Margin="0 10 0 10">
+                                <Grid Grid.ColumnDefinitions="4* 6*" Margin="0 10 0 10">
                                     
                                     <Border Grid.Column="0" HorizontalAlignment="Right"
                                             Margin="0 0 0 0" 
                                             BorderThickness="0 0 1 0" BorderBrush="Gray"/>
                                     
                                     <StackPanel Grid.Column="0" Margin="0 0 10 0">
-                                       
-                                        <TextBlock Text="账户: " Margin="0,0,0,3" /> 
-                            
-                                        <TextBox Text="{Binding UserName, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
-                                                 MinHeight="22"
-                                                 FontWeight="Normal"
-                                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"                                         
-                                                 TextWrapping="NoWrap"
-                                                 Padding="1 1 1 1"/>
-                            
-                                        <TextBlock Text="密码: " Margin="0,0,0,3" /> 
-                            
-                                        <TextBox Text="{Binding Password, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
-                                                 MinHeight="22"
-                                                 FontWeight="Normal"
-                                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"                                         
-                                                 TextWrapping="NoWrap"
-                                                 Padding="1 1 1 1"/>
-                                
-                                        <TextBlock Text="服务器地址: " Margin="0,0,0,3" /> 
-                            
-                                        <TextBox Text="{Binding DomainUrl, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
-                                                 MinHeight="22"
-                                                 FontWeight="Normal"
-                                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                 TextWrapping="NoWrap"
-                                                 Padding="1 1 1 1"/>
                                         
-                                        <TextBlock Text="语言首选项 language pref: " Margin="0,0,0,3" HorizontalAlignment="Right"/> 
+                                        <Grid ColumnDefinitions="Auto *" RowDefinitions="* * * * * * *" >
+                                            
+                                            <TextBlock Grid.Row="0" Grid.Column="0" Text="账户: " Margin="0,0,0,3" /> 
                             
-                                        <ComboBox Grid.Column="1" Margin="0,0,0,3" 
-                                                  HorizontalAlignment="Right"
-                                                  MinHeight="22" MinWidth="150"
-                                                  FontWeight="Normal"
-                                                  ItemsSource="{Binding LanguageOptionList}"
-                                                  SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
-                                        >
-                                            <ComboBox.Styles>
-                                                <Style Selector="ComboBoxItem">
-                                                    <Setter Property="FontWeight" Value="Normal"/>
-                                                </Style>
-                                            </ComboBox.Styles>
-                                        </ComboBox>
+                                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding UserName, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                     MinHeight="22"
+                                                     FontWeight="Normal"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"                                         
+                                                     TextWrapping="NoWrap"
+                                                     Padding="1 1 1 1"/>
+                                            
+                                            <TextBlock Grid.Row="1" Grid.Column="0" Text="密码: " Margin="0,0,0,3" /> 
+                            
+                                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Password, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                     MinHeight="22"
+                                                     FontWeight="Normal"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"                                         
+                                                     TextWrapping="NoWrap"
+                                                     Padding="1 1 1 1"/>
+                                            
+                                            <TextBlock Grid.Row="2" Grid.Column="0" Text="服务器: " Margin="0,0,0,3" /> 
+                            
+                                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding DomainUrl, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                     MinHeight="22"
+                                                     FontWeight="Normal"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                     TextWrapping="NoWrap"
+                                                     Padding="1 1 1 1"/>
+                                            
+                                            <TextBlock Grid.Row="3" Grid.Column="0" Text="AE name: " Margin="0,0,0,3" /> 
+                            
+                                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding AENodeName, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                     MinHeight="22"
+                                                     FontWeight="Normal"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                     TextWrapping="NoWrap"
+                                                     Padding="1 1 1 1"/>
+                                            
+                                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Token: " Margin="0,0,0,3" /> 
+                            
+                                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Token, Mode=TwoWay}" Height="14" Margin="0,0,0,3" 
+                                                     MinHeight="22"
+                                                     FontWeight="Normal"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                     TextWrapping="NoWrap"
+                                                     Padding="1 1 1 1"/>
+                                            
+                                            <TextBlock Grid.Row="5" Grid.Column="0" Text="AuthType: " Margin="0,0,0,3" HorizontalAlignment="Left"/> 
+                            
+                                            <ComboBox Grid.Row="5" Grid.Column="1" Margin="0,0,0,3" 
+                                                      HorizontalAlignment="Right"
+                                                      MinHeight="22" MinWidth="150"
+                                                      FontWeight="Normal"
+                                                      ItemsSource="{Binding AuthTypeList}"
+                                                      SelectedItem="{Binding SelectedAuthType, Mode=TwoWay}"
+                                            >
+                                                <ComboBox.Styles>
+                                                    <Style Selector="ComboBoxItem">
+                                                        <Setter Property="FontWeight" Value="Normal"/>
+                                                    </Style>
+                                                </ComboBox.Styles>
+                                            </ComboBox>
+                                            
+                                            <TextBlock Grid.Row="6" Grid.Column="0" Text="语言:" Margin="0,0,0,3" HorizontalAlignment="Left"/> 
+                            
+                                            <ComboBox Grid.Row="6" Grid.Column="1" Margin="0,0,0,3" 
+                                                      HorizontalAlignment="Right"
+                                                      MinHeight="22" MinWidth="150"
+                                                      FontWeight="Normal"
+                                                      ItemsSource="{Binding LanguageOptionList}"
+                                                      SelectedItem="{Binding SelectedLanguage, Mode=TwoWay}"
+                                            >
+                                                <ComboBox.Styles>
+                                                    <Style Selector="ComboBoxItem">
+                                                        <Setter Property="FontWeight" Value="Normal"/>
+                                                    </Style>
+                                                </ComboBox.Styles>
+                                            </ComboBox>
+                                            
+                                        </Grid>
+                                        
                                     </StackPanel>
                                     
                                     <!-- Studies Col -->
@@ -366,38 +405,16 @@
                                                      ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                                      TextWrapping="NoWrap"
                                                      Padding="1 1 1 1"/>
+                                            
                                             <!-- URL grid -->
-                                            <Grid ColumnDefinitions="Auto *">
-                                                <TextBlock Grid.Column="0" Text="URL:" HorizontalAlignment="Right"/>
-                                                <TextBox Grid.Column="1" Watermark="url"
-                                                         MinHeight="22"
-                                                         FontWeight="Normal"
-                                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                         TextWrapping="NoWrap"
-                                                         Padding="1 1 1 1"/>
-                                            </Grid>
-                                            
-                                            <!-- Authenticate grid -->
-                                            <Grid ColumnDefinitions="Auto *">
-                                                <TextBlock Grid.Column="0" Text="Auth:" HorizontalAlignment="Right"/>
-                                                <TextBox Grid.Column="1" Watermark="authentication"
-                                                         MinHeight="22"
-                                                         FontWeight="Normal"
-                                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                         TextWrapping="NoWrap"
-                                                         Padding="1 1 1 1"/>
-                                            </Grid>
-                                            
-                                            <!-- Token grid -->
-                                            <Grid ColumnDefinitions="Auto *">
-                                                <TextBlock Grid.Column="0" Text="Token:" HorizontalAlignment="Right"/>
-                                                <TextBox Grid.Column="1" Watermark="token"
-                                                         MinHeight="22"
-                                                         FontWeight="Normal"
-                                                         ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                         TextWrapping="NoWrap"
-                                                         Padding="1 1 1 1"/>
-                                            </Grid>
+                                            <TextBlock Text="Notification URL:" HorizontalAlignment="Left"/>
+                                            <TextBox Text="{Binding NotificationUrl, Mode=TwoWay}" Height="14"  
+                                                     Watermark="输入你的回调用Rest URL"
+                                                     MinHeight="22"
+                                                     FontWeight="Normal"
+                                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                     TextWrapping="NoWrap"
+                                                     Padding="1 1 1 1"/>
                                             
                                         </StackPanel>
                                         

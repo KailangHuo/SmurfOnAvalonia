@@ -2,6 +2,13 @@
 
 namespace SMURF_Ava.ViewModels;
 
+/**
+ * MetaDataObject
+ * 这个类中的名称是直接放入到cmd 命令中的内容, 需要与integration所要求的命令名完全一致
+ */
+
+
+
 public class MetaDataObject {
 
     public MetaDataObject() {
@@ -31,4 +38,13 @@ public class MetaDataObject {
     public string showTimeStamp;
 
     public string portNumber;
+
+    public string authType;
+
+    public string aeNodeName;
+
+    public string token;
+
+    // TODO:option中叫什么?
+    public string notificationUrl;
 }

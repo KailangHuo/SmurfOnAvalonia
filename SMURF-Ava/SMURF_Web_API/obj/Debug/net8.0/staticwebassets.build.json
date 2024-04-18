@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "q3Hv6QbbAYPIhZXGVJDZsCecEgHPsXmFPADEiBoCOe8=",
+  "Source": "SMURF_Web_API",
+  "BasePath": "_content/SMURF_Web_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

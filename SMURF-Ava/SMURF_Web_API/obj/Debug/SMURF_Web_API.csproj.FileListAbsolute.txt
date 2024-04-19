@@ -1,9 +1,9 @@
+D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.exe
+D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.dll
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\appsettings.Development.json
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\appsettings.json
-D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.exe
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.deps.json
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.runtimeconfig.json
-D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.dll
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF_Web_API.pdb
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF_Web_API\obj\Debug\SMURF_Web_API.csproj.AssemblyReference.cache
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF_Web_API\obj\Debug\SMURF_Web_API.GeneratedMSBuildEditorConfig.editorconfig

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SMURF-Ava")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6aa04c84336e41e52ba36cff3795a06836686d76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3438a85e1dd113046ad0be423d614015b78a4f8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SMURF-Ava")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SMURF-Ava")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

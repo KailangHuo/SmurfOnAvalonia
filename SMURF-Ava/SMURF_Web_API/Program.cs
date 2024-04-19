@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SMURF_Web_API;
 
 public class Program {
@@ -29,8 +30,9 @@ public class Program {
 
         app.MapPost("/statusReturn", (StatusContent statusContent) => {
 
-                client.Send(statusContent.Content);
-                return Results.Ok("StatusReturn Received! " + statusContent.Content);
+                string content = JsonConvert.SerializeObject(statusContent);
+                client.Send(content);
+                return Results.Ok("StatusReturn Received! " + content.Substring(0,100));
 
             })
             .WithName("PostStatusReturn");

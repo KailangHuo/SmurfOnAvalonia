@@ -2,5 +2,9 @@
 
 public class StatusContent
 {
-    public string Content { get; set; }
+    public string Grid { get; set; }
+
+    public string StatusType { get; set; }
+
+    public string StatusParam { get; set; }
 }

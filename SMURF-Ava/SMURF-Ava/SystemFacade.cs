@@ -24,9 +24,14 @@ public class SystemFacade : AbstractEventDrivenObject{
         PublishSystemLogger();
         this.CommandLineCommunicator = new CommandLineCommunicator();
         PublishCmdCommunicator();
+        this.WebRestfulServer = new WebRestfulServer();
+        
+        
         
         this.CommandLineCommunicator.RegisterObserver(this.SystemLogger);
         this.TcpShortServer.RegisterObserver(this.ResponseItemManager);
+        this.WebRestfulServer.RegisterObserver(this.ResponseItemManager);
+        this.TcpShortServer.RegisterObserver(this.WebRestfulServer);
         
 
     }
@@ -52,6 +57,8 @@ public class SystemFacade : AbstractEventDrivenObject{
     private SystemLogger SystemLogger;
 
     private CommandLineCommunicator CommandLineCommunicator;
+
+    private WebRestfulServer WebRestfulServer;
 
     private TcpShortServer TcpShortServer;
 
@@ -94,6 +101,10 @@ public class SystemFacade : AbstractEventDrivenObject{
 
     public void ClearAllRespondsCommand() {
         this.ResponseItemManager.RemoveAllItems();
+    }
+
+    public void ShutDownSystem() {
+        this.WebRestfulServer.ShutDownServer();
     }
 
 }

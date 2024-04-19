@@ -64,6 +64,7 @@ public class TcpShortServer : AbstractEventDrivenObject{
                 server = new TcpListener(IPAddress.Parse(ip), port);
                 server.Start();
                 LogServerInfo("Listening on port: " + port);
+                PublishServerPort(port);
                 string incomingStr = "";
                 do {
                     if (client == null) {
@@ -108,6 +109,10 @@ public class TcpShortServer : AbstractEventDrivenObject{
             ExceptionManager.GetInstance().ThrowException("[TcpServer.ResponseReceived]: " + e.Message);
         }
         
+    }
+
+    public void PublishServerPort(int port) {
+        PublishEvent(nameof(PublishServerPort), this.port);
     }
 
 }

@@ -18,3 +18,10 @@ SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.GeneratedMSBuildEditorConfig.editorconfi
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.csproj.AssemblyReference.cache
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.assets.cache
 SMURF-Ava/SMURF-Ava/obj/Debug/Avalonia/Resources.Inputs.cache
+*.dll
+*.pdb
+SMURF-Ava/SMURF-Ava/obj/Debug/Avalonia/references
+*.cache
+SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.csproj.FileListAbsolute.txt
+SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.GeneratedMSBuildEditorConfig.editorconfig
+SMURF-Ava/SMURF-Ava/obj/project.assets.json

@@ -17,7 +17,6 @@ D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\Avaloni
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\refint\SMURF-Ava.dll
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\SMURF-Ava.dll
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\SMURF-Ava.pdb
-D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\SMURF-Ava.csproj.CopyComplete
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\SMURF-Ava.genruntimeconfig.cache
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\ref\SMURF-Ava.dll
 E:\DeskTop\SMURF_Ava\SMURF-Ava.exe
@@ -47,3 +46,5 @@ D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bi
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF-Ava.runtimeconfig.json
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF-Ava.dll
 D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SmurfPublished\SMURF_Ava\bin\SMURF-Ava.pdb
+D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\SMURF-Ava.sourcelink.json
+D:\System\Documents\GitHub\SmurfOnAvalonia\SMURF-Ava\SMURF-Ava\obj\Debug\SMURF-Ava.csproj.Up2Date

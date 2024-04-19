@@ -131,7 +131,7 @@
             <Grid Grid.Row="0" Height="30">
                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" IsHitTestVisible="False">
                     <Image Width="16" Height="16" Source="../Assets/avalonia-logo.ico"  Margin="5"/>
-                    <TextBlock Text="SMURF Simulate Mainly UIH Resolution Foundation" VerticalAlignment="Center"/>
+                    <TextBlock Text="SMURF Simulate Mainly Uhealth Resolution Foundation" VerticalAlignment="Center"/>
                 </StackPanel>
             </Grid>
             

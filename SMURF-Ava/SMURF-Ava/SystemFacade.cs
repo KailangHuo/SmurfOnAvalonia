@@ -103,4 +103,8 @@ public class SystemFacade : AbstractEventDrivenObject{
         this.ResponseItemManager.RemoveAllItems();
     }
 
+    public void ShutDownSystem() {
+        this.WebRestfulServer.ShutDownServer();
+    }
+
 }

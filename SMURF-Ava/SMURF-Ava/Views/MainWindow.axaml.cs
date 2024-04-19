@@ -81,6 +81,7 @@ public partial class MainWindow : Window , INotifyPropertyChanged{
     }
 
     private void CloseApplication(object o, WindowClosingEventArgs e) {
+        SystemFacade.GetInstance().ShutDownSystem();
         Process.GetCurrentProcess().Kill();
         System.Environment.Exit(0);
     }

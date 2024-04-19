@@ -316,9 +316,9 @@ public class MainWindowViewModel : AbstractEventDrivenViewModel {
         this.StudiesStringItemManagerViewModel.LoadStringItemCollectionFromJson(metaDataObject.StudyStringItemsJson);
         this.SeriesStringItemManagerViewModel.LoadStringItemCollectionFromJson(metaDataObject.SeriesStringItemsJson); 
         //this.SeriesUid = metaDataObject.selectedSeries;
-        this.SelectedAppName = metaDataObject.application;
+        if (!string.IsNullOrEmpty(metaDataObject.application)) this.SelectedAppName = metaDataObject.application;
         this.ShowTimeStamp = Convert.ToBoolean(metaDataObject.showTimeStamp);
-        if(!string.IsNullOrEmpty(metaDataObject.authType)) this.SelectedAuthType = metaDataObject.authType;
+        if (!string.IsNullOrEmpty(metaDataObject.authType)) this.SelectedAuthType = metaDataObject.authType;
         this.Token = metaDataObject.token;
         this.AENodeName = metaDataObject.aeNodeName;
         this.NotificationUrl = metaDataObject.notificationUrl;

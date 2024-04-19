@@ -151,7 +151,7 @@ public class ResponseItem_ViewModel : AbstractEventDrivenViewModel{
     
     public void CopyContentCommand() {
         IClipboard clipboard = SystemFacade.GetInstance().MainWindow.Clipboard;
-        clipboard.SetTextAsync(this._content); 
+        clipboard.SetTextAsync(this._responseItem.RawContent); 
     }
 
     #endregion

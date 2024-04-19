@@ -4,9 +4,8 @@ using SMURF_Web_API;
 
 public class Program {
     public static void Main(string[] args) {
-        // --port=1024
-        Debugger.Launch();
-        int portNum = int.Parse(args[0]);
+
+        int portNum = args.Length == 0? 3506 : int.Parse(args[0]);
         SMURF_TCP_Client client = new SMURF_TCP_Client("127.0.0.1", portNum);
         
         var builder = WebApplication.CreateBuilder();

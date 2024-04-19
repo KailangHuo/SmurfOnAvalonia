@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Root>
     <Applications>
-        <Application Name="ReviewIn2D"/>
-        <Application Name="ReviewIn3D"/>
-        <Application Name="MultiModelFuse"/>
+        <Application Name="Review2D"/>
+        <Application Name="Review3D"/>
+        <Application Name="MMFusion"/>
         <Application Name="Filming"/>
         <Application Name="Report"/>
         <Application Name="CT"/>

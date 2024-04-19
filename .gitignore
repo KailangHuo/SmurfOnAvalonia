@@ -25,3 +25,7 @@ SMURF-Ava/SMURF-Ava/obj/Debug/Avalonia/references
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.csproj.FileListAbsolute.txt
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.GeneratedMSBuildEditorConfig.editorconfig
 SMURF-Ava/SMURF-Ava/obj/project.assets.json
+SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.AssemblyInfo.cs
+*.cache
+*.info
+SMURF-Ava/SMURF_Web_API/obj/Debug/SMURF_Web_API.AssemblyInfo.cs

@@ -1,12 +1,5 @@
 
-*.dll
-*.pdb
-*.so
-*.dylib
-*.cache
-*.cache
-*.info
-*.editorconfig
+
 SMURF-Ava/SMURF-Ava/obj/SMURF-Ava.csproj.nuget.g.targets
 SMURF-Ava/SMURF-Ava/obj/SMURF-Ava.csproj.nuget.g.props
 SMURF-Ava/SMURF-Ava/obj/SMURF-Ava.csproj.nuget.dgspec.json
@@ -18,14 +11,9 @@ SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.GeneratedMSBuildEditorConfig.editorconfi
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.csproj.AssemblyReference.cache
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.assets.cache
 SMURF-Ava/SMURF-Ava/obj/Debug/Avalonia/Resources.Inputs.cache
-*.dll
-*.pdb
 SMURF-Ava/SMURF-Ava/obj/Debug/Avalonia/references
-*.cache
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.csproj.FileListAbsolute.txt
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.GeneratedMSBuildEditorConfig.editorconfig
 SMURF-Ava/SMURF-Ava/obj/project.assets.json
 SMURF-Ava/SMURF-Ava/obj/Debug/SMURF-Ava.AssemblyInfo.cs
-*.cache
-*.info
 SMURF-Ava/SMURF_Web_API/obj/Debug/SMURF_Web_API.AssemblyInfo.cs

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "v98qv1Maou0FyCJpRwT/FLUld31VU5Ep+3AjuO+kzENUj0VgM4UNQIEpPG2eB3JoIqMbFBrZQXc1n9m7sfLKGA==",
+  "dgSpecHash": "4iPXBP5fv0bm8ZL/je0N8vRDBelBOW+07wAzhag1/v8cxhLv1OcjU7djYVKgX5z0pgaCtFZfhjm8LnHwltdOcw==",
   "success": true,
   "projectFilePath": "D:\\System\\Documents\\GitHub\\SmurfOnAvalonia\\SMURF-Ava\\SMURF_Web_API\\SMURF_Web_API.csproj",
   "expectedPackageFiles": [
@@ -14,11 +14,7 @@
     "E:\\NUGET\\packages\\microsoft.netcore.app.ref\\6.0.27\\microsoft.netcore.app.ref.6.0.27.nupkg.sha512",
     "E:\\NUGET\\packages\\microsoft.windowsdesktop.app.ref\\6.0.27\\microsoft.windowsdesktop.app.ref.6.0.27.nupkg.sha512",
     "E:\\NUGET\\packages\\microsoft.aspnetcore.app.ref\\6.0.27\\microsoft.aspnetcore.app.ref.6.0.27.nupkg.sha512",
-    "E:\\NUGET\\packages\\microsoft.netcore.app.host.win-x64\\6.0.27\\microsoft.netcore.app.host.win-x64.6.0.27.nupkg.sha512",
-    "E:\\NUGET\\packages\\microsoft.netcore.app.ref\\7.0.16\\microsoft.netcore.app.ref.7.0.16.nupkg.sha512",
-    "E:\\NUGET\\packages\\microsoft.windowsdesktop.app.ref\\7.0.16\\microsoft.windowsdesktop.app.ref.7.0.16.nupkg.sha512",
-    "E:\\NUGET\\packages\\microsoft.aspnetcore.app.ref\\7.0.16\\microsoft.aspnetcore.app.ref.7.0.16.nupkg.sha512",
-    "E:\\NUGET\\packages\\microsoft.netcore.app.host.win-x64\\7.0.16\\microsoft.netcore.app.host.win-x64.7.0.16.nupkg.sha512"
+    "E:\\NUGET\\packages\\microsoft.netcore.app.host.win-x64\\6.0.27\\microsoft.netcore.app.host.win-x64.6.0.27.nupkg.sha512"
   ],
   "logs": []
 }

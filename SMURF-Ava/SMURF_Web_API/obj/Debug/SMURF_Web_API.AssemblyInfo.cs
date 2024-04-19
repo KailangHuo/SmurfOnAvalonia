@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SMURF_Web_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9efa9e7fa07916675c71aed0d769874f191d24d3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b85c931fb5d35097df26f1d69c4b991dcd1f2c18")]
 [assembly: System.Reflection.AssemblyProductAttribute("SMURF_Web_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SMURF_Web_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
